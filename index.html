@@ -65,22 +65,14 @@
       font-size: 1.15rem; letter-spacing: 0.25em;
       color: var(--white); text-transform: uppercase;
       text-decoration: none;
-      position: relative;
-      display: flex; align-items: center; gap: 12px;
+      display: flex; flex-direction: column; align-items: flex-start;
+      gap: 4px; line-height: 1;
     }
-    .nav-logo-bg {
-      height: 38px;
+    .nav-logo-below {
+      height: 44px;
       width: auto;
-      opacity: 0.18;
-      position: absolute;
-      left: 0; top: 50%;
-      transform: translateY(-50%);
-      filter: blur(1px) brightness(2);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .nav-brand span, .nav-brand {
-      position: relative; z-index: 1;
+      opacity: 0.85;
+      display: block;
     }
     .nav-links {
       display: flex; align-items: center; gap: 2.5rem;
@@ -465,8 +457,8 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-brand">
-    <img src="Logo.png" alt="Logo MJC" class="nav-logo-bg" />
     MJC · Boulogne
+    <img src="Logo.png" alt="Logo MJC" class="nav-logo-below" />
   </a>
   <div class="nav-social">
     <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" class="nav-cta" target="_blank">Visitanos</a>
@@ -620,6 +612,13 @@
   </div>
 </section>
 
+<!-- MARQUEE SEPARADOR 2 -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Fe</span><span>·</span><span>Esperanza</span><span>·</span><span>Comunidad</span><span>·</span><span>Amor</span><span>·</span><span>Transformación</span><span>·</span><span>Servicio</span><span>·</span><span>Propósito</span><span>·</span><span>Verdad</span><span>·</span><span>Fe</span><span>·</span><span>Esperanza</span><span>·</span><span>Comunidad</span><span>·</span><span>Amor</span><span>·</span><span>Transformación</span><span>·</span><span>Servicio</span><span>·</span><span>Propósito</span><span>·</span><span>Verdad</span><span>·</span>
+  </div>
+</div>
+
 <!-- ÚNETE -->
 <section id="unete">
   <div class="unete-inner">
@@ -640,6 +639,13 @@
     <div class="unete-image"></div>
   </div>
 </section>
+
+<!-- MARQUEE SEPARADOR 3 -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Fe</span><span>·</span><span>Esperanza</span><span>·</span><span>Comunidad</span><span>·</span><span>Amor</span><span>·</span><span>Transformación</span><span>·</span><span>Servicio</span><span>·</span><span>Propósito</span><span>·</span><span>Verdad</span><span>·</span><span>Fe</span><span>·</span><span>Esperanza</span><span>·</span><span>Comunidad</span><span>·</span><span>Amor</span><span>·</span><span>Transformación</span><span>·</span><span>Servicio</span><span>·</span><span>Propósito</span><span>·</span><span>Verdad</span><span>·</span>
+  </div>
+</div>
 
 <!-- FOOTER / CONTACTO -->
 <footer id="contacto">
