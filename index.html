@@ -65,6 +65,22 @@
       font-size: 1.15rem; letter-spacing: 0.25em;
       color: var(--white); text-transform: uppercase;
       text-decoration: none;
+      position: relative;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .nav-logo-bg {
+      height: 38px;
+      width: auto;
+      opacity: 0.18;
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      filter: blur(1px) brightness(2);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .nav-brand span, .nav-brand {
+      position: relative; z-index: 1;
     }
     .nav-links {
       display: flex; align-items: center; gap: 2.5rem;
@@ -448,22 +464,12 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="#" class="nav-brand">MJC · Boulogne</a>
-  <ul class="nav-links">
-    <li><a href="#vision">Misión</a></li>
-    <li><a href="#horarios">Horarios</a></li>
-    <li><a href="#pastor">Comunidad</a></li>
-    <li><a href="#unete">Únete</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-    <li><a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d205.50564618001377!2d-58.585213532741164!3d-34.500593950715846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcbb007de0535f%3A0x144fbb51fa4229bf!2sMinisterio%20Jesucristo%20es%20el%20Camino!5e0!3m2!1ses-419!2sar" class="nav-cta" target="_blank">Visitanos</a></li>
-  </ul>
+  <a href="#" class="nav-brand">
+    <img src="Logo.png" alt="Logo MJC" class="nav-logo-bg" />
+    MJC · Boulogne
+  </a>
   <div class="nav-social">
-    <a href="https://www.instagram.com/mjcboulogne/" target="_blank">IG</a>
-    <a href="https://www.facebook.com/share/1AioxqC8CD/" target="_blank">FB</a>
-    <a href="https://www.youtube.com/@MJCBoulogne" target="_blank">YT</a>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" class="nav-cta" target="_blank">Visitanos</a>
   </div>
 </nav>
 
@@ -481,7 +487,7 @@
     </p>
     <div class="hero-actions">
       <a href="#vision" class="btn-primary">Nuestra Misión</a>
-      <a href="https://www.google.com/maps/place/Ministerio+Jesucristo+es+el+Camino/@-34.5005939,-58.5852135,19z" target="_blank" class="btn-outline">Visitanos</a>
+      <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" target="_blank" class="btn-outline">Visitanos</a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -490,27 +496,9 @@
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-strip">
-  <div class="marquee-track">
-    <span>Fe</span><span>·</span>
-    <span>Esperanza</span><span>·</span>
-    <span>Comunidad</span><span>·</span>
-    <span>Amor</span><span>·</span>
-    <span>Transformación</span><span>·</span>
-    <span>Servicio</span><span>·</span>
-    <span>Propósito</span><span>·</span>
-    <span>Verdad</span><span>·</span>
-    <span>Fe</span><span>·</span>
-    <span>Esperanza</span><span>·</span>
-    <span>Comunidad</span><span>·</span>
-    <span>Amor</span><span>·</span>
-    <span>Transformación</span><span>·</span>
-    <span>Servicio</span><span>·</span>
-    <span>Propósito</span><span>·</span>
-    <span>Verdad</span><span>·</span>
-  </div>
-</div>
+
+
+
 
 
 
@@ -540,6 +528,28 @@
     </div>
   </div>
 </section>
+
+<!-- MARQUEE SEPARADOR -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Fe</span><span>·</span>
+    <span>Esperanza</span><span>·</span>
+    <span>Comunidad</span><span>·</span>
+    <span>Amor</span><span>·</span>
+    <span>Transformación</span><span>·</span>
+    <span>Servicio</span><span>·</span>
+    <span>Propósito</span><span>·</span>
+    <span>Verdad</span><span>·</span>
+    <span>Fe</span><span>·</span>
+    <span>Esperanza</span><span>·</span>
+    <span>Comunidad</span><span>·</span>
+    <span>Amor</span><span>·</span>
+    <span>Transformación</span><span>·</span>
+    <span>Servicio</span><span>·</span>
+    <span>Propósito</span><span>·</span>
+    <span>Verdad</span><span>·</span>
+  </div>
+</div>
 
 <!-- HORARIOS -->
 <section id="horarios">
@@ -572,7 +582,7 @@
         Encuentra un lugar de paz y comunión<br>
         en el corazón del barrio.
       </p>
-      <a href="https://maps.google.com/?q=Junín+1734,+Boulogne,+Buenos+Aires" target="_blank" class="btn-outline fade-up" style="width:fit-content;">Cómo llegar →</a>
+      <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" target="_blank" class="btn-outline fade-up" style="width:fit-content;">Cómo llegar →</a>
     </div>
   </div>
 </section>
@@ -591,6 +601,7 @@
         <div class="divider"></div>
         <p class="pastor-bio">
           Jesucristo es el Camino, la Verdad y la Vida.<br>
+          <em style="font-size:0.6rem; color:var(--gold); letter-spacing:0.2em;">— Juan 14:6 RVR 1960</em><br><br>
           Nuestro ministerio acompaña a cada persona<br>
           en su camino de fe, con la Palabra de Dios<br>
           como guía y la comunidad como fortaleza.<br><br>
@@ -664,7 +675,10 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-logo">MJC · Boulogne</div>
+      <div class="footer-logo">
+        <img src="Logo.png" alt="Logo MJC" style="height:60px; opacity:0.5; display:block; margin: 0 auto 12px;" />
+        MJC · Boulogne
+      </div>
       <p class="footer-copy">© 2026 Ministerio Jesucristo es el Camino</p>
     </div>
   </div>
