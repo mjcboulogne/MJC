@@ -433,24 +433,114 @@
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* RESPONSIVE */
+    /* ── TABLET ── */
     @media(max-width:1000px) {
-      nav { padding: 1.2rem 2rem; }
-      nav.scrolled { padding: 0.8rem 2rem; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
+      nav { padding: 1rem 2rem; }
       .container { padding: 0 2rem; }
       section { padding: 5rem 0; }
-      .photo-grid { grid-template-columns: repeat(3,1fr); grid-template-rows: auto; }
-      .photo-item { height: 200px; }
-      .photo-item:nth-child(n) { grid-column: span 1 !important; }
       .vision-grid, .pastor-grid { grid-template-columns: 1fr; gap: 3rem; }
       .horarios-inner, .unete-inner { grid-template-columns: 1fr; }
-      .horarios-image { min-height: 260px; }
-      .horarios-image::after { background: linear-gradient(to top, var(--dark), transparent); }
+      .horarios-image { min-height: 300px; }
       .horarios-content, .unete-content { padding: 3rem 2rem; }
       .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 0 2rem; }
       .pastor-badge { right: 0; bottom: -0.5rem; }
+    }
+
+    /* ── MOBILE ── */
+    @media(max-width:640px) {
+      /* NAV */
+      nav {
+        padding: 0.9rem 1.2rem;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+      }
+      .nav-brand {
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+      }
+      .nav-logo-below { height: 52px; }
+      .nav-social { gap: 0.7rem; flex-wrap: nowrap; }
+      .nav-social a svg { width: 15px; height: 15px; }
+      .nav-cta { padding: 0.4rem 0.8rem; font-size: 0.55rem; letter-spacing: 0.12em; }
+
+      /* HERO */
+      .hero-title { font-size: clamp(2.4rem, 13vw, 4rem); }
+      .hero-sub { font-size: 0.6rem; letter-spacing: 0.2em; }
+      .hero-actions { flex-direction: column; gap: 0.8rem; align-items: center; }
+      .hero-actions a { width: 80%; text-align: center; padding: 0.9rem 1rem; }
+
+      /* MARQUEE */
+      .marquee-strip { padding: 0.9rem 0; }
+      .marquee-track span { font-size: 0.55rem; margin: 0 0.6rem; }
+
+      /* GENERAL */
+      .container { padding: 0 1.2rem; }
+      section { padding: 3.5rem 0; }
+      .section-label { font-size: 0.52rem; letter-spacing: 0.3em; }
+      .section-title { font-size: clamp(1.9rem, 8vw, 2.8rem); }
+      .divider { margin: 1.2rem 0; }
+
+      /* VISION */
+      .vision-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .vision-image::before { display: none; }
+      .vision-image img { aspect-ratio: 4/3; }
+      .vision-body { font-size: 0.65rem; }
+
+      /* HORARIOS */
+      .horarios-inner { grid-template-columns: 1fr; }
+      .horarios-image {
+        min-height: unset;
+        padding: 2rem 1.2rem;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .horarios-image iframe { width: 100% !important; height: 220px !important; }
+      .horarios-content { padding: 2.5rem 1.2rem; }
+      .schedule-row { font-size: 0.6rem; }
+      .schedule-time { font-size: 0.6rem; }
+
+      /* PASTOR */
+      .pastor-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .pastor-image-wrap img { width: 75% !important; }
+      .pastor-badge {
+        right: 0; bottom: 0;
+        padding: 0.8rem 1rem;
+        font-size: 0.7rem;
+      }
+      .pastor-name { font-size: clamp(2rem, 10vw, 3rem); }
+      .pastor-bio { font-size: 0.65rem; }
+      .awards { gap: 1.2rem; justify-content: center; }
+      .award-item { font-size: 1.2rem; }
+
+      /* ÚNETE */
+      .unete-inner { grid-template-columns: 1fr; }
+      .unete-content { padding: 2.5rem 1.2rem; }
+      .unete-image {
+        min-height: 260px;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .unete-image img { width: 70% !important; max-width: 260px !important; }
+      .unete-btns { flex-direction: column; gap: 0.8rem; }
+      .unete-btns a { text-align: center; }
+
+      /* FOOTER */
+      footer { padding: 0 1.2rem 2rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 0 1.5rem; }
+      .contact-col h4 { font-size: 0.55rem; }
+      .contact-col p, .contact-col a { font-size: 0.65rem; }
+      .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; padding: 1.5rem 0; }
+      .footer-logo { font-size: 0.65rem; }
+      .footer-copy { font-size: 0.52rem; }
+
+      /* BUTTONS */
+      .btn-primary, .btn-outline {
+        font-size: 0.6rem;
+        padding: 0.8rem 1.6rem;
+        letter-spacing: 0.18em;
+      }
+
+      /* WHATSAPP */
+      .wa-float { width: 48px; height: 48px; bottom: 1.2rem; right: 1.2rem; }
+      .wa-float svg { width: 22px; height: 22px; }
     }
   </style>
 </head>
