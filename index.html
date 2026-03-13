@@ -35,17 +35,27 @@
     #preloader {
       position: fixed; inset: 0;
       background: var(--dark);
-      display: flex; align-items: center; justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1.2rem;
       z-index: 9999;
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
     #preloader.hide { opacity: 0; visibility: hidden; pointer-events:none; }
     .preloader-cross {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 4rem; color: var(--gold);
-      animation: pulse 1.5s ease-in-out infinite;
+      font-size: 7rem;
+      color: var(--gold);
+      text-shadow: 0 0 22px rgba(184,151,90,0.9), 0 0 55px rgba(184,151,90,0.45), 0 0 100px rgba(184,151,90,0.18);
+      animation: cross-bounce 2.2s ease-in-out infinite;
+      line-height: 1;
     }
-    @keyframes pulse { 0%,100%{opacity:0.3;transform:scale(0.95)} 50%{opacity:1;transform:scale(1.05)} }
+    .preloader-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.6rem; letter-spacing: 0.5em;
+      text-transform: uppercase; color: rgba(184,151,90,0.5);
+      animation: cross-bounce 2.2s ease-in-out infinite;
+      animation-delay: 0.15s;
+    }
 
     /* NAV */
     nav {
@@ -707,6 +717,7 @@
 <!-- PRELOADER -->
 <div id="preloader">
   <div class="preloader-cross">✝</div>
+  <p class="preloader-label">Ministerio Jesucristo es el Camino</p>
 </div>
 
 <!-- WHATSAPP FLOAT -->
@@ -1159,7 +1170,7 @@
     setTimeout(() => {
       document.getElementById('preloader').classList.add('hide');
       document.getElementById('hero').classList.add('loaded');
-    }, 900);
+    }, 3000);
   });
 
   // Navbar scroll
