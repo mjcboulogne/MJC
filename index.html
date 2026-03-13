@@ -167,20 +167,47 @@
     }
     .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
     .hero-scroll {
-      position: absolute; bottom: 2.8rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
       color: rgba(245,240,232,0.45); font-size: 0.52rem; letter-spacing: 0.35em;
       text-transform: uppercase;
     }
     .scroll-cross {
-      font-size: 1.4rem;
+      font-size: 2rem;
       color: var(--gold);
-      text-shadow: 0 0 14px rgba(184,151,90,0.8);
+      text-shadow: 0 0 18px rgba(184,151,90,0.9);
       animation: cross-bounce 2.2s ease-in-out infinite;
+      line-height: 1.4;
     }
     @keyframes cross-bounce {
-      0%,100% { opacity: 0.4; transform: translateY(0) scale(0.9); }
-      50% { opacity: 1; transform: translateY(8px) scale(1.15); }
+      0%,100% { opacity: 0.4; transform: translateY(0) scale(0.92); }
+      50% { opacity: 1; transform: translateY(10px) scale(1.18); }
+    }
+    .hero-verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.9rem, 2vw, 1.4rem);
+      font-style: italic; font-weight: 300;
+      color: rgba(212,180,122,0.75);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.2rem;
+    }
+
+    /* FRASE CENTRAL */
+    .frase-central {
+      background: var(--dark);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .frase-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-weight: 300; font-style: italic;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+      text-align: center;
+      max-width: 800px;
     }
 
     /* MARQUEE */
@@ -199,21 +226,6 @@
       font-weight: 600;
     }
     @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-
-    .frase-central {
-      background: var(--dark);
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-    .frase-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 4vw, 3.2rem);
-      font-weight: 300; font-style: italic;
-      color: var(--gold-light);
-      letter-spacing: 0.05em;
-      line-height: 1.3;
-    }
 
     /* SEPARADOR CRUCES */
     .cruz-separador {
@@ -708,6 +720,7 @@
     </a>
     <a href="#ofrendar" class="nav-cta nav-ofrendar">Ofrendar</a>
     <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" class="nav-cta" target="_blank">Visitanos</a>
+    <a href="https://zeno.fm/radio/cristianos-en-linea/" class="nav-cta nav-ofrendar" target="_blank">Escuchanos</a>
   </div>
 </nav>
 
@@ -719,6 +732,7 @@
     <h1 class="hero-title">
       Jesucristo<br><em>es el Camino</em>
     </h1>
+    <p class="hero-verse">...la Verdad y la Vida. — Juan 14:6 RVR 1960</p>
     <p class="hero-sub">
       Unimos voluntades para profundizar nuestro amor<br>
       por Dios y fortalecer la fe en comunidad
@@ -733,13 +747,6 @@
     <div class="scroll-cross">✝</div>
   </div>
 </section>
-
-
-
-
-
-
-
 <!-- FRASE CENTRAL -->
 <div class="frase-central">
   <p class="frase-text">¡Jesús es la respuesta a tu necesidad!</p>
