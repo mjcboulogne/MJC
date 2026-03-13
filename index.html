@@ -559,7 +559,16 @@
     /* Plant SVG */
     .plant-svg, .church-svg { width: 120px; height: 140px; overflow: visible; }
 
-    /* Transfer datos */
+    .ofrendar-grid1 {
+      display: flex; justify-content: center;
+      margin-top: 2.5rem;
+    }
+    .of-card-diezmo {
+      max-width: 520px; width: 100%;
+    }
+    .wheat-svg { width: 200px; height: 160px; overflow: visible; }
+
+
     .ofrendar-datos { display: flex; flex-direction: column; gap: 0; width: 100%; }
     .dato-row {
       display: flex; justify-content: space-between; align-items: baseline;
@@ -1053,6 +1062,51 @@
       </div>
 
     </div>
+
+    <!-- SEGUNDA FILA: Diezmo centrado -->
+    <div class="ofrendar-grid1">
+      <div class="of-card of-card-diezmo">
+        <h4 class="of-card-title">Diezmo</h4>
+
+        <div class="of-verse-small" style="margin-top:0; padding-top:0; border-top:none; margin-bottom:0.8rem;">
+          <p>"Traed todos los diezmos al alfolí y haya alimento en mi casa; y probadme ahora en esto, dice Jehová de los ejércitos, si no os abriré las ventanas de los cielos, y derramaré sobre vosotros bendición hasta que sobreabunde."</p>
+          <span>Malaquías 3:10 · RVR1960</span>
+        </div>
+
+        <div class="wheat-anim">
+          <svg viewBox="0 0 200 160" class="wheat-svg">
+            <line class="wh-stem1" x1="70" y1="145" x2="70" y2="145" stroke="#b8975a" stroke-width="2" stroke-linecap="round"/>
+            <line class="wh-stem2" x1="100" y1="145" x2="100" y2="145" stroke="#b8975a" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="wh-stem3" x1="130" y1="145" x2="130" y2="145" stroke="#b8975a" stroke-width="2" stroke-linecap="round"/>
+            <ellipse class="wh-g1l" cx="64" cy="92" rx="0" ry="0" fill="#b8975a" opacity="0"/>
+            <ellipse class="wh-g2l" cx="62" cy="80" rx="0" ry="0" fill="#b8975a" opacity="0"/>
+            <ellipse class="wh-g3l" cx="60" cy="68" rx="0" ry="0" fill="#c9a96e" opacity="0"/>
+            <ellipse class="wh-g4l" cx="58" cy="56" rx="0" ry="0" fill="#d4b47a" opacity="0"/>
+            <ellipse class="wh-g1c" cx="100" cy="88" rx="0" ry="0" fill="#b8975a" opacity="0"/>
+            <ellipse class="wh-g2c" cx="100" cy="75" rx="0" ry="0" fill="#b8975a" opacity="0"/>
+            <ellipse class="wh-g3c" cx="100" cy="62" rx="0" ry="0" fill="#c9a96e" opacity="0"/>
+            <ellipse class="wh-g4c" cx="100" cy="49" rx="0" ry="0" fill="#d4b47a" opacity="0"/>
+            <ellipse class="wh-g5c" cx="100" cy="37" rx="0" ry="0" fill="#d4b47a" opacity="0"/>
+            <ellipse class="wh-g1r" cx="136" cy="92" rx="0" ry="0" fill="#b8975a" opacity="0"/>
+            <ellipse class="wh-g2r" cx="138" cy="80" rx="0" ry="0" fill="#b8975a" opacity="0"/>
+            <ellipse class="wh-g3r" cx="140" cy="68" rx="0" ry="0" fill="#c9a96e" opacity="0"/>
+            <ellipse class="wh-g4r" cx="142" cy="56" rx="0" ry="0" fill="#d4b47a" opacity="0"/>
+            <path class="wh-leaf-l" d="M70 112 Q52 105 48 94" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0" stroke-linecap="round"/>
+            <path class="wh-leaf-r" d="M130 112 Q148 105 152 94" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0" stroke-linecap="round"/>
+            <path class="wh-leaf-cl" d="M100 118 Q83 110 80 100" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0" stroke-linecap="round"/>
+            <path class="wh-leaf-cr" d="M100 118 Q117 110 120 100" stroke="#c9a96e" stroke-width="1.5" fill="none" opacity="0" stroke-linecap="round"/>
+            <ellipse cx="100" cy="147" rx="55" ry="5" fill="rgba(184,151,90,0.18)"/>
+            <circle class="wh-glow" cx="100" cy="42" r="0" fill="rgba(184,151,90,0.1)" opacity="0"/>
+          </svg>
+        </div>
+
+        <p class="of-card-sub">El diezmo es el 10% de tus ingresos</p>
+        <p class="of-link-hint" style="font-size:0.58rem; color:rgba(245,240,232,0.45); text-align:center; max-width:360px; line-height:1.9;">
+          Podés realizarlo por transferencia bancaria<br>usando los datos de la sección central.
+        </p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1308,12 +1362,83 @@
     requestAnimationFrame(frame);
   }
 
+  // ── WHEAT ANIMATION — espigas creciendo ──────────────────────────
+  function animateWheat() {
+    const svg = document.querySelector('.wheat-svg');
+    if (!svg) return;
+
+    const stems = [
+      svg.querySelector('.wh-stem1'),
+      svg.querySelector('.wh-stem2'),
+      svg.querySelector('.wh-stem3'),
+    ];
+    const grainsL = ['wh-g1l','wh-g2l','wh-g3l','wh-g4l'].map(c => svg.querySelector('.'+c));
+    const grainsC = ['wh-g1c','wh-g2c','wh-g3c','wh-g4c','wh-g5c'].map(c => svg.querySelector('.'+c));
+    const grainsR = ['wh-g1r','wh-g2r','wh-g3r','wh-g4r'].map(c => svg.querySelector('.'+c));
+    const leaves  = ['wh-leaf-l','wh-leaf-r','wh-leaf-cl','wh-leaf-cr'].map(c => svg.querySelector('.'+c));
+    const glow    = svg.querySelector('.wh-glow');
+
+    const CYCLE = 6500, PAUSE = 2500;
+    function ease(x){ return x<0.5?2*x*x:1-Math.pow(-2*x+2,2)/2; }
+    function ep(p,s,d){ return ease(Math.max(0,Math.min((p-s)/d,1))); }
+
+    // Heights for each stalk (center taller)
+    const stalkTops = [56, 35, 56];
+    const stalkBases = [145, 145, 145];
+
+    function frame(ts) {
+      if (!frame.start) frame.start = ts;
+      const elapsed = (ts - frame.start) % (CYCLE + PAUSE);
+      const p = Math.min(elapsed / CYCLE, 1);
+
+      // 0–35%: stems grow up
+      stems.forEach((s, i) => {
+        const sp = ep(p, i * 0.04, 0.35);
+        const top = stalkBases[i] - sp * (stalkBases[i] - stalkTops[i]);
+        s.setAttribute('y2', top);
+        s.setAttribute('opacity', sp);
+      });
+
+      // 20–45%: leaves sprout
+      leaves.forEach((l, i) => {
+        const lp = ep(p, 0.20 + i*0.04, 0.20);
+        l.setAttribute('opacity', lp * 0.8);
+      });
+
+      // 30–70%: grains fill in bottom to top on each stalk
+      const allGrainGroups = [grainsL, grainsC, grainsR];
+      const grainW = [4.5, 5, 4.5];
+      const grainH = [7, 8, 7];
+      allGrainGroups.forEach((grp, gi) => {
+        grp.forEach((g, i) => {
+          const start = 0.30 + gi * 0.03 + i * 0.06;
+          const gp = ep(p, start, 0.12);
+          g.setAttribute('rx', gp * grainW[gi]);
+          g.setAttribute('ry', gp * grainH[gi]);
+          g.setAttribute('opacity', gp * (0.7 + i * 0.07));
+        });
+      });
+
+      // 75–100%: glow at top
+      if (p > 0.75) {
+        const gp = ep(p, 0.75, 0.25);
+        const pulse = 0.5 + 0.5 * Math.sin(Date.now() / 600);
+        glow.setAttribute('r', gp * (18 + pulse * 8));
+        glow.setAttribute('opacity', gp * 0.6 * pulse);
+      }
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
   // Start animations when ofrendar section is visible
   const ofrendaObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         animatePlant();
         animateChurch();
+        animateWheat();
         ofrendaObserver.disconnect();
       }
     });
