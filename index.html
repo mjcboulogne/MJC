@@ -66,6 +66,60 @@
       font-weight: 300;
     }
 
+    /* RADIO PLAYER */
+    .hero-radio {
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 1.2rem;
+      padding: 0.75rem 1.2rem 0.75rem 0.75rem;
+      border: 1px solid rgba(184,151,90,0.3);
+      background: rgba(13,11,9,0.55);
+      backdrop-filter: blur(8px);
+      width: fit-content;
+    }
+    .radio-btn {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--gold);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--dark);
+      transition: background 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+    .radio-btn:hover { background: var(--gold-light); transform: scale(1.08); }
+    .radio-btn svg { width: 20px; height: 20px; }
+    .radio-info {
+      display: flex; flex-direction: column; gap: 0.15rem;
+    }
+    .radio-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--cream);
+    }
+    .radio-status {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.48rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(184,151,90,0.6);
+    }
+    .radio-bars {
+      display: flex; align-items: flex-end; gap: 3px;
+      height: 18px; opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .radio-bars.active { opacity: 1; }
+    .radio-bars span {
+      display: block; width: 3px;
+      background: var(--gold); border-radius: 2px;
+      animation: bar-dance 0.9s ease-in-out infinite alternate;
+    }
+    .radio-bars span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+    .radio-bars span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+    .radio-bars span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+    .radio-bars span:nth-child(4) { height: 16px; animation-delay: 0.1s; }
+    .radio-bars span:nth-child(5) { height: 8px;  animation-delay: 0.22s; }
+    @keyframes bar-dance {
+      from { transform: scaleY(0.3); opacity: 0.5; }
+      to   { transform: scaleY(1.0); opacity: 1.0; }
+    }
 
     /* NAV */
     nav {
@@ -365,32 +419,7 @@
       box-shadow: 0 8px 40px rgba(0,0,0,0.5);
     }
     .map-wrapper iframe { display: block; }
-    .map-overlay {
-      position: absolute; inset: 0;
-      background: rgba(13,11,9,0.3);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: opacity 0.35s ease;
-    }
-    .map-overlay.hidden { opacity: 0; pointer-events: none; }
-    .map-overlay-hint {
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      background: rgba(13,11,9,0.75);
-      border: 1px solid rgba(184,151,90,0.35);
-      padding: 0.8rem 1.4rem;
-      backdrop-filter: blur(4px);
-    }
-    .map-overlay-hint svg { color: var(--gold); }
-    .map-overlay-hint span {
-      font-size: 0.55rem; letter-spacing: 0.25em;
-      text-transform: uppercase; color: var(--gold);
-      font-family: 'Montserrat', sans-serif;
-    }
-    .map-hint-mobile { display: none; }
-    @media (hover: none) {
-      .map-hint-desktop { display: none; }
-      .map-hint-mobile  { display: block; }
-    }
+
     .horarios-image {
       background: linear-gradient(135deg, #1a1612 0%, #2e2820 100%);
       position: relative;
@@ -818,6 +847,22 @@
       <a href="#vision" class="btn-primary">Nuestra Misión</a>
       <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" target="_blank" class="btn-outline">Visitanos</a>
     </div>
+
+    <!-- RADIO PLAYER -->
+    <div class="hero-radio" id="radioPlayer">
+      <audio id="radioAudio" src="https://stream.zeno.fm/yn65m38mylhvv" preload="none"></audio>
+      <button class="radio-btn" id="radioBtn" onclick="toggleRadio()" aria-label="Reproducir radio">
+        <svg class="radio-icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="radio-icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <div class="radio-info">
+        <span class="radio-name">MJC En Vivo · Zeno.fm</span>
+        <span class="radio-status" id="radioStatus">En vivo</span>
+      </div>
+      <div class="radio-bars" id="radioBars">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
   </div>
   <div class="hero-scroll">
     <span>Descubrir</span>
@@ -875,13 +920,7 @@
           style="border:0; display:block; filter: grayscale(0.2) brightness(0.85); box-shadow: 0 8px 40px rgba(0,0,0,0.5);"
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
-        <div class="map-overlay" id="mapOverlay">
-          <div class="map-overlay-hint">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            <span class="map-hint-desktop">Click para interactuar</span>
-            <span class="map-hint-mobile">Tocá para interactuar</span>
-          </div>
-        </div>
+
       </div>
     </div>
     <div class="horarios-content">
@@ -1233,24 +1272,31 @@
     navbar.classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Map overlay — click or touch to activate
-  const mapOverlay = document.getElementById('mapOverlay');
-  if (mapOverlay) {
-    const activate = () => mapOverlay.classList.add('hidden');
-    mapOverlay.addEventListener('click', activate);
-    mapOverlay.addEventListener('touchstart', activate, { passive: true });
-    // Re-show overlay when user clicks/touches outside the map
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.map-wrapper')) {
-        mapOverlay.classList.remove('hidden');
-      }
-    });
-    document.addEventListener('touchstart', (e) => {
-      if (!e.target.closest('.map-wrapper')) {
-        mapOverlay.classList.remove('hidden');
-      }
-    }, { passive: true });
+  // Radio player
+  function toggleRadio() {
+    const audio = document.getElementById('radioAudio');
+    const btn = document.getElementById('radioBtn');
+    const bars = document.getElementById('radioBars');
+    const status = document.getElementById('radioStatus');
+    const iconPlay = btn.querySelector('.radio-icon-play');
+    const iconPause = btn.querySelector('.radio-icon-pause');
+    if (audio.paused) {
+      audio.play();
+      iconPlay.style.display = 'none';
+      iconPause.style.display = 'block';
+      bars.classList.add('active');
+      status.textContent = 'Reproduciendo...';
+    } else {
+      audio.pause();
+      audio.src = audio.src;
+      iconPlay.style.display = 'block';
+      iconPause.style.display = 'none';
+      bars.classList.remove('active');
+      status.textContent = 'En vivo';
+    }
   }
+
+
   const fadeEls = document.querySelectorAll('.fade-up');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
