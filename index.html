@@ -69,23 +69,29 @@
     /* RADIO PLAYER */
     .hero-radio {
       display: flex; align-items: center; gap: 1rem;
-      margin-top: 1.2rem;
+      margin-top: 1.4rem;
       padding: 0.75rem 1.2rem 0.75rem 0.75rem;
       border: 1px solid rgba(184,151,90,0.3);
       background: rgba(13,11,9,0.55);
       backdrop-filter: blur(8px);
       width: fit-content;
+      text-decoration: none;
+      transition: border-color 0.25s, background 0.25s;
+      cursor: pointer;
+    }
+    .hero-radio:hover {
+      border-color: rgba(184,151,90,0.65);
+      background: rgba(13,11,9,0.75);
     }
     .radio-btn {
       width: 42px; height: 42px; border-radius: 50%;
       background: var(--gold);
-      border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       color: var(--dark);
       transition: background 0.2s, transform 0.2s;
       flex-shrink: 0;
     }
-    .radio-btn:hover { background: var(--gold-light); transform: scale(1.08); }
+    .hero-radio:hover .radio-btn { background: var(--gold-light); transform: scale(1.08); }
     .radio-btn svg { width: 20px; height: 20px; }
     .radio-info {
       display: flex; flex-direction: column; gap: 0.15rem;
@@ -102,24 +108,119 @@
     }
     .radio-bars {
       display: flex; align-items: flex-end; gap: 3px;
-      height: 18px; opacity: 0;
-      transition: opacity 0.3s;
+      height: 18px;
     }
-    .radio-bars.active { opacity: 1; }
     .radio-bars span {
       display: block; width: 3px;
       background: var(--gold); border-radius: 2px;
       animation: bar-dance 0.9s ease-in-out infinite alternate;
+      opacity: 0.35;
+      transition: opacity 0.3s;
     }
+    .hero-radio:hover .radio-bars span { opacity: 1; }
     .radio-bars span:nth-child(1) { height: 6px;  animation-delay: 0s; }
     .radio-bars span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
     .radio-bars span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
     .radio-bars span:nth-child(4) { height: 16px; animation-delay: 0.1s; }
     .radio-bars span:nth-child(5) { height: 8px;  animation-delay: 0.22s; }
     @keyframes bar-dance {
-      from { transform: scaleY(0.3); opacity: 0.5; }
-      to   { transform: scaleY(1.0); opacity: 1.0; }
+      from { transform: scaleY(0.3); }
+      to   { transform: scaleY(1.0); }
     }
+
+
+    /* SCROLL ICONS */
+    .scroll-icons {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .scroll-icon {
+      width: 2rem; height: 2.65rem;
+      filter: drop-shadow(0 0 8px rgba(184,151,90,0.9))
+              drop-shadow(0 3px 18px rgba(184,151,90,0.45));
+      animation: cross-bounce 2.2s ease-in-out infinite;
+      display: block;
+    }
+    .scroll-icon:nth-child(2) { animation-delay: 0.18s; }
+    .scroll-icon:nth-child(3) { animation-delay: 0.36s; }
+
+    /* EN QUÉ CREEMOS */
+    .creemos-line {
+      width: 40px; height: 1px;
+      background: var(--gold); opacity: 0.5;
+      margin: 1rem auto 3.5rem;
+    }
+    .creemos-list {
+      max-width: 720px; margin: 0 auto;
+    }
+    .creemos-item {
+      border-bottom: 1px solid rgba(184,151,90,0.15);
+      overflow: hidden;
+    }
+    .creemos-item:first-child { border-top: 1px solid rgba(184,151,90,0.15); }
+    .creemos-header {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1.4rem 0;
+      cursor: pointer; user-select: none;
+    }
+    .creemos-icon-wrap {
+      width: 28px; height: 28px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0.7; transition: opacity 0.3s;
+    }
+    .creemos-icon-wrap svg { width: 100%; height: 100%; }
+    .creemos-item.open .creemos-icon-wrap { opacity: 1; }
+    .creemos-title {
+      flex: 1;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 500;
+      color: var(--cream); letter-spacing: 0.02em;
+      transition: color 0.3s;
+    }
+    .creemos-item.open .creemos-title { color: var(--gold); }
+    .creemos-toggle {
+      background: none; border: none; cursor: pointer;
+      color: rgba(184,151,90,0.6);
+      width: 32px; height: 32px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.3s;
+    }
+    .creemos-toggle svg { width: 20px; height: 20px; transition: transform 0.4s ease; }
+    .creemos-toggle .plus-v { transition: transform 0.4s ease, opacity 0.3s; transform-origin: center; }
+    .creemos-item.open .creemos-toggle { color: var(--gold); }
+    .creemos-item.open .creemos-toggle .plus-v { transform: scaleY(0); opacity: 0; }
+    /* Body — reveals with ink-wipe effect */
+    .creemos-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+    }
+    .creemos-item.open .creemos-body { max-height: 200px; }
+    .creemos-body p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-style: italic;
+      color: rgba(245,240,232,0.7); line-height: 1.8;
+      padding: 0 0 1.5rem 2.8rem;
+      /* Ink-wipe reveal: clip from left */
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.7s cubic-bezier(0.4,0,0.2,1) 0.1s;
+    }
+    .creemos-item.open .creemos-body p {
+      clip-path: inset(0 0% 0 0);
+    }
+    /* Golden ink line that sweeps across */
+    .creemos-reveal-bar {
+      position: absolute; top: 0; left: 2.8rem;
+      width: 0; height: 100%;
+      background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+      opacity: 0.18;
+      transition: width 0.65s cubic-bezier(0.4,0,0.2,1) 0.05s,
+                  opacity 0.3s ease 0.6s;
+      pointer-events: none;
+    }
+    .creemos-item.open .creemos-reveal-bar {
+      width: 80%;
+    }
+    .creemos-item.open .creemos-reveal-bar { opacity: 0; transition: width 0.65s cubic-bezier(0.4,0,0.2,1) 0.05s, opacity 0.25s ease 0.55s; }
 
     /* NAV */
     nav {
@@ -235,6 +336,7 @@
       line-height: 2.1;
     }
     .hero-actions { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .hero-radio-wrap { display: flex; justify-content: center; }
     .btn-primary {
       display: inline-block;
       background: var(--gold); color: var(--dark);
@@ -256,17 +358,11 @@
     }
     .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
     .hero-scroll {
-      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
-      color: rgba(245,240,232,0.45); font-size: 0.52rem; letter-spacing: 0.35em;
-      text-transform: uppercase;
+      position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0;
     }
     .scroll-cross {
-      font-size: 2rem;
-      color: var(--gold);
-      text-shadow: 0 0 18px rgba(184,151,90,0.9);
-      animation: cross-bounce 2.2s ease-in-out infinite;
-      line-height: 1.4;
+      display: flex; align-items: center; justify-content: center;
     }
     @keyframes cross-bounce {
       0%,100% { opacity: 0.4; transform: translateY(0) scale(0.92); }
@@ -844,29 +940,35 @@
       por Dios y fortalecer la fe en comunidad
     </p>
     <div class="hero-actions">
+      <a href="#creemos" class="btn-outline">En qué creemos</a>
       <a href="#vision" class="btn-primary">Nuestra Misión</a>
       <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" target="_blank" class="btn-outline">Visitanos</a>
     </div>
 
     <!-- RADIO PLAYER -->
-    <div class="hero-radio" id="radioPlayer">
-      <audio id="radioAudio" src="https://stream.zeno.fm/yn65m38mylhvv" preload="none"></audio>
-      <button class="radio-btn" id="radioBtn" onclick="toggleRadio()" aria-label="Reproducir radio">
-        <svg class="radio-icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="radio-icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
+    <div class="hero-radio-wrap">
+    <a class="hero-radio" href="https://zeno.fm/radio/cristianos-en-linea/" target="_blank" rel="noopener" aria-label="Escuchar radio en vivo">
+      <div class="radio-btn" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </div>
       <div class="radio-info">
         <span class="radio-name">MJC En Vivo · Zeno.fm</span>
-        <span class="radio-status" id="radioStatus">En vivo</span>
+        <span class="radio-status">Escuchanos en vivo</span>
       </div>
-      <div class="radio-bars" id="radioBars">
+      <div class="radio-bars">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
+    </a>
     </div>
   </div>
   <div class="hero-scroll">
-    <span>Descubrir</span>
-    <div class="scroll-cross">✝</div>
+    <div class="scroll-icons">
+      <!-- Cruz -->
+      <svg class="scroll-icon" viewBox="0 0 28 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="11" y="0" width="6" height="40" rx="1.5" fill="#b8975a"/>
+        <rect x="0" y="11" width="28" height="6" rx="1.5" fill="#b8975a"/>
+      </svg>
+    </div>
   </div>
 </section>
 <!-- FRASE CENTRAL -->
@@ -897,6 +999,162 @@
         </p>
         <a href="https://api.whatsapp.com/send?phone=5491135702698" target="_blank" class="btn-primary">Escribinos</a>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- EN QUÉ CREEMOS -->
+<section id="creemos" style="background: var(--dark); padding: 7rem 0;">
+  <div class="container">
+    <p class="section-label fade-up" style="text-align:center;">Doctrina</p>
+    <h2 class="section-title fade-up" style="text-align:center; margin-bottom:0.5rem;">En qué<br>Creemos.</h2>
+    <div class="creemos-line fade-up"></div>
+    <div class="creemos-list fade-up">
+
+      <div class="creemos-item" data-index="0">
+        <div class="creemos-header">
+          <div class="creemos-icon-wrap">
+            <svg viewBox="0 0 28 40" fill="none"><rect x="11" y="0" width="6" height="40" rx="1.5" fill="#b8975a"/><rect x="0" y="11" width="28" height="6" rx="1.5" fill="#b8975a"/></svg>
+          </div>
+          <span class="creemos-title">En Jesucristo</span>
+          <button class="creemos-toggle" aria-label="Expandir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line class="plus-h" x1="4" y1="12" x2="20" y2="12"/><line class="plus-v" x1="12" y1="4" x2="12" y2="20"/></svg>
+          </button>
+        </div>
+        <div class="creemos-body">
+          <p>Nuestro Señor y Salvador. Quien nació de la virgen María y fue concebido por obra y gracia del Espíritu Santo.</p>
+          <div class="creemos-reveal-bar"></div>
+        </div>
+      </div>
+
+      <div class="creemos-item" data-index="1">
+        <div class="creemos-header">
+          <div class="creemos-icon-wrap">
+            <svg viewBox="0 0 36 20" fill="none">
+              <circle cx="6" cy="10" r="5" stroke="#b8975a" stroke-width="2"/>
+              <circle cx="18" cy="10" r="5" stroke="#b8975a" stroke-width="2"/>
+              <circle cx="30" cy="10" r="5" stroke="#b8975a" stroke-width="2"/>
+            </svg>
+          </div>
+          <span class="creemos-title">La Trinidad</span>
+          <button class="creemos-toggle" aria-label="Expandir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line class="plus-h" x1="4" y1="12" x2="20" y2="12"/><line class="plus-v" x1="12" y1="4" x2="12" y2="20"/></svg>
+          </button>
+        </div>
+        <div class="creemos-body">
+          <p>Dios Padre, Hijo y Espíritu Santo.</p>
+          <div class="creemos-reveal-bar"></div>
+        </div>
+      </div>
+
+      <div class="creemos-item" data-index="2">
+        <div class="creemos-header">
+          <div class="creemos-icon-wrap">
+            <svg viewBox="0 0 36 28" fill="none">
+              <!-- Left page -->
+              <path d="M18 5 C14 4 7 4 2 6 L2 24 C7 22 14 22 18 24 Z" stroke="#b8975a" stroke-width="1.8" stroke-linejoin="round" fill="rgba(184,151,90,0.08)"/>
+              <!-- Right page -->
+              <path d="M18 5 C22 4 29 4 34 6 L34 24 C29 22 22 22 18 24 Z" stroke="#b8975a" stroke-width="1.8" stroke-linejoin="round" fill="rgba(184,151,90,0.08)"/>
+              <!-- Spine -->
+              <line x1="18" y1="5" x2="18" y2="24" stroke="#b8975a" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Lines on left page -->
+              <line x1="5" y1="11" x2="15" y2="10" stroke="#b8975a" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+              <line x1="5" y1="15" x2="15" y2="14" stroke="#b8975a" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+              <line x1="5" y1="19" x2="15" y2="18.5" stroke="#b8975a" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+              <!-- Lines on right page -->
+              <line x1="21" y1="10" x2="31" y2="11" stroke="#b8975a" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+              <line x1="21" y1="14" x2="31" y2="15" stroke="#b8975a" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+              <line x1="21" y1="18.5" x2="31" y2="19" stroke="#b8975a" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+            </svg>
+          </div>
+          <span class="creemos-title">La Biblia</span>
+          <button class="creemos-toggle" aria-label="Expandir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line class="plus-h" x1="4" y1="12" x2="20" y2="12"/><line class="plus-v" x1="12" y1="4" x2="12" y2="20"/></svg>
+          </button>
+        </div>
+        <div class="creemos-body">
+          <p>Única y verdadera fuente de revelación. Regla infalible de fe y conducta.</p>
+          <div class="creemos-reveal-bar"></div>
+        </div>
+      </div>
+
+      <div class="creemos-item" data-index="3">
+        <div class="creemos-header">
+          <div class="creemos-icon-wrap">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 4 C8 4 4 10 4 16 C4 24 16 30 16 30 C16 30 28 24 28 16 C28 10 24 4 16 4Z" stroke="#b8975a" stroke-width="2" fill="none"/>
+              <path d="M16 10 L16 22 M10 16 L22 16" stroke="#b8975a" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="creemos-title">El perdón de los pecados</span>
+          <button class="creemos-toggle" aria-label="Expandir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line class="plus-h" x1="4" y1="12" x2="20" y2="12"/><line class="plus-v" x1="12" y1="4" x2="12" y2="20"/></svg>
+          </button>
+        </div>
+        <div class="creemos-body">
+          <p>Por medio de Jesucristo y su sangre redentora.</p>
+          <div class="creemos-reveal-bar"></div>
+        </div>
+      </div>
+
+      <div class="creemos-item" data-index="4">
+        <div class="creemos-header">
+          <div class="creemos-icon-wrap">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 3 L4 10 L4 22 L16 29 L28 22 L28 10 Z" stroke="#b8975a" stroke-width="2" fill="none"/>
+              <path d="M16 3 L16 29 M4 10 L28 10 M4 22 L28 22" stroke="#b8975a" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+            </svg>
+          </div>
+          <span class="creemos-title">La salvación para vida eterna</span>
+          <button class="creemos-toggle" aria-label="Expandir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line class="plus-h" x1="4" y1="12" x2="20" y2="12"/><line class="plus-v" x1="12" y1="4" x2="12" y2="20"/></svg>
+          </button>
+        </div>
+        <div class="creemos-body">
+          <p>La cual alcanzamos por gracia, por medio de la fe.</p>
+          <div class="creemos-reveal-bar"></div>
+        </div>
+      </div>
+
+      <div class="creemos-item" data-index="5">
+        <div class="creemos-header">
+          <div class="creemos-icon-wrap">
+            <svg viewBox="0 0 36 32" fill="none">
+              <path d="M18 4 C10 4 4 9 4 16 C4 20 6 23 10 25 L10 28 L18 24 L26 28 L26 25 C30 23 32 20 32 16 C32 9 26 4 18 4Z" stroke="#b8975a" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <span class="creemos-title">La Iglesia</span>
+          <button class="creemos-toggle" aria-label="Expandir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line class="plus-h" x1="4" y1="12" x2="20" y2="12"/><line class="plus-v" x1="12" y1="4" x2="12" y2="20"/></svg>
+          </button>
+        </div>
+        <div class="creemos-body">
+          <p>La compañía de todos los redimidos por Jesucristo que creen y practican las enseñanzas del Evangelio.</p>
+          <div class="creemos-reveal-bar"></div>
+        </div>
+      </div>
+
+      <div class="creemos-item" data-index="6">
+        <div class="creemos-header">
+          <div class="creemos-icon-wrap">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M4 28 L16 6 L28 28" stroke="#b8975a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <line x1="8" y1="22" x2="24" y2="22" stroke="#b8975a" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="16" cy="3" r="2.5" fill="#b8975a"/>
+            </svg>
+          </div>
+          <span class="creemos-title">La Segunda Venida</span>
+          <button class="creemos-toggle" aria-label="Expandir">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line class="plus-h" x1="4" y1="12" x2="20" y2="12"/><line class="plus-v" x1="12" y1="4" x2="12" y2="20"/></svg>
+          </button>
+        </div>
+        <div class="creemos-body">
+          <p>De nuestro Señor Jesucristo.</p>
+          <div class="creemos-reveal-bar"></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1263,7 +1521,7 @@
     setTimeout(() => {
       document.getElementById('preloader').classList.add('hide');
       document.getElementById('hero').classList.add('loaded');
-    }, 4500);
+    }, 3000);
   });
 
   // Navbar scroll
@@ -1272,29 +1530,7 @@
     navbar.classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Radio player
-  function toggleRadio() {
-    const audio = document.getElementById('radioAudio');
-    const btn = document.getElementById('radioBtn');
-    const bars = document.getElementById('radioBars');
-    const status = document.getElementById('radioStatus');
-    const iconPlay = btn.querySelector('.radio-icon-play');
-    const iconPause = btn.querySelector('.radio-icon-pause');
-    if (audio.paused) {
-      audio.play();
-      iconPlay.style.display = 'none';
-      iconPause.style.display = 'block';
-      bars.classList.add('active');
-      status.textContent = 'Reproduciendo...';
-    } else {
-      audio.pause();
-      audio.src = audio.src;
-      iconPlay.style.display = 'block';
-      iconPause.style.display = 'none';
-      bars.classList.remove('active');
-      status.textContent = 'En vivo';
-    }
-  }
+  // Radio: opens Zeno.fm in new tab (direct stream + embeds blocked by CORS)
 
 
   const fadeEls = document.querySelectorAll('.fade-up');
@@ -1573,6 +1809,19 @@
   }, { threshold: 0.2 });
   const ofSection = document.getElementById('ofrendar');
   if (ofSection) ofrendaObserver.observe(ofSection);
+
+  // En qué creemos — accordion with ink-wipe reveal
+  document.querySelectorAll('.creemos-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.closest('.creemos-item');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.creemos-item').forEach(i => i.classList.remove('open'));
+      // Open clicked if it was closed
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
 </script>
 </body>
 </html>
