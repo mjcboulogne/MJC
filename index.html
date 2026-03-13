@@ -623,6 +623,12 @@
       letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--text-light); margin-top: 0.3rem;
     }
+    .award-item svg {
+      width: 28px;
+      height: 28px;
+      display: block;
+      margin: 0 auto 0.5rem;
+    }
     .verse-hint {
       display: block; font-size: 0.48rem;
       font-family: 'Montserrat', sans-serif;
@@ -891,9 +897,25 @@
       }
       .pastor-name { font-size: clamp(2rem, 10vw, 3rem); margin: 0.8rem 0; }
       .pastor-bio { font-size: 0.65rem; margin: 1.5rem 0; max-width: 100%; }
-      .awards { gap: 1rem; justify-content: center; }
+      .awards {
+        gap: 1rem;
+        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
+        width: 100%;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
       .award-item { font-size: 1.1rem; }
       .award-item small { font-size: 0.48rem; margin-top: 0.2rem; }
+      /* Posicionamiento en cruz */
+      .award-item:nth-child(1) { grid-column: 1; grid-row: 1; }  /* Fe - arriba izq */
+      .award-item:nth-child(2) { grid-column: 2; grid-row: 2; }  /* Amor - centro */
+      .award-item:nth-child(3) { grid-column: 3; grid-row: 1; }  /* Verdad - arriba der */
+      .award-item:nth-child(4) { grid-column: 1; grid-row: 3; }  /* Esperanza - abajo izq */
+      .award-item:nth-child(5) { grid-column: 3; grid-row: 3; }  /* Propósito - abajo der */
 
       /* ÚNETE */
       .unete-inner { grid-template-columns: 1fr; min-height: auto; }
@@ -1304,6 +1326,25 @@
         <div class="awards">
           <div class="award-item">✝<small>Fe</small></div>
           <div class="award-item">♥<small>Amor</small></div>
+          <div class="award-item">
+            <svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Biblia abierta -->
+              <path d="M2 4C2 2.9 2.9 2 4 2H12V14V26C12 27.1 11.1 28 10 28H4C2.9 28 2 27.1 2 26V4Z" fill="none"/>
+              <path d="M22 4C22 2.9 21.1 2 20 2H12V14V26C12 27.1 12.9 28 14 28H20C21.1 28 22 27.1 22 26V4Z" fill="none"/>
+              <line x1="12" y1="2" x2="12" y2="26"/>
+              <!-- Líneas de texto izquierda -->
+              <line x1="4" y1="8" x2="10" y2="8" opacity="0.6"/>
+              <line x1="4" y1="12" x2="10" y2="12" opacity="0.6"/>
+              <line x1="4" y1="16" x2="10" y2="16" opacity="0.4"/>
+              <line x1="4" y1="20" x2="10" y2="20" opacity="0.4"/>
+              <!-- Líneas de texto derecha -->
+              <line x1="14" y1="8" x2="20" y2="8" opacity="0.6"/>
+              <line x1="14" y1="12" x2="20" y2="12" opacity="0.6"/>
+              <line x1="14" y1="16" x2="20" y2="16" opacity="0.4"/>
+              <line x1="14" y1="20" x2="20" y2="20" opacity="0.4"/>
+            </svg>
+            <small>Verdad</small>
+          </div>
           <div class="award-item">✦<small>Esperanza</small></div>
           <div class="award-item">☀<small>Propósito</small></div>
         </div>
@@ -1564,12 +1605,12 @@
           <a href="https://www.bible.com/organizations/b58e6c18-0645-45d5-8dda-474451be81f5" target="_blank">YouVersion</a>
         </div>
         <div style="margin-top: 2rem; display: flex; gap: 2rem; align-items: flex-start;">
-          <div>
+          <a href="https://www.bible.com/organizations/b58e6c18-0645-45d5-8dda-474451be81f5" target="_blank" style="text-decoration: none; display: flex; flex-direction: column; align-items: center; transition: opacity 0.3s; cursor: pointer;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
             <p style="font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color: var(--gold); margin-bottom: 1rem;">Lectura Bíblica · YouVersion</p>
             <img src="QR_CODE.png" alt="QR YouVersion" style="width: 110px; height: 110px; object-fit: contain; opacity: 0.85; border: 1px solid rgba(184,151,90,0.25); padding: 8px; background: rgba(255,255,255,0.04);" />
             <p style="font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color: rgba(245,240,232,0.4); margin-top: 0.8rem;">Escaneá para leer la Biblia</p>
-          </div>
-          <div style="display: flex; flex-direction: column; justify-content: flex-start; gap: 1rem;">
+          </a>
+          <a href="https://www.bible.com/organizations/b58e6c18-0645-45d5-8dda-474451be81f5" target="_blank" style="display: flex; flex-direction: column; justify-content: flex-start; gap: 1rem; text-decoration: none; transition: opacity 0.3s; cursor: pointer;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
             <p style="font-size:0.65rem; letter-spacing:0.12em; line-height:2; color: rgba(245,240,232,0.75); text-transform: uppercase;">
               Ingresa aquí para agregar<br>
               <span style="color: var(--gold); font-weight: 600;">MJC Boulogne</span><br>
@@ -1577,7 +1618,7 @@
               <span style="color: var(--gold); font-size: 0.7rem;">✦</span><br>
               <span style="font-size: 0.58rem; color: rgba(184,151,90,0.8); font-style: italic;">Conecta tu fe digitalmente</span>
             </p>
-          </div>
+          </a>
         </div>
       </div>
     </div>
