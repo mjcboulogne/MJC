@@ -464,107 +464,89 @@
     .wa-float svg { width: 28px; height: 28px; fill: white; }
 
     /* OFRENDAR */
-    .ofrendar-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 5rem; align-items: start;
+    .ofrendar-versiculo {
+      text-align: center; max-width: 700px; margin: 0 auto 4rem;
+      padding: 2rem; border: 1px solid rgba(184,151,90,0.2);
     }
-    .ofrendar-col { }
-    .ofrendar-mp {
-      display: flex; justify-content: center;
-    }
-    .seed-container {
-      text-align: center;
-      border: 1px solid rgba(184,151,90,0.2);
-      padding: 3rem 2rem;
-      background: rgba(0,0,0,0.2);
-      width: 100%;
-    }
-    .seed-anim {
-      position: relative; width: 80px; height: 100px;
-      margin: 0 auto 1.5rem;
-    }
-    .seed-ground {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 2px; background: rgba(184,151,90,0.4);
-    }
-    .seed-dot {
-      position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--gold); opacity: 0.8;
-      animation: seed-pulse 2s ease-in-out infinite;
-    }
-    .seed-stem {
-      position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
-      width: 2px; background: var(--gold); transform-origin: bottom;
-      animation: grow-stem 3s ease-in-out infinite alternate;
-    }
-    .seed-leaf {
-      position: absolute; width: 18px; height: 10px;
-      background: var(--gold); border-radius: 50% 50% 50% 0;
-      opacity: 0; transform-origin: bottom center;
-      animation: grow-leaf 3s ease-in-out infinite alternate;
-    }
-    .seed-leaf-l {
-      left: calc(50% - 20px); bottom: 30px;
-      transform: rotate(-40deg);
-      animation-delay: 0.5s;
-    }
-    .seed-leaf-r {
-      left: calc(50% + 2px); bottom: 40px;
-      transform: rotate(40deg) scaleX(-1);
-      animation-delay: 1s;
-    }
-    @keyframes seed-pulse {
-      0%,100%{transform:translateX(-50%) scale(1); opacity:0.8}
-      50%{transform:translateX(-50%) scale(1.3); opacity:1}
-    }
-    @keyframes grow-stem {
-      0%{height:0px; opacity:0}
-      100%{height:55px; opacity:1}
-    }
-    @keyframes grow-leaf {
-      0%,30%{opacity:0; transform:rotate(-40deg) scale(0)}
-      100%{opacity:0.85; transform:rotate(-40deg) scale(1)}
-    }
-    .seed-label {
+    .ofrendar-verse-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem; color: var(--white);
-      letter-spacing: 0.1em; margin-bottom: 0.4rem;
+      font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic;
+      font-weight: 300; color: var(--cream); line-height: 1.8;
+      margin-bottom: 0.8rem;
     }
-    .seed-sub {
-      font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.5rem;
+    .ofrendar-verse-ref {
+      font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold);
     }
-    .seed-qr-box {
-      width: 160px; height: 160px; margin: 0 auto;
-      border: 2px dashed rgba(184,151,90,0.35);
+    .ofrendar-grid3 {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 2.5rem; align-items: start;
+    }
+    .of-card {
+      border: 1px solid rgba(184,151,90,0.18);
+      padding: 2.5rem 1.8rem;
+      background: rgba(0,0,0,0.18);
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 1rem;
+    }
+    .of-card-center {
+      border-color: rgba(184,151,90,0.35);
+      background: rgba(0,0,0,0.28);
+      text-align: left; align-items: flex-start;
+    }
+    .of-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 300;
+      color: var(--white); letter-spacing: 0.08em;
+      text-align: center; width: 100%;
+    }
+    .of-card-sub {
+      font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); line-height: 1.9;
+    }
+    .of-qr-box {
+      width: 150px; height: 150px;
+      border: 2px dashed rgba(184,151,90,0.3);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(245,240,232,0.3);
+      font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(245,240,232,0.25);
     }
-    .ofrendar-title {
+    .of-link-hint {
+      font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(245,240,232,0.25);
+    }
+    .of-verse-small {
+      margin-top: 1.2rem; padding-top: 1.2rem;
+      border-top: 1px solid rgba(184,151,90,0.15);
+      text-align: center;
+    }
+    .of-verse-small p {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem; font-weight: 300;
-      color: var(--white); margin-bottom: 1rem;
+      font-size: 0.85rem; font-style: italic; font-weight: 300;
+      color: rgba(245,240,232,0.65); line-height: 1.8; margin-bottom: 0.5rem;
     }
-    .ofrendar-sub {
-      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(245,240,232,0.5); line-height: 2; margin-bottom: 2rem;
+    .of-verse-small span {
+      font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold);
     }
-    .ofrendar-datos { display: flex; flex-direction: column; gap: 0; }
+    /* Plant SVG */
+    .plant-svg, .church-svg { width: 120px; height: 140px; overflow: visible; }
+
+    /* Transfer datos */
+    .ofrendar-datos { display: flex; flex-direction: column; gap: 0; width: 100%; }
     .dato-row {
       display: flex; justify-content: space-between; align-items: baseline;
-      padding: 0.9rem 0;
+      padding: 0.85rem 0;
       border-bottom: 1px solid rgba(184,151,90,0.12);
       gap: 1rem;
     }
     .dato-label {
-      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: rgba(245,240,232,0.4); white-space: nowrap;
+      font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(245,240,232,0.38); white-space: nowrap;
     }
     .dato-val {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem; color: var(--gold); text-align: right;
+      font-size: 0.95rem; color: var(--gold); text-align: right;
     }
     .nav-ofrendar {
       background: transparent !important;
@@ -574,9 +556,9 @@
     }
     .nav-ofrendar:hover { background: rgba(184,151,90,0.1) !important; }
 
-    /* OFRENDAR MOBILE */
-    @media(max-width:640px) {
-      .ofrendar-grid { grid-template-columns: 1fr; gap: 3rem; }
+    @media(max-width:900px) {
+      .ofrendar-grid3 { grid-template-columns: 1fr; gap: 2rem; }
+      .of-card-center { text-align: center; align-items: center; }
     }
 
 
@@ -914,34 +896,75 @@
 <section id="ofrendar" style="background: var(--mid); padding: 7rem 0;">
   <div class="container">
     <p class="section-label" style="text-align:center;">Tu ofrenda</p>
-    <h2 class="section-title" style="text-align:center; margin-bottom:0.5rem;">Ofrendar al Ministerio</h2>
-    <p style="text-align:center; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(245,240,232,0.5); margin-bottom:4rem;">
-      "Cada uno dé como propuso en su corazón" — 2 Corintios 9:7
-    </p>
+    <h2 class="section-title" style="text-align:center; margin-bottom:2rem;">Ofrendar al Ministerio</h2>
 
-    <div class="ofrendar-grid">
+    <!-- VERSICULO 2 COR -->
+    <div class="ofrendar-versiculo">
+      <p class="ofrendar-verse-text">"Cada uno dé como propuso en su corazón: no con tristeza, ni por necesidad, porque Dios ama al dador alegre."</p>
+      <p class="ofrendar-verse-ref">2 Corintios 9:7 · RVR1960</p>
+    </div>
 
-      <!-- COLUMNA IZQUIERDA: MP en construcción -->
-      <div class="ofrendar-col ofrendar-mp">
-        <div class="seed-container">
-          <div class="seed-anim">
-            <div class="seed-ground"></div>
-            <div class="seed-stem"></div>
-            <div class="seed-leaf seed-leaf-l"></div>
-            <div class="seed-leaf seed-leaf-r"></div>
-            <div class="seed-dot"></div>
-          </div>
-          <p class="seed-label">Mercado Pago</p>
-          <p class="seed-sub">Próximamente · En construcción</p>
-          <div class="seed-qr-box">Agregar QR aquí</div>
-          <p style="font-size:0.55rem; color:rgba(245,240,232,0.3); letter-spacing:0.15em; text-transform:uppercase; margin-top:1rem;">Link de pago MP · Próximamente</p>
+    <div class="ofrendar-grid3">
+
+
+      <!-- COLUMNA 1: OFRENDA con semilla → lirio -->
+      <div class="of-card">
+        <h4 class="of-card-title">Ofrenda</h4>
+
+        <!-- Versiculo Ofrenda -->
+        <div class="of-verse-small" style="margin-top:0; padding-top:0; border-top:none; margin-bottom:0.5rem;">
+          <p>"Dad, y se os dará; medida buena, apretada, remecida y rebosando darán en vuestro regazo."</p>
+          <span>Lucas 6:38 · RVR1960</span>
         </div>
+
+        <div class="plant-anim" id="plantAnim">
+          <svg viewBox="0 0 120 155" class="plant-svg" style="height:155px;">
+            <!-- Tierra con textura -->
+            <ellipse cx="60" cy="120" rx="38" ry="6" fill="rgba(184,151,90,0.18)"/>
+            <rect x="22" y="118" width="76" height="4" fill="rgba(184,151,90,0.22)" rx="2"/>
+            <!-- Semilla -->
+            <ellipse class="pa-seed" cx="60" cy="121" rx="7" ry="4.5" fill="#b8975a" opacity="0.9"/>
+            <!-- Raíces -->
+            <path class="pa-root-l" d="M57 122 Q50 128 44 132" stroke="#b8975a" stroke-width="1" fill="none" opacity="0" stroke-linecap="round"/>
+            <path class="pa-root-r" d="M63 122 Q70 128 76 132" stroke="#b8975a" stroke-width="1" fill="none" opacity="0" stroke-linecap="round"/>
+            <!-- Tallo principal -->
+            <path class="pa-stem" d="M60 118 Q60 118 60 118" stroke="#b8975a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Hoja izquierda baja -->
+            <path class="pa-leaf-l" d="M58 98 Q38 88 35 72 Q50 76 58 94" fill="#c9a96e" opacity="0"/>
+            <!-- Hoja derecha baja -->
+            <path class="pa-leaf-r" d="M62 84 Q82 74 85 58 Q70 64 62 82" fill="#c9a96e" opacity="0"/>
+            <!-- Hoja izquierda alta -->
+            <path class="pa-leaf-l2" d="M58 68 Q42 58 42 44 Q54 50 59 66" fill="#c9a96e" opacity="0"/>
+            <!-- Flor: lirio - pétalos externos -->
+            <g class="pa-lily" opacity="0">
+              <ellipse cx="60" cy="28" rx="5" ry="13" fill="#d4b47a" transform="rotate(-30 60 28)" opacity="0.85"/>
+              <ellipse cx="60" cy="28" rx="5" ry="13" fill="#d4b47a" transform="rotate(30 60 28)" opacity="0.85"/>
+              <ellipse cx="60" cy="28" rx="5" ry="13" fill="#d4b47a" transform="rotate(90 60 28)" opacity="0.85"/>
+              <ellipse cx="60" cy="28" rx="5" ry="13" fill="#c9a86a" transform="rotate(-90 60 28)" opacity="0.7"/>
+              <ellipse cx="60" cy="28" rx="5" ry="13" fill="#c9a86a" transform="rotate(150 60 28)" opacity="0.7"/>
+              <ellipse cx="60" cy="28" rx="5" ry="13" fill="#c9a86a" transform="rotate(-150 60 28)" opacity="0.7"/>
+              <!-- Centro -->
+              <circle cx="60" cy="28" r="5" fill="#1a1612"/>
+              <circle cx="60" cy="28" r="3" fill="#b8975a" opacity="0.9"/>
+              <!-- Estambres -->
+              <line x1="60" y1="28" x2="56" y2="20" stroke="#d4b47a" stroke-width="0.8"/>
+              <line x1="60" y1="28" x2="60" y2="19" stroke="#d4b47a" stroke-width="0.8"/>
+              <line x1="60" y1="28" x2="64" y2="20" stroke="#d4b47a" stroke-width="0.8"/>
+              <circle cx="56" cy="19" r="1.2" fill="#d4b47a"/>
+              <circle cx="60" cy="18" r="1.2" fill="#d4b47a"/>
+              <circle cx="64" cy="19" r="1.2" fill="#d4b47a"/>
+            </g>
+          </svg>
+        </div>
+        <p class="of-card-sub">Mercado Pago · Próximamente</p>
+        <div class="of-qr-box">Agregar QR aquí</div>
+        <p class="of-link-hint">Link de pago MP · En construcción</p>
       </div>
 
-      <!-- COLUMNA DERECHA: Transferencia -->
-      <div class="ofrendar-col">
-        <h4 class="ofrendar-title">Transferencia Bancaria</h4>
-        <p class="ofrendar-sub">Podés realizar una transferencia o depósito a la cuenta del Ministerio:</p>
+      <!-- COLUMNA 2: TRANSFERENCIA BANCARIA (centro) -->
+      <div class="of-card of-card-center">
+        <h4 class="of-card-title">Transferencia Bancaria</h4>
+        <p class="of-card-sub" style="margin-bottom:2rem;">Podés realizar una transferencia o depósito a la cuenta del Ministerio:</p>
         <div class="ofrendar-datos">
           <div class="dato-row"><span class="dato-label">Alias</span><span class="dato-val">AGREGAR.ALIAS</span></div>
           <div class="dato-row"><span class="dato-label">CBU</span><span class="dato-val">Agregar CBU</span></div>
@@ -950,6 +973,63 @@
           <div class="dato-row"><span class="dato-label">Titular</span><span class="dato-val">Ministerio Jesucristo es el Camino</span></div>
           <div class="dato-row"><span class="dato-label">Banco</span><span class="dato-val">Agregar Banco</span></div>
         </div>
+      </div>
+
+      <!-- COLUMNA 3: CIMIENTOS con iglesia -->
+      <div class="of-card">
+        <h4 class="of-card-title">Cimientos</h4>
+
+        <!-- Versiculo Hageo inmediatamente bajo el titulo -->
+        <div class="of-verse-small" style="margin-top:0; padding-top:0; border-top:none; margin-bottom:0.5rem;">
+          <p>"Subid al monte, y traed madera, y reedificad la casa; y pondré en ella mi voluntad, y seré glorificado, ha dicho Jehová."</p>
+          <span>Hageo 1:8 · RVR1960</span>
+        </div>
+
+        <div class="church-anim">
+          <svg viewBox="0 0 160 160" class="church-svg" style="width:160px;height:160px;">
+            <!-- Cielo / luz de fondo -->
+            <circle class="ca-glow" cx="80" cy="50" r="0" fill="rgba(184,151,90,0.07)"/>
+            <!-- Roca de Cristo — base -->
+            <ellipse class="ca-rock" cx="80" cy="142" rx="0" ry="0" fill="rgba(184,151,90,0.3)" stroke="rgba(184,151,90,0.5)" stroke-width="0.8"/>
+            <ellipse class="ca-rock2" cx="80" cy="142" rx="0" ry="0" fill="none" stroke="rgba(184,151,90,0.2)" stroke-width="1.5"/>
+            <!-- Cuerpo principal izquierda -->
+            <rect class="ca-body-l" x="20" y="160" width="28" height="0" fill="rgba(184,151,90,0.12)" stroke="#b8975a" stroke-width="0.8"/>
+            <!-- Cuerpo principal derecha -->
+            <rect class="ca-body-r" x="112" y="160" width="28" height="0" fill="rgba(184,151,90,0.12)" stroke="#b8975a" stroke-width="0.8"/>
+            <!-- Nave central -->
+            <rect class="ca-nave" x="48" y="160" width="64" height="0" fill="rgba(184,151,90,0.15)" stroke="#b8975a" stroke-width="1"/>
+            <!-- Puerta arco -->
+            <path class="ca-door" d="M72 160 L72 160 Q80 160 88 160 L88 160" stroke="#b8975a" stroke-width="1" fill="rgba(184,151,90,0.25)" opacity="0"/>
+            <!-- Ventana rosetón izquierda -->
+            <circle class="ca-win-l" cx="34" cy="110" r="0" fill="none" stroke="#b8975a" stroke-width="0.8" opacity="0"/>
+            <!-- Ventana rosetón derecha -->
+            <circle class="ca-win-r" cx="126" cy="110" r="0" fill="none" stroke="#b8975a" stroke-width="0.8" opacity="0"/>
+            <!-- Ventana central -->
+            <ellipse class="ca-win-c" cx="80" cy="105" rx="0" ry="0" fill="rgba(184,151,90,0.15)" stroke="#b8975a" stroke-width="0.8" opacity="0"/>
+            <!-- Techo lateral izquierdo -->
+            <polygon class="ca-roof-l" points="80,110 80,110 80,110" fill="rgba(184,151,90,0.18)" stroke="#b8975a" stroke-width="0.8"/>
+            <!-- Techo lateral derecho -->
+            <polygon class="ca-roof-r" points="80,110 80,110 80,110" fill="rgba(184,151,90,0.18)" stroke="#b8975a" stroke-width="0.8"/>
+            <!-- Techo central -->
+            <polygon class="ca-roof-c" points="80,110 80,110 80,110" fill="rgba(184,151,90,0.22)" stroke="#b8975a" stroke-width="1"/>
+            <!-- Torre campanario -->
+            <rect class="ca-tower" x="70" y="160" width="20" height="0" fill="rgba(184,151,90,0.18)" stroke="#b8975a" stroke-width="1"/>
+            <!-- Techo torre -->
+            <polygon class="ca-tower-roof" points="80,80 80,80 80,80" fill="rgba(184,151,90,0.3)" stroke="#b8975a" stroke-width="0.8"/>
+            <!-- Cruz sobre torre -->
+            <line class="ca-cross-v" x1="80" y1="40" x2="80" y2="40" stroke="#b8975a" stroke-width="2" stroke-linecap="round" opacity="0"/>
+            <line class="ca-cross-h" x1="80" y1="40" x2="80" y2="40" stroke="#b8975a" stroke-width="2" stroke-linecap="round" opacity="0"/>
+            <!-- Brillo cruz -->
+            <circle class="ca-cross-glow" cx="80" cy="35" r="0" fill="rgba(184,151,90,0.25)" opacity="0"/>
+            <!-- Detalles piedra en paredes -->
+            <line class="ca-detail1" x1="20" y1="130" x2="48" y2="130" stroke="rgba(184,151,90,0.25)" stroke-width="0.5" opacity="0"/>
+            <line class="ca-detail2" x1="112" y1="130" x2="140" y2="130" stroke="rgba(184,151,90,0.25)" stroke-width="0.5" opacity="0"/>
+          </svg>
+        </div>
+
+        <p class="of-card-sub">QR Cimientos · Próximamente</p>
+        <div class="of-qr-box">Agregar QR aquí</div>
+        <p class="of-link-hint">Link de pago · En construcción</p>
       </div>
 
     </div>
@@ -1022,6 +1102,204 @@
     });
   }, { threshold: 0.12 });
   fadeEls.forEach(el => io.observe(el));
+
+  // ── PLANT ANIMATION — semilla → lirio ────────────────────────────
+  function animatePlant() {
+    const svg = document.querySelector('.plant-svg');
+    if (!svg) return;
+    const seed   = svg.querySelector('.pa-seed');
+    const rootL  = svg.querySelector('.pa-root-l');
+    const rootR  = svg.querySelector('.pa-root-r');
+    const stem   = svg.querySelector('.pa-stem');
+    const leafL  = svg.querySelector('.pa-leaf-l');
+    const leafR  = svg.querySelector('.pa-leaf-r');
+    const leafL2 = svg.querySelector('.pa-leaf-l2');
+    const lily   = svg.querySelector('.pa-lily');
+
+    const CYCLE = 6800, PAUSE = 2000;
+
+    function ease(x) { return x<0.5?2*x*x:1-Math.pow(-2*x+2,2)/2; }
+    function lerp(a,b,t){ return a+(b-a)*t; }
+
+    function frame(ts) {
+      if (!frame.start) frame.start = ts;
+      const elapsed = (ts - frame.start) % (CYCLE + PAUSE);
+      const p = Math.min(elapsed / CYCLE, 1);
+      const e = ease(p);
+
+      // 0–10%: semilla se hunde
+      seed.setAttribute('cy', 121 + ease(Math.min(p/0.1,1))*5);
+      seed.setAttribute('opacity', p<0.08 ? 0.9 : Math.max(0, 0.9-(p-0.08)/0.12));
+
+      // 5–15%: raíces salen
+      const rp = ease(Math.max(0,Math.min((p-0.05)/0.12,1)));
+      rootL.setAttribute('opacity', rp*0.7);
+      rootR.setAttribute('opacity', rp*0.7);
+
+      // 12–55%: tallo crece con curva suave
+      if (p > 0.12) {
+        const sp = ease(Math.min((p-0.12)/0.43,1));
+        const topY = lerp(118, 22, sp);
+        stem.setAttribute('d', `M60 118 Q${58+sp*4} ${lerp(118,70,sp)} 60 ${topY}`);
+        stem.setAttribute('opacity', 1);
+      }
+
+      // 28–50%: hoja baja izquierda
+      if (p > 0.28) {
+        const lp = ease(Math.min((p-0.28)/0.22,1));
+        leafL.setAttribute('opacity', lp*0.88);
+        leafL.setAttribute('transform', `scale(${lp}) translate(${60*(1-lp)},${98*(1-lp)})`);
+      }
+      // 38–58%: hoja baja derecha
+      if (p > 0.38) {
+        const lp = ease(Math.min((p-0.38)/0.22,1));
+        leafR.setAttribute('opacity', lp*0.82);
+        leafR.setAttribute('transform', `scale(${lp}) translate(${62*(1-lp)},${84*(1-lp)})`);
+      }
+      // 50–68%: hoja alta
+      if (p > 0.50) {
+        const lp = ease(Math.min((p-0.50)/0.2,1));
+        leafL2.setAttribute('opacity', lp*0.78);
+        leafL2.setAttribute('transform', `scale(${lp}) translate(${58*(1-lp)},${68*(1-lp)})`);
+      }
+
+      // 68–100%: lirio florece — escala desde el centro
+      if (p > 0.68) {
+        const fp = ease(Math.min((p-0.68)/0.32,1));
+        lily.setAttribute('opacity', fp);
+        lily.setAttribute('transform', `scale(${fp}) translate(${60*(1-fp)},${28*(1-fp)})`);
+      }
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // ── CHURCH ANIMATION — roca → iglesia completa ───────────────────
+  function animateChurch() {
+    const svg = document.querySelector('.church-svg');
+    if (!svg) return;
+    const glow      = svg.querySelector('.ca-glow');
+    const rock      = svg.querySelector('.ca-rock');
+    const rock2     = svg.querySelector('.ca-rock2');
+    const bodyL     = svg.querySelector('.ca-body-l');
+    const bodyR     = svg.querySelector('.ca-body-r');
+    const nave      = svg.querySelector('.ca-nave');
+    const door      = svg.querySelector('.ca-door');
+    const winL      = svg.querySelector('.ca-win-l');
+    const winR      = svg.querySelector('.ca-win-r');
+    const winC      = svg.querySelector('.ca-win-c');
+    const roofL     = svg.querySelector('.ca-roof-l');
+    const roofR     = svg.querySelector('.ca-roof-r');
+    const roofC     = svg.querySelector('.ca-roof-c');
+    const tower     = svg.querySelector('.ca-tower');
+    const towerRoof = svg.querySelector('.ca-tower-roof');
+    const crossV    = svg.querySelector('.ca-cross-v');
+    const crossH    = svg.querySelector('.ca-cross-h');
+    const crossGlow = svg.querySelector('.ca-cross-glow');
+    const det1      = svg.querySelector('.ca-detail1');
+    const det2      = svg.querySelector('.ca-detail2');
+
+    const CYCLE = 7200, PAUSE = 2200;
+    function ease(x){ return x<0.5?2*x*x:1-Math.pow(-2*x+2,2)/2; }
+    function easeOut(x){ return 1-Math.pow(1-x,3); }
+    function lerp(a,b,t){ return a+(b-a)*t; }
+    function ep(p, start, dur){ return ease(Math.max(0,Math.min((p-start)/dur,1))); }
+
+    function frame(ts) {
+      if (!frame.start) frame.start = ts;
+      const elapsed = (ts - frame.start) % (CYCLE + PAUSE);
+      const p = Math.min(elapsed / CYCLE, 1);
+
+      // 0–12%: ROCA aparece pulsando desde el centro
+      const rp = ep(p, 0, 0.12);
+      rock.setAttribute('rx', rp * 58); rock.setAttribute('ry', rp * 10);
+      rock.setAttribute('opacity', rp * 0.85);
+      rock2.setAttribute('rx', rp * 68); rock2.setAttribute('ry', rp * 14);
+      rock2.setAttribute('opacity', rp * 0.4);
+      glow.setAttribute('r', rp * 55); glow.setAttribute('opacity', rp * 0.5);
+
+      // 12–35%: PAREDES laterales y nave central suben desde la roca
+      const wp = ep(p, 0.12, 0.23);
+      const wallH = wp * 35;
+      const wallY = 142 - wallH;
+      bodyL.setAttribute('y', wallY); bodyL.setAttribute('height', wallH); bodyL.setAttribute('opacity', wp*0.9);
+      bodyR.setAttribute('y', wallY); bodyR.setAttribute('height', wallH); bodyR.setAttribute('opacity', wp*0.9);
+      // nave más alta
+      const naveH = wp * 42;
+      const naveY = 142 - naveH;
+      nave.setAttribute('y', naveY); nave.setAttribute('height', naveH); nave.setAttribute('opacity', wp);
+
+      // 28–42%: PUERTA arco aparece en nave
+      const dp = ep(p, 0.28, 0.14);
+      const doorY = lerp(142, 116, dp);
+      door.setAttribute('d', `M72 142 L72 ${doorY} Q80 ${doorY-10} 88 ${doorY} L88 142`);
+      door.setAttribute('opacity', dp*0.9);
+
+      // 35–48%: ventanas rosetón
+      const winp = ep(p, 0.35, 0.13);
+      winL.setAttribute('r', winp*6); winL.setAttribute('cy', naveY+18); winL.setAttribute('opacity', winp*0.8);
+      winR.setAttribute('r', winp*6); winR.setAttribute('cy', naveY+18); winR.setAttribute('opacity', winp*0.8);
+      winC.setAttribute('rx', winp*7); winC.setAttribute('ry', winp*9);
+      winC.setAttribute('cy', naveY+14); winC.setAttribute('opacity', winp*0.85);
+
+      // 38–52%: TECHOS se ensamblan
+      const rtp = ep(p, 0.38, 0.14);
+      const roofPeak = lerp(142, 88, rtp);
+      roofL.setAttribute('points', `20,${wallY} 48,${wallY} 34,${roofPeak+12}`);
+      roofL.setAttribute('opacity', rtp*0.85);
+      roofR.setAttribute('points', `112,${wallY} 140,${wallY} 126,${roofPeak+12}`);
+      roofR.setAttribute('opacity', rtp*0.85);
+      roofC.setAttribute('points', `48,${naveY} 112,${naveY} 80,${roofPeak}`);
+      roofC.setAttribute('opacity', rtp*0.9);
+
+      // 50–65%: TORRE campanario sube
+      const tp = ep(p, 0.50, 0.15);
+      const towerH = tp * 38;
+      const towerY = naveY - towerH;
+      tower.setAttribute('y', towerY); tower.setAttribute('height', towerH); tower.setAttribute('opacity', tp*0.95);
+      // Techo torre
+      const trp = ep(p, 0.58, 0.10);
+      const trPeak = lerp(naveY, 58, trp);
+      towerRoof.setAttribute('points', `80,${trPeak} 68,${towerY} 92,${towerY}`);
+      towerRoof.setAttribute('opacity', trp*0.9);
+
+      // 65–75%: detalles piedra
+      const dtp = ep(p, 0.65, 0.1);
+      det1.setAttribute('opacity', dtp*0.6); det2.setAttribute('opacity', dtp*0.6);
+
+      // 72–100%: CRUZ con brillo — se dibuja desde arriba
+      const cp = ep(p, 0.72, 0.28);
+      const crossTop = lerp(trPeak||58, 28, cp);
+      crossV.setAttribute('y1', crossTop); crossV.setAttribute('y2', crossTop + cp*20);
+      crossV.setAttribute('x1', 80); crossV.setAttribute('x2', 80); crossV.setAttribute('opacity', cp);
+      const arm = cp * 11;
+      crossH.setAttribute('x1', 80-arm); crossH.setAttribute('x2', 80+arm);
+      crossH.setAttribute('y1', crossTop+7); crossH.setAttribute('y2', crossTop+7);
+      crossH.setAttribute('opacity', cp);
+      // halo dorado pulsante alrededor de la cruz
+      const pulse = 0.5 + 0.5 * Math.sin(Date.now()/500);
+      crossGlow.setAttribute('r', cp * (8 + pulse*4));
+      crossGlow.setAttribute('cy', crossTop+7);
+      crossGlow.setAttribute('opacity', cp * 0.35 * pulse);
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // Start animations when ofrendar section is visible
+  const ofrendaObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animatePlant();
+        animateChurch();
+        ofrendaObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+  const ofSection = document.getElementById('ofrendar');
+  if (ofSection) ofrendaObserver.observe(ofSection);
 </script>
 </body>
 </html>
