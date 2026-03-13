@@ -32,30 +32,40 @@
     }
 
     /* PRELOADER */
+    /* ── PRELOADER ─────────────────────────────────────────────── */
     #preloader {
       position: fixed; inset: 0;
-      background: var(--dark);
+      background: radial-gradient(ellipse 60% 45% at 50% 55%, rgba(184,151,90,0.07) 0%, #0d0b09 70%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 1.2rem;
+      gap: clamp(1rem, 3vw, 2.4rem);
       z-index: 9999;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
+      transition: opacity 1.2s ease, visibility 1.2s ease;
     }
-    #preloader.hide { opacity: 0; visibility: hidden; pointer-events:none; }
+    #preloader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
     .preloader-cross {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 7rem;
-      color: var(--gold);
-      text-shadow: 0 0 22px rgba(184,151,90,0.9), 0 0 55px rgba(184,151,90,0.45), 0 0 100px rgba(184,151,90,0.18);
-      animation: cross-bounce 2.2s ease-in-out infinite;
+      font-size: clamp(6rem, 22vw, 10.8rem);
       line-height: 1;
-    }
-    .preloader-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.6rem; letter-spacing: 0.5em;
-      text-transform: uppercase; color: rgba(184,151,90,0.5);
+      color: var(--gold);
+      filter: drop-shadow(0 0 18px rgba(184,151,90,0.95))
+              drop-shadow(0 6px 35px rgba(184,151,90,0.55))
+              drop-shadow(0 14px 70px rgba(184,151,90,0.22))
+              drop-shadow(0 28px 110px rgba(184,151,90,0.10));
       animation: cross-bounce 2.2s ease-in-out infinite;
-      animation-delay: 0.15s;
     }
+    .preloader-text {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      animation: cross-bounce 2.2s ease-in-out infinite;
+      /* NO delay — synced with cross */
+    }
+    .preloader-text span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.42rem, 1.4vw, 0.62rem);
+      letter-spacing: 0.55em;
+      text-transform: uppercase; color: rgba(184,151,90,0.75);
+      font-weight: 300;
+    }
+
 
     /* NAV */
     nav {
@@ -349,6 +359,37 @@
     .horarios-inner {
       display: grid; grid-template-columns: 1fr 1fr;
       min-height: 620px;
+    }
+    .map-wrapper {
+      position: relative; display: inline-block;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+    .map-wrapper iframe { display: block; }
+    .map-overlay {
+      position: absolute; inset: 0;
+      background: rgba(13,11,9,0.3);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.35s ease;
+    }
+    .map-overlay.hidden { opacity: 0; pointer-events: none; }
+    .map-overlay-hint {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      background: rgba(13,11,9,0.75);
+      border: 1px solid rgba(184,151,90,0.35);
+      padding: 0.8rem 1.4rem;
+      backdrop-filter: blur(4px);
+    }
+    .map-overlay-hint svg { color: var(--gold); }
+    .map-overlay-hint span {
+      font-size: 0.55rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+    }
+    .map-hint-mobile { display: none; }
+    @media (hover: none) {
+      .map-hint-desktop { display: none; }
+      .map-hint-mobile  { display: block; }
     }
     .horarios-image {
       background: linear-gradient(135deg, #1a1612 0%, #2e2820 100%);
@@ -717,7 +758,10 @@
 <!-- PRELOADER -->
 <div id="preloader">
   <div class="preloader-cross">✝</div>
-  <p class="preloader-label">Ministerio Jesucristo es el Camino</p>
+  <div class="preloader-text">
+    <span>Ministerio</span>
+    <span>Jesucristo es el Camino</span>
+  </div>
 </div>
 
 <!-- WHATSAPP FLOAT -->
@@ -823,12 +867,22 @@
 <section id="horarios">
   <div class="horarios-inner">
     <div class="horarios-image" style="display:flex; align-items:center; justify-content:center; background: var(--dark);">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.0834828700245!2d-58.58764152439795!3d-34.50076777299142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcbb007de0535f%3A0x144fbb51fa4229bf!2sMinisterio%20Jesucristo%20es%20el%20Camino!5e0!3m2!1ses-419!2sar!4v1773259878383!5m2!1ses-419!2sar"
-        width="400" height="300"
-        style="border:0; display:block; filter: grayscale(0.2) brightness(0.85); box-shadow: 0 8px 40px rgba(0,0,0,0.5);"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+      <div class="map-wrapper">
+        <iframe
+          id="mapFrame"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.0834828700245!2d-58.58764152439795!3d-34.50076777299142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcbb007de0535f%3A0x144fbb51fa4229bf!2sMinisterio%20Jesucristo%20es%20el%20Camino!5e0!3m2!1ses-419!2sar!4v1773259878383!5m2!1ses-419!2sar"
+          width="400" height="300"
+          style="border:0; display:block; filter: grayscale(0.2) brightness(0.85); box-shadow: 0 8px 40px rgba(0,0,0,0.5);"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-overlay" id="mapOverlay">
+          <div class="map-overlay-hint">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <span class="map-hint-desktop">Click para interactuar</span>
+            <span class="map-hint-mobile">Tocá para interactuar</span>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="horarios-content">
       <p class="section-label fade-up">Reuniones</p>
@@ -1170,7 +1224,7 @@
     setTimeout(() => {
       document.getElementById('preloader').classList.add('hide');
       document.getElementById('hero').classList.add('loaded');
-    }, 3000);
+    }, 4500);
   });
 
   // Navbar scroll
@@ -1179,7 +1233,24 @@
     navbar.classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Fade-up IntersectionObserver
+  // Map overlay — click or touch to activate
+  const mapOverlay = document.getElementById('mapOverlay');
+  if (mapOverlay) {
+    const activate = () => mapOverlay.classList.add('hidden');
+    mapOverlay.addEventListener('click', activate);
+    mapOverlay.addEventListener('touchstart', activate, { passive: true });
+    // Re-show overlay when user clicks/touches outside the map
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.map-wrapper')) {
+        mapOverlay.classList.remove('hidden');
+      }
+    });
+    document.addEventListener('touchstart', (e) => {
+      if (!e.target.closest('.map-wrapper')) {
+        mapOverlay.classList.remove('hidden');
+      }
+    }, { passive: true });
+  }
   const fadeEls = document.querySelectorAll('.fade-up');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
