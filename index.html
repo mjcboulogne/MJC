@@ -72,6 +72,30 @@
     [data-theme="light"] .cruz-separador { border-color: rgba(184,151,90,0.2); }
     [data-theme="light"] .photo-item img { filter: grayscale(10%); }
     [data-theme="light"] .schedule-day { color: rgba(46,40,32,0.55); }
+    [data-theme="light"] #horarios { background: var(--dark); }
+    [data-theme="light"] #pastor { background: var(--dark); }
+    [data-theme="light"] #creemos { background: var(--dark) !important; }
+    [data-theme="light"] #mensajes { background: var(--dark); }
+    [data-theme="light"] #ofrendar { background: var(--mid) !important; }
+    [data-theme="light"] .hero-eyebrow { color: var(--gold); }
+    [data-theme="light"] .hero-verse { color: rgba(138,109,48,0.75); }
+    [data-theme="light"] .section-label { color: var(--gold); }
+    [data-theme="light"] .section-title { color: var(--cream); }
+    [data-theme="light"] .schedule-row { border-bottom-color: rgba(184,151,90,0.2); }
+    [data-theme="light"] .divider { background: var(--gold); }
+    [data-theme="light"] .pastor-name { color: var(--cream); }
+    [data-theme="light"] .of-card-title { color: var(--cream); }
+    [data-theme="light"] .award-item { color: var(--gold); }
+    [data-theme="light"] .award-item small { color: var(--text-light); }
+    [data-theme="light"] .footer-logo { color: var(--gold); }
+    [data-theme="light"] .contact-col h4 { color: var(--gold); }
+    [data-theme="light"] .social-links a { color: var(--cream); }
+    [data-theme="light"] .mensajes-badge { background: rgba(184,151,90,0.08); border-color: rgba(184,151,90,0.3); }
+    [data-theme="light"] .creemos-title { color: var(--cream); }
+    [data-theme="light"] .creemos-item.open .creemos-title { color: var(--gold); }
+    [data-theme="light"] .of-link-hint { color: rgba(46,40,32,0.3); }
+    [data-theme="light"] .dato-label { color: rgba(46,40,32,0.45); }
+    [data-theme="light"] .of-card-sub { color: #8a6d30; }
 
     /* ── THEME TOGGLE BUTTON — above WhatsApp ── */
     .theme-toggle {
@@ -136,6 +160,132 @@
     }
     [data-theme="light"] .cross-night .star:nth-child(2) { animation-delay: 0.6s; }
     [data-theme="light"] .cross-night .star:nth-child(3) { animation-delay: 1.2s; }
+
+    /* ── VERSE OF THE DAY (VOTD) BUTTON ── */
+    .votd-btn {
+      position: fixed; bottom: 9.6rem; right: 2rem;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(26,22,18,0.7);
+      border: 1px solid rgba(184,151,90,0.4);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 200;
+      transition: background 0.4s, transform 0.25s, border-color 0.4s, box-shadow 0.4s;
+      backdrop-filter: blur(10px); padding: 0;
+    }
+    .votd-btn:hover { transform: scale(1.12); border-color: var(--gold); box-shadow: 0 0 20px rgba(184,151,90,0.3); }
+    .votd-btn:active { transform: scale(0.95); }
+    [data-theme="light"] .votd-btn { background: rgba(245,240,232,0.8); }
+    .votd-btn svg { width: 24px; height: 24px; }
+    /* Pulse on the book icon */
+    @keyframes book-glow {
+      0%,100% { filter: drop-shadow(0 0 2px rgba(184,151,90,0.2)); }
+      50% { filter: drop-shadow(0 0 8px rgba(184,151,90,0.6)); }
+    }
+    .votd-btn svg { animation: book-glow 3s ease-in-out infinite; }
+
+    /* ── VOTD CARD OVERLAY ── */
+    .votd-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.4s, visibility 0.4s;
+      padding: 1.5rem;
+    }
+    .votd-overlay.open { opacity: 1; visibility: visible; }
+
+    /* Flip card container */
+    .votd-flip-container {
+      perspective: 1000px;
+      max-width: 420px; width: 100%;
+      height: 420px;
+      transform: translateY(30px);
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .votd-overlay.open .votd-flip-container { transform: translateY(0); }
+    .votd-flip-inner {
+      position: relative; width: 100%; height: 100%;
+      transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+      transform-style: preserve-3d;
+    }
+    .votd-flip-inner.flipped { transform: rotateY(180deg); }
+    .votd-face {
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background: var(--dark);
+      border: 1px solid rgba(184,151,90,0.35);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      overflow-y: auto;
+    }
+    .votd-face-back { transform: rotateY(180deg); }
+    [data-theme="light"] .votd-face { background: var(--dark); }
+
+    .votd-close {
+      position: absolute; top: 0.8rem; right: 0.8rem;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-light); width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.2s; z-index: 2;
+    }
+    .votd-close:hover { color: var(--gold); }
+    .votd-label {
+      font-size: 0.5rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.3rem;
+    }
+    .votd-date {
+      font-size: 0.46rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 1.2rem;
+    }
+    .votd-version-tag {
+      display: inline-block; padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(184,151,90,0.4);
+      font-size: 0.48rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+      background: rgba(184,151,90,0.06);
+    }
+    .votd-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+      font-style: italic; font-weight: 300;
+      color: var(--cream); line-height: 1.85;
+      margin-bottom: 0.8rem;
+    }
+    .votd-ref {
+      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+    }
+    .votd-flip-hint {
+      font-size: 0.45rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-light); margin-top: auto; padding-top: 0.8rem;
+      cursor: pointer; transition: color 0.2s;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .votd-flip-hint:hover { color: var(--gold); }
+    .votd-flip-hint svg { width: 14px; height: 14px; }
+    .votd-cross-deco {
+      display: block; margin: 0.6rem auto;
+      color: var(--gold); font-size: 1rem; opacity: 0.35;
+    }
+    .votd-yv-link {
+      display: inline-block; margin-top: 0.5rem;
+      font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-light); text-decoration: none;
+      border: 1px solid rgba(184,151,90,0.2);
+      padding: 0.35rem 0.8rem; transition: color 0.3s, border-color 0.3s;
+    }
+    .votd-yv-link:hover { color: var(--gold); border-color: var(--gold); }
+
+    @media(max-width:640px) {
+      .votd-flip-container { height: 400px; }
+      .votd-face { padding: 2rem 1.4rem; }
+      .votd-btn { width: 44px; height: 44px; bottom: 8.4rem; right: 1.2rem; }
+      .votd-btn svg { width: 20px; height: 20px; }
+    }
 
     /* Mobile adjustment */
     @media(max-width:640px) {
@@ -798,7 +948,7 @@
     }
     .ofrendar-verse-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic;
+      font-size: clamp(1.15rem, 2.5vw, 1.5rem); font-style: italic;
       font-weight: 300; color: var(--cream); line-height: 1.8;
       margin-bottom: 0.8rem;
     }
@@ -850,11 +1000,11 @@
     }
     .of-verse-small p {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.85rem; font-style: italic; font-weight: 300;
+      font-size: 1.05rem; font-style: italic; font-weight: 300;
       color: rgba(245,240,232,0.65); line-height: 1.8; margin-bottom: 0.5rem;
     }
     .of-verse-small span {
-      font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase;
+      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
       color: var(--gold);
     }
     /* Plant SVG */
@@ -1061,6 +1211,58 @@
   <div class="preloader-text">
     <span>Ministerio</span>
     <span>Jesucristo es el Camino</span>
+  </div>
+</div>
+
+<!-- VOTD BUTTON — Mensaje del día -->
+<button class="votd-btn" id="votdBtn" aria-label="Mensaje del día">
+  <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Open Bible icon -->
+    <path d="M14 6 C10 5 5 5 2 7 L2 23 C5 21 10 21 14 23 Z" stroke="#b8975a" stroke-width="1.5" stroke-linejoin="round" fill="rgba(184,151,90,0.08)"/>
+    <path d="M14 6 C18 5 23 5 26 7 L26 23 C23 21 18 21 14 23 Z" stroke="#b8975a" stroke-width="1.5" stroke-linejoin="round" fill="rgba(184,151,90,0.08)"/>
+    <line x1="14" y1="6" x2="14" y2="23" stroke="#b8975a" stroke-width="1" stroke-linecap="round"/>
+    <!-- Small cross on page -->
+    <line x1="14" y1="10" x2="14" y2="15" stroke="#d4b47a" stroke-width="0.8" stroke-linecap="round" opacity="0.7"/>
+    <line x1="12" y1="11.5" x2="16" y2="11.5" stroke="#d4b47a" stroke-width="0.8" stroke-linecap="round" opacity="0.7"/>
+  </svg>
+</button>
+
+<!-- VOTD CARD OVERLAY — flip card -->
+<div class="votd-overlay" id="votdOverlay">
+  <div class="votd-flip-container">
+    <div class="votd-flip-inner" id="votdFlip">
+
+      <!-- FRENTE: RVR1960 -->
+      <div class="votd-face votd-face-front">
+        <button class="votd-close votd-close-front" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <p class="votd-label">✝ Mensaje del Día</p>
+        <p class="votd-date" id="votdDate"></p>
+        <span class="votd-version-tag">Reina-Valera 1960</span>
+        <p class="votd-text" id="votdTextRVR"></p>
+        <p class="votd-ref" id="votdRefRVR"></p>
+        <span class="votd-cross-deco">✝</span>
+        <a class="votd-yv-link" href="https://www.bible.com/es/verse-of-the-day" target="_blank" rel="noopener">Ver en YouVersion →</a>
+        <p class="votd-flip-hint" onclick="document.getElementById('votdFlip').classList.add('flipped')">Tocar para ver en NVI ↻</p>
+      </div>
+
+      <!-- DORSO: NVI -->
+      <div class="votd-face votd-face-back">
+        <button class="votd-close votd-close-back" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <p class="votd-label">✝ Mensaje del Día</p>
+        <p class="votd-date votd-date-back"></p>
+        <span class="votd-version-tag">Nueva Versión Internacional</span>
+        <p class="votd-text" id="votdTextNVI"></p>
+        <p class="votd-ref" id="votdRefNVI"></p>
+        <span class="votd-cross-deco">✝</span>
+        <a class="votd-yv-link" href="https://www.bible.com/es/verse-of-the-day" target="_blank" rel="noopener">Ver en YouVersion →</a>
+        <p class="votd-flip-hint" onclick="document.getElementById('votdFlip').classList.remove('flipped')">Tocar para ver en RVR1960 ↻</p>
+      </div>
+
+    </div>
   </div>
 </div>
 
@@ -1381,41 +1583,46 @@
 </div>
 
 <!-- HORARIOS -->
-<section id="horarios">
-  <div class="horarios-inner">
-    <div class="horarios-image" style="display:flex; align-items:center; justify-content:center; background: var(--dark);">
-      <div class="map-wrapper">
-        <iframe
-          id="mapFrame"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.0834828700245!2d-58.58764152439795!3d-34.50076777299142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcbb007de0535f%3A0x144fbb51fa4229bf!2sMinisterio%20Jesucristo%20es%20el%20Camino!5e0!3m2!1ses-419!2sar!4v1773259878383!5m2!1ses-419!2sar"
-          width="400" height="300"
-          style="border:0; display:block; filter: grayscale(0.2) brightness(0.85); box-shadow: 0 8px 40px rgba(0,0,0,0.5);"
-          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+<section id="horarios" style="background: var(--dark); padding: 6rem 0;">
+  <div class="container" style="max-width:900px;">
+    <div style="text-align:center;" class="fade-up">
+      <p class="section-label">Reuniones</p>
+      <h2 class="section-title">Horarios de<br>Encuentro.</h2>
+      <div class="divider" style="margin:1.5rem auto 2.5rem;"></div>
+    </div>
 
+    <!-- Schedule cards -->
+    <div style="display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:3rem;" class="fade-up">
+      <div style="flex:1; min-width:260px; max-width:380px; border:1px solid rgba(184,151,90,0.25); padding:1.8rem 1.5rem; background:rgba(184,151,90,0.04); text-align:center;">
+        <p style="font-size:0.5rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem;">Viernes</p>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; color:var(--cream); margin-bottom:0.5rem;">Encuentro Semanal</p>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold); font-weight:500; letter-spacing:0.05em;">19:30 hs</p>
+      </div>
+      <div style="flex:1; min-width:260px; max-width:380px; border:1px solid rgba(184,151,90,0.25); padding:1.8rem 1.5rem; background:rgba(184,151,90,0.04); text-align:center;">
+        <p style="font-size:0.5rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); margin-bottom:0.8rem;">Domingo</p>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; color:var(--cream); margin-bottom:0.5rem;">Reunión General</p>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold); font-weight:500; letter-spacing:0.05em;">09:30 hs</p>
       </div>
     </div>
-    <div class="horarios-content">
-      <p class="section-label fade-up">Reuniones</p>
-      <h2 class="section-title fade-up">Horarios de<br>Encuentro.</h2>
-      <div class="divider"></div>
-      <div class="horarios-schedule fade-up">
-        <div class="schedule-row">
-          <span class="schedule-day">Viernes</span>
-          <span class="schedule-time">19:30 hs</span>
-        </div>
-        <div class="schedule-row">
-          <span class="schedule-day">Domingo · Reunión General</span>
-          <span class="schedule-time">09:30 hs</span>
-        </div>
-      </div>
-      <p style="font-size:0.65rem;letter-spacing:0.14em;color:rgba(245,240,232,0.58);text-transform:uppercase;line-height:2.1;margin-bottom:2.5rem;" class="fade-up">
-        Junín 1734, Boulogne,<br>
-        Provincia de Buenos Aires, Argentina.<br>
-        Encuentra un lugar de paz y comunión<br>
-        en el corazón del barrio.
-      </p>
-      <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" target="_blank" class="btn-outline fade-up" style="width:fit-content;">Cómo llegar →</a>
+
+    <!-- Address -->
+    <p style="font-size:0.65rem; letter-spacing:0.14em; color:var(--text-light); text-transform:uppercase; line-height:2.1; text-align:center; margin-bottom:1.5rem;" class="fade-up">
+      Junín 1734, Boulogne, Provincia de Buenos Aires, Argentina.
+    </p>
+
+    <!-- Cómo llegar button -->
+    <div style="text-align:center; margin-bottom:2.5rem;" class="fade-up">
+      <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" target="_blank" class="btn-primary" style="display:inline-block;">Cómo llegar →</a>
+    </div>
+
+    <!-- Interactive Google Map -->
+    <div class="fade-up" style="width:100%; border:1px solid rgba(184,151,90,0.2); overflow:hidden;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.0834828700245!2d-58.58764152439795!3d-34.50076777299142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcbb007de0535f%3A0x144fbb51fa4229bf!2sMinisterio%20Jesucristo%20es%20el%20Camino!5e0!3m2!1ses-419!2sar!4v1773259878383!5m2!1ses-419!2sar"
+        width="100%" height="380"
+        style="border:0; display:block;"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
   </div>
 </section>
@@ -1945,6 +2152,81 @@
     const next = current === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     localStorage.setItem('mjc-theme', next);
+  });
+
+  // ── VERSÍCULO DEL DÍA ──────────────────────────────────────
+  // 52 versículos rotados semanalmente (curados de YouVersion VOTD)
+  // Cada uno en RVR1960 y NVI
+  const VOTD_DB = [
+    {ref:"Jeremías 29:11",rvr:'"Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis."',nvi:'"Porque yo sé muy bien los planes que tengo para ustedes —afirma el Señor—, planes de bienestar y no de calamidad, a fin de darles un futuro y una esperanza."'},
+    {ref:"Filipenses 4:13",rvr:'"Todo lo puedo en Cristo que me fortalece."',nvi:'"Todo lo puedo en Cristo que me fortalece."'},
+    {ref:"Romanos 8:28",rvr:'"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien, esto es, a los que conforme a su propósito son llamados."',nvi:'"Ahora bien, sabemos que Dios dispone todas las cosas para el bien de quienes lo aman, los que han sido llamados de acuerdo con su propósito."'},
+    {ref:"Isaías 41:10",rvr:'"No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia."',nvi:'"Así que no temas, porque yo estoy contigo; no te angusties, porque yo soy tu Dios. Te fortaleceré y te ayudaré; te sostendré con mi diestra victoriosa."'},
+    {ref:"Proverbios 3:5-6",rvr:'"Fíate de Jehová de todo tu corazón, y no te apoyes en tu propia prudencia. Reconócelo en todos tus caminos, y él enderezará tus veredas."',nvi:'"Confía en el Señor de todo corazón, y no en tu propia inteligencia. Reconócelo en todos tus caminos, y él allanará tus sendas."'},
+    {ref:"Salmos 23:1",rvr:'"Jehová es mi pastor; nada me faltará."',nvi:'"El Señor es mi pastor, nada me falta."'},
+    {ref:"Juan 3:16",rvr:'"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna."',nvi:'"Porque tanto amó Dios al mundo que dio a su Hijo unigénito, para que todo el que cree en él no se pierda, sino que tenga vida eterna."'},
+    {ref:"Mateo 11:28",rvr:'"Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar."',nvi:'"Vengan a mí todos ustedes que están cansados y agobiados, y yo les daré descanso."'},
+    {ref:"Salmos 46:1",rvr:'"Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones."',nvi:'"Dios es nuestro amparo y nuestra fortaleza, nuestra ayuda segura en momentos de angustia."'},
+    {ref:"Josué 1:9",rvr:'"Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas."',nvi:'"Ya te lo he ordenado: ¡Sé fuerte y valiente! ¡No tengas miedo ni te desanimes! Porque el Señor tu Dios te acompañará dondequiera que vayas."'},
+    {ref:"Salmos 119:105",rvr:'"Lámpara es a mis pies tu palabra, y lumbrera a mi camino."',nvi:'"Tu palabra es una lámpara a mis pies; es una luz en mi sendero."'},
+    {ref:"2 Timoteo 1:7",rvr:'"Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio."',nvi:'"Pues Dios no nos ha dado un espíritu de timidez, sino de poder, de amor y de dominio propio."'},
+    {ref:"Romanos 8:38-39",rvr:'"Por lo cual estoy seguro de que ni la muerte, ni la vida, ni ángeles, ni principados, ni lo presente, ni lo por venir, ni lo alto, ni lo profundo, ni ninguna otra cosa creada nos podrá separar del amor de Dios."',nvi:'"Pues estoy convencido de que ni la muerte ni la vida, ni los ángeles ni los demonios, ni lo presente ni lo por venir, ni nada en toda la creación podrá apartarnos del amor que Dios nos ha manifestado en Cristo Jesús."'},
+    {ref:"Salmos 34:8",rvr:'"Gustad, y ved que es bueno Jehová; dichoso el hombre que confía en él."',nvi:'"Prueben y vean que el Señor es bueno; dichosos los que en él se refugian."'},
+    {ref:"Hebreos 11:1",rvr:'"Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve."',nvi:'"Ahora bien, la fe es la garantía de lo que se espera, la certeza de lo que no se ve."'},
+    {ref:"Isaías 40:31",rvr:'"Pero los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas; correrán, y no se cansarán; caminarán, y no se fatigarán."',nvi:'"Pero los que confían en el Señor renovarán sus fuerzas; volarán como las águilas: correrán y no se fatigarán, caminarán y no se cansarán."'},
+    {ref:"Efesios 2:8-9",rvr:'"Porque por gracia sois salvos por medio de la fe; y esto no de vosotros, pues es don de Dios; no por obras, para que nadie se gloríe."',nvi:'"Porque por gracia ustedes han sido salvados mediante la fe; esto no procede de ustedes, sino que es el regalo de Dios, no por obras, para que nadie se jacte."'},
+    {ref:"1 Corintios 13:4",rvr:'"El amor es sufrido, es benigno; el amor no tiene envidia, el amor no es jactancioso, no se envanece."',nvi:'"El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso."'},
+    {ref:"Salmos 91:1-2",rvr:'"El que habita al abrigo del Altísimo morará bajo la sombra del Omnipotente. Diré yo a Jehová: Esperanza mía, y castillo mío; mi Dios, en quien confiaré."',nvi:'"El que habita al abrigo del Altísimo se acoge a la sombra del Todopoderoso. Yo le digo al Señor: Tú eres mi refugio, mi fortaleza, el Dios en quien confío."'},
+    {ref:"Gálatas 5:22-23",rvr:'"Mas el fruto del Espíritu es amor, gozo, paz, paciencia, benignidad, bondad, fe, mansedumbre, templanza."',nvi:'"En cambio, el fruto del Espíritu es amor, alegría, paz, paciencia, amabilidad, bondad, fidelidad, humildad y dominio propio."'},
+    {ref:"Santiago 1:5",rvr:'"Y si alguno de vosotros tiene falta de sabiduría, pídala a Dios, el cual da a todos abundantemente y sin reproche, y le será dada."',nvi:'"Si a alguno de ustedes le falta sabiduría, pídasela a Dios, y él se la dará, pues Dios da a todos generosamente sin menospreciar a nadie."'},
+    {ref:"Filipenses 4:6-7",rvr:'"Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones."',nvi:'"No se inquieten por nada; más bien, en toda ocasión, con oración y ruego, presenten sus peticiones a Dios y denle gracias. Y la paz de Dios, que sobrepasa todo entendimiento, cuidará sus corazones."'},
+    {ref:"Mateo 6:33",rvr:'"Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas."',nvi:'"Más bien, busquen primeramente el reino de Dios y su justicia, y todas estas cosas les serán añadidas."'},
+    {ref:"Salmos 37:4",rvr:'"Deléitate asimismo en Jehová, y él te concederá las peticiones de tu corazón."',nvi:'"Deléitate en el Señor, y él te concederá los deseos de tu corazón."'},
+    {ref:"1 Pedro 5:7",rvr:'"Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros."',nvi:'"Depositen en él toda ansiedad, porque él cuida de ustedes."'},
+    {ref:"Lamentaciones 3:22-23",rvr:'"Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron sus misericordias. Nuevas son cada mañana; grande es tu fidelidad."',nvi:'"El gran amor del Señor nunca se acaba, y su compasión jamás se agota. Cada mañana se renuevan sus bondades; ¡muy grande es su fidelidad!"'},
+    {ref:"Juan 14:6",rvr:'"Jesús le dijo: Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí."',nvi:'"Yo soy el camino, la verdad y la vida —le contestó Jesús—. Nadie llega al Padre sino por mí."'},
+    {ref:"Romanos 12:2",rvr:'"No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento, para que comprobéis cuál sea la buena voluntad de Dios."',nvi:'"No se amolden al mundo actual, sino sean transformados mediante la renovación de su mente. Así podrán comprobar cuál es la voluntad de Dios."'},
+    {ref:"Salmos 27:1",rvr:'"Jehová es mi luz y mi salvación; ¿de quién temeré? Jehová es la fortaleza de mi vida; ¿de quién he de atemorizarme?"',nvi:'"El Señor es mi luz y mi salvación; ¿a quién temeré? El Señor es el baluarte de mi vida; ¿quién podrá amedrentarme?"'},
+    {ref:"2 Corintios 5:17",rvr:'"De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas."',nvi:'"Por lo tanto, si alguno está en Cristo, es una nueva creación. ¡Lo viejo ha pasado, ha llegado ya lo nuevo!"'},
+    {ref:"Miqueas 6:8",rvr:'"Oh hombre, él te ha declarado lo que es bueno, y qué pide Jehová de ti: solamente hacer justicia, y amar misericordia, y humillarte ante tu Dios."',nvi:'"¡Ya se te ha declarado lo que es bueno! Ya se te ha dicho lo que de ti espera el Señor: Practicar la justicia, amar la misericordia, y humillarte ante tu Dios."'},
+  ];
+
+  // Get verse index based on day of year
+  function getVOTD() {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const dayOfYear = Math.floor((now - start) / 86400000);
+    return VOTD_DB[dayOfYear % VOTD_DB.length];
+  }
+
+  // Format date in Spanish
+  function formatDateES(d) {
+    const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    return `${dias[d.getDay()]} ${d.getDate()} de ${meses[d.getMonth()]}, ${d.getFullYear()}`;
+  }
+
+  // Initialize VOTD card
+  const votd = getVOTD();
+  document.getElementById('votdDate').textContent = formatDateES(new Date());
+  document.querySelectorAll('.votd-date-back').forEach(el => el.textContent = formatDateES(new Date()));
+  document.getElementById('votdTextRVR').textContent = votd.rvr;
+  document.getElementById('votdRefRVR').textContent = votd.ref + ' · RVR1960';
+  document.getElementById('votdTextNVI').textContent = votd.nvi;
+  document.getElementById('votdRefNVI').textContent = votd.ref + ' · NVI';
+
+  // Open/close overlay
+  const votdOverlay = document.getElementById('votdOverlay');
+  const votdFlip = document.getElementById('votdFlip');
+  document.getElementById('votdBtn').addEventListener('click', () => {
+    votdFlip.classList.remove('flipped');
+    votdOverlay.classList.add('open');
+  });
+  document.querySelectorAll('.votd-close-front, .votd-close-back').forEach(btn => {
+    btn.addEventListener('click', () => { votdOverlay.classList.remove('open'); });
+  });
+  votdOverlay.addEventListener('click', (e) => {
+    if (e.target === votdOverlay) votdOverlay.classList.remove('open');
   });
 
   // Radio: opens Zeno.fm in new tab (direct stream + embeds blocked by CORS)
