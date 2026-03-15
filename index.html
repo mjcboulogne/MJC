@@ -768,6 +768,56 @@
     }
 
 
+    /* MENSAJES — EN CONSTRUCCIÓN */
+    #mensajes {
+      background: var(--dark);
+      padding: 7rem 0;
+      text-align: center;
+    }
+    .mensajes-inner {
+      max-width: 640px; margin: 0 auto; padding: 0 2rem;
+      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+    }
+    .mensajes-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      border: 1px solid rgba(184,151,90,0.3);
+      padding: 0.4rem 1.2rem;
+      background: rgba(184,151,90,0.06);
+    }
+    .mensajes-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold);
+      animation: badge-pulse 2s ease-in-out infinite;
+    }
+    @keyframes badge-pulse {
+      0%,100% { opacity: 0.4; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+    .mensajes-badge span {
+      font-size: 0.5rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .mensajes-desc {
+      font-size: 0.65rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(245,240,232,0.5);
+      line-height: 2.2; max-width: 420px;
+    }
+    .mensajes-anim-wrap {
+      position: relative; width: 260px; height: 300px;
+      margin: 1rem auto;
+    }
+    .mensajes-verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-style: italic; font-weight: 300;
+      color: rgba(212,180,122,0.65); line-height: 1.8;
+      max-width: 480px;
+    }
+    .mensajes-verse-ref {
+      font-size: 0.5rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--gold);
+      margin-top: 0.6rem;
+    }
+
     .fade-up {
       opacity: 0; transform: translateY(38px);
       transition: opacity 0.95s ease, transform 0.95s ease;
@@ -904,6 +954,7 @@
     <div class="nav-social-buttons">
       <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9?g_st=aw" class="nav-cta" target="_blank">Visitanos</a>
       <a href="https://zeno.fm/radio/cristianos-en-linea/" class="nav-cta" target="_blank">Escuchanos</a>
+      <a href="#mensajes" class="nav-cta">Mensajes</a>
       <a href="#ofrendar" class="nav-cta">Ofrendar</a>
     </div>
     <div class="nav-social-icons">
@@ -1242,6 +1293,148 @@
           <div class="award-item">☀<small>Propósito</small></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE SEPARADOR -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Fe</span><span>·</span><span>Esperanza</span><span>·</span><span>Comunidad</span><span>·</span><span>Amor</span><span>·</span><span>Transformación</span><span>·</span><span>Servicio</span><span>·</span><span>Propósito</span><span>·</span><span>Verdad</span><span>·</span><span>Fe</span><span>·</span><span>Esperanza</span><span>·</span><span>Comunidad</span><span>·</span><span>Amor</span><span>·</span><span>Transformación</span><span>·</span><span>Servicio</span><span>·</span><span>Propósito</span><span>·</span><span>Verdad</span><span>·</span>
+  </div>
+</div>
+
+<!-- MENSAJES — EN CONSTRUCCIÓN -->
+<section id="mensajes">
+  <div class="mensajes-inner">
+    <p class="section-label fade-up">Predicaciones</p>
+    <h2 class="section-title fade-up" style="margin-bottom:0.5rem;">Mensajes.</h2>
+    <div class="divider" style="margin: 0 auto;"></div>
+
+    <div class="mensajes-badge fade-up">
+      <div class="mensajes-badge-dot"></div>
+      <span>Sección en construcción</span>
+    </div>
+
+    <!-- Animación: pergamino con pluma escribiendo -->
+    <div class="mensajes-anim-wrap fade-up">
+      <svg id="scroll-anim" viewBox="0 0 260 300" width="260" height="300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="rollWood" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c9a96e"/>
+            <stop offset="20%" stop-color="#a8854a"/>
+            <stop offset="50%" stop-color="#7a5e30"/>
+            <stop offset="80%" stop-color="#a8854a"/>
+            <stop offset="100%" stop-color="#c9a96e"/>
+          </linearGradient>
+          <radialGradient id="medallionGrad" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#d4b47a"/>
+            <stop offset="60%" stop-color="#a8854a"/>
+            <stop offset="100%" stop-color="#6b5530"/>
+          </radialGradient>
+          <linearGradient id="papiroGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="rgba(184,151,90,0.15)"/>
+            <stop offset="8%" stop-color="rgba(184,151,90,0.06)"/>
+            <stop offset="92%" stop-color="rgba(184,151,90,0.06)"/>
+            <stop offset="100%" stop-color="rgba(184,151,90,0.15)"/>
+          </linearGradient>
+          <linearGradient id="quillGrad" x1="0.3" y1="0" x2="0.7" y2="1">
+            <stop offset="0%" stop-color="#d4b47a"/>
+            <stop offset="40%" stop-color="#b8975a"/>
+            <stop offset="100%" stop-color="#8a7040"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Glow -->
+        <circle class="sa-glow" cx="130" cy="150" r="0" fill="rgba(184,151,90,0.04)"/>
+
+        <!-- Sombra -->
+        <rect class="sa-shadow" x="68" y="260" width="124" height="0" rx="1" fill="rgba(0,0,0,0.15)" opacity="0"/>
+
+        <!-- Papiro con bordes irregulares -->
+        <path class="sa-body" d="" fill="url(#papiroGrad)" stroke="rgba(184,151,90,0.35)" stroke-width="0.7" opacity="0"/>
+        <rect class="sa-body-inner" x="72" y="260" width="116" height="0" rx="1"
+              fill="none" stroke="rgba(184,151,90,0.15)" stroke-width="0.5" stroke-dasharray="2 4" opacity="0"/>
+        <!-- Manchas del papiro -->
+        <circle class="sa-stain1" cx="100" cy="140" r="0" fill="rgba(184,151,90,0.04)" opacity="0"/>
+        <circle class="sa-stain2" cx="155" cy="180" r="0" fill="rgba(107,85,48,0.04)" opacity="0"/>
+        <path class="sa-crack1" d="" stroke="rgba(107,85,48,0.12)" stroke-width="0.4" fill="none" opacity="0"/>
+        <path class="sa-crack2" d="" stroke="rgba(107,85,48,0.08)" stroke-width="0.3" fill="none" opacity="0"/>
+
+        <!-- ═══ RULO SUPERIOR ═══ -->
+        <circle class="sa-knob-tl" cx="45" cy="260" r="0" fill="#6b5530" stroke="#a8854a" stroke-width="1"/>
+        <rect class="sa-roll-top-cyl" x="50" y="256" width="160" height="0" rx="0" fill="url(#rollWood)" opacity="0"/>
+        <rect class="sa-ring-tl" x="62" y="256" width="5" height="0" fill="#d4b47a" opacity="0"/>
+        <rect class="sa-ring-tr" x="193" y="256" width="5" height="0" fill="#d4b47a" opacity="0"/>
+        <ellipse class="sa-medal-top" cx="130" cy="260" rx="0" ry="0" fill="url(#medallionGrad)" stroke="#d4b47a" stroke-width="0.8" opacity="0"/>
+        <line class="sa-medal-top-cv" x1="130" y1="260" x2="130" y2="260" stroke="#1a1612" stroke-width="1" opacity="0"/>
+        <line class="sa-medal-top-ch" x1="130" y1="260" x2="130" y2="260" stroke="#1a1612" stroke-width="1" opacity="0"/>
+        <line class="sa-roll-top-shine" x1="55" y1="258" x2="205" y2="258" stroke="rgba(212,180,122,0.35)" stroke-width="1.2" stroke-linecap="round" opacity="0"/>
+        <circle class="sa-knob-tr" cx="215" cy="260" r="0" fill="#6b5530" stroke="#a8854a" stroke-width="1"/>
+
+        <!-- ═══ RULO INFERIOR ═══ -->
+        <circle class="sa-knob-bl" cx="45" cy="260" r="0" fill="#6b5530" stroke="#a8854a" stroke-width="1"/>
+        <rect class="sa-roll-bot-cyl" x="50" y="256" width="160" height="0" rx="0" fill="url(#rollWood)" opacity="0"/>
+        <rect class="sa-ring-bl" x="62" y="256" width="5" height="0" fill="#d4b47a" opacity="0"/>
+        <rect class="sa-ring-br" x="193" y="256" width="5" height="0" fill="#d4b47a" opacity="0"/>
+        <ellipse class="sa-medal-bot" cx="130" cy="260" rx="0" ry="0" fill="url(#medallionGrad)" stroke="#d4b47a" stroke-width="0.8" opacity="0"/>
+        <line class="sa-medal-bot-cv" x1="130" y1="260" x2="130" y2="260" stroke="#1a1612" stroke-width="1" opacity="0"/>
+        <line class="sa-medal-bot-ch" x1="130" y1="260" x2="130" y2="260" stroke="#1a1612" stroke-width="1" opacity="0"/>
+        <line class="sa-roll-bot-shine" x1="55" y1="258" x2="205" y2="258" stroke="rgba(212,180,122,0.35)" stroke-width="1.2" stroke-linecap="round" opacity="0"/>
+        <circle class="sa-knob-br" cx="215" cy="260" r="0" fill="#6b5530" stroke="#a8854a" stroke-width="1"/>
+
+        <!-- ═══ CONTENIDO ═══ -->
+        <line class="sa-cross-v" x1="130" y1="56" x2="130" y2="56" stroke="#b8975a" stroke-width="2.2" stroke-linecap="round" opacity="0"/>
+        <line class="sa-cross-h" x1="130" y1="62" x2="130" y2="62" stroke="#b8975a" stroke-width="2.2" stroke-linecap="round" opacity="0"/>
+        <line class="sa-line1" x1="82" y1="80" x2="82" y2="80" stroke="#b8975a" stroke-width="1.3" stroke-linecap="round" opacity="0"/>
+        <line class="sa-line2" x1="82" y1="96" x2="82" y2="96" stroke="#b8975a" stroke-width="1.3" stroke-linecap="round" opacity="0"/>
+        <line class="sa-line3" x1="82" y1="112" x2="82" y2="112" stroke="#b8975a" stroke-width="1.3" stroke-linecap="round" opacity="0"/>
+        <line class="sa-line4" x1="82" y1="128" x2="82" y2="128" stroke="#b8975a" stroke-width="1.3" stroke-linecap="round" opacity="0"/>
+        <line class="sa-line5" x1="82" y1="144" x2="82" y2="144" stroke="#b8975a" stroke-width="1.3" stroke-linecap="round" opacity="0"/>
+
+        <!-- ═══ PLUMA — silueta elegante tipo quill clásico ═══ -->
+        <g class="sa-quill" opacity="0" transform="translate(170, 90) rotate(-30)">
+          <!-- Silueta sólida de la pluma — forma continua y curvada como la referencia -->
+          <path d="
+            M 0 68 Q -1 55 -1 42 Q -2 30 -5 20 Q -9 10 -16 2 Q -20 -3 -22 -8
+            Q -20 -10 -16 -6 Q -10 0 -6 8 Q -3 14 -1 22
+            Q 0 14 2 6 Q 5 -2 10 -12 Q 14 -22 17 -34 Q 18 -40 16 -42
+            Q 14 -36 11 -26 Q 7 -14 4 -4 Q 1 4 0 12 Q -1 24 0 42 Q 0 55 0 68 Z
+          " fill="url(#quillGrad)" opacity="0.88"/>
+
+          <!-- Raquis curvado -->
+          <path d="M 0 68 Q -1 40 -2 22 Q -1 10 2 0 Q 6 -14 12 -30 Q 15 -38 16 -42"
+                stroke="#d4b47a" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <path d="M 0.4 65 Q -0.5 42 -1 24 Q 0 12 3 2 Q 6 -10 11 -24"
+                stroke="rgba(255,255,255,0.1)" stroke-width="0.5" fill="none"/>
+
+          <!-- Muescas naturales en borde izquierdo -->
+          <path d="M-15 -2 L-13 -1" stroke="#8a7040" stroke-width="0.5" opacity="0.4"/>
+          <path d="M-7 14 L-5 15" stroke="#8a7040" stroke-width="0.4" opacity="0.3"/>
+
+          <!-- Calamo -->
+          <line x1="0" y1="68" x2="0" y2="88" stroke="#c9a96e" stroke-width="1.3" stroke-linecap="round"/>
+          <line x1="0" y1="84" x2="0" y2="94" stroke="#b8975a" stroke-width="0.8" stroke-linecap="round"/>
+
+          <!-- Nib -->
+          <path d="M 0 94 L -0.8 99 L 0 97.5 L 0.8 99 Z" fill="#a8854a"/>
+          <line x1="0" y1="92" x2="0" y2="98" stroke="rgba(26,22,18,0.4)" stroke-width="0.3"/>
+        </g>
+
+        <!-- Glow punta -->
+        <circle class="sa-quill-glow" cx="170" cy="150" r="0" fill="rgba(184,151,90,0.3)" opacity="0"/>
+        <circle class="sa-ink-drop" cx="130" cy="130" r="0" fill="#b8975a" opacity="0"/>
+      </svg>
+    </div>
+
+    <p class="mensajes-desc fade-up">
+      Pronto podrás acceder a las predicaciones<br>
+      y enseñanzas de nuestro ministerio.
+    </p>
+
+    <div class="fade-up" style="margin-top:1rem;">
+      <p class="mensajes-verse">"Escudriñad las Escrituras; porque a vosotros os parece que en ellas tenéis la vida eterna; y ellas son las que dan testimonio de mí."</p>
+      <p class="mensajes-verse-ref">Juan 5:39 · RVR1960</p>
     </div>
   </div>
 </section>
@@ -1829,6 +2022,167 @@
       if (!isOpen) item.classList.add('open');
     });
   });
+
+  // ── SCROLL / QUILL ANIMATION — pergamino con pluma ───────────
+  function animateScroll() {
+    const svg = document.getElementById('scroll-anim');
+    if (!svg) return;
+    const $ = s => svg.querySelector(s);
+
+    const glow=$('.sa-glow'), shadow=$('.sa-shadow'), body=$('.sa-body'), bodyIn=$('.sa-body-inner');
+    const stain1=$('.sa-stain1'), stain2=$('.sa-stain2'), crack1=$('.sa-crack1'), crack2=$('.sa-crack2');
+    const rtCyl=$('.sa-roll-top-cyl'), rtShine=$('.sa-roll-top-shine');
+    const ringTL=$('.sa-ring-tl'), ringTR=$('.sa-ring-tr');
+    const medalT=$('.sa-medal-top'), medalTCV=$('.sa-medal-top-cv'), medalTCH=$('.sa-medal-top-ch');
+    const knobTL=$('.sa-knob-tl'), knobTR=$('.sa-knob-tr');
+    const rbCyl=$('.sa-roll-bot-cyl'), rbShine=$('.sa-roll-bot-shine');
+    const ringBL=$('.sa-ring-bl'), ringBR=$('.sa-ring-br');
+    const medalB=$('.sa-medal-bot'), medalBCV=$('.sa-medal-bot-cv'), medalBCH=$('.sa-medal-bot-ch');
+    const knobBL=$('.sa-knob-bl'), knobBR=$('.sa-knob-br');
+    const lines=['.sa-line1','.sa-line2','.sa-line3','.sa-line4','.sa-line5'].map(s=>$(s));
+    const crossV=$('.sa-cross-v'), crossH=$('.sa-cross-h');
+    const quill=$('.sa-quill'), qGlow=$('.sa-quill-glow'), inkDrop=$('.sa-ink-drop');
+
+    const CYCLE=8000, PAUSE=2500;
+    const CY=150, SH=155, TY=CY-SH/2, BY_=CY+SH/2, CYL_H=14, KR=7, MR=10;
+    function ease(x){return x<0.5?2*x*x:1-Math.pow(-2*x+2,2)/2;}
+    function ep(p,s,d){return ease(Math.max(0,Math.min((p-s)/d,1)));}
+    function lerp(a,b,t){return a+(b-a)*t;}
+
+    // Helper to build irregular papiro path
+    function papiroPath(top, bot, left, right) {
+      const w=right-left, jL=3, jR=3;
+      return `M${left} ${top}
+        Q${left+w*0.15} ${top+2} ${left+w*0.3} ${top-1}
+        Q${left+w*0.5} ${top+1.5} ${left+w*0.7} ${top-0.5}
+        L${right} ${top}
+        Q${right+jR} ${top+(bot-top)*0.2} ${right+1} ${top+(bot-top)*0.35}
+        Q${right+jR} ${top+(bot-top)*0.55} ${right-1} ${top+(bot-top)*0.7}
+        Q${right+jR} ${top+(bot-top)*0.85} ${right} ${bot}
+        Q${left+w*0.7} ${bot+1} ${left+w*0.5} ${bot-1.5}
+        Q${left+w*0.3} ${bot+0.5} ${left} ${bot}
+        Q${left-jL} ${top+(bot-top)*0.8} ${left+1} ${top+(bot-top)*0.65}
+        Q${left-jL} ${top+(bot-top)*0.4} ${left+1} ${top+(bot-top)*0.25}
+        Q${left-jL} ${top+(bot-top)*0.1} ${left} ${top} Z`;
+    }
+
+    function setRoll(cyl, shine, rTL, rTR, medal, mCV, mCH, kL, kR, y, s) {
+      cyl.setAttribute('y', y-CYL_H/2); cyl.setAttribute('height', CYL_H*s);
+      cyl.setAttribute('opacity', s);
+      shine.setAttribute('y1', y-CYL_H/2+2); shine.setAttribute('y2', y-CYL_H/2+2);
+      shine.setAttribute('opacity', s*0.4);
+      rTL.setAttribute('y', y-CYL_H/2); rTL.setAttribute('height', CYL_H*s); rTL.setAttribute('opacity', s);
+      rTR.setAttribute('y', y-CYL_H/2); rTR.setAttribute('height', CYL_H*s); rTR.setAttribute('opacity', s);
+      medal.setAttribute('cy', y); medal.setAttribute('rx', s*MR); medal.setAttribute('ry', s*MR); medal.setAttribute('opacity', s);
+      const ms=s*4;
+      mCV.setAttribute('y1', y-ms); mCV.setAttribute('y2', y+ms); mCV.setAttribute('opacity', s*0.6);
+      mCH.setAttribute('x1', 130-ms); mCH.setAttribute('x2', 130+ms); mCH.setAttribute('y1', y); mCH.setAttribute('y2', y); mCH.setAttribute('opacity', s*0.6);
+      kL.setAttribute('cy', y); kL.setAttribute('r', s*KR);
+      kR.setAttribute('cy', y); kR.setAttribute('r', s*KR);
+    }
+
+    function frame(ts) {
+      if (!frame.start) frame.start = ts;
+      const elapsed = (ts-frame.start) % (CYCLE+PAUSE);
+      const p = Math.min(elapsed/CYCLE, 1);
+
+      // 0–22%: rollos aparecen y se separan
+      const unroll = ep(p, 0, 0.22);
+      const topY = lerp(CY, TY, unroll);
+      const botY = lerp(CY, BY_, unroll);
+      const rs = Math.min(unroll/0.06, 1);
+
+      glow.setAttribute('r', unroll*120); glow.setAttribute('opacity', unroll*0.45);
+
+      // Papiro
+      const pTop = topY + CYL_H/2;
+      const pBot = botY - CYL_H/2;
+      const pH = Math.max(0, pBot - pTop);
+      if (pH > 2) {
+        body.setAttribute('d', papiroPath(pTop, pBot, 56, 204));
+        body.setAttribute('opacity', unroll);
+        bodyIn.setAttribute('y', pTop+10); bodyIn.setAttribute('height', Math.max(0,pH-20));
+        bodyIn.setAttribute('opacity', unroll*0.5);
+      }
+      shadow.setAttribute('y', pTop+4); shadow.setAttribute('height', pH); shadow.setAttribute('opacity', unroll*0.2);
+
+      // Manchas y grietas
+      if (unroll > 0.5) {
+        const sp = ep(p, 0.12, 0.10);
+        stain1.setAttribute('r', sp*22); stain1.setAttribute('cy', pTop+pH*0.3); stain1.setAttribute('opacity', sp);
+        stain2.setAttribute('r', sp*18); stain2.setAttribute('cy', pTop+pH*0.65); stain2.setAttribute('opacity', sp);
+        crack1.setAttribute('d', `M${80} ${pTop+pH*0.25} Q${100} ${pTop+pH*0.3} ${130} ${pTop+pH*0.22} Q${150} ${pTop+pH*0.28} ${170} ${pTop+pH*0.35}`);
+        crack1.setAttribute('opacity', sp*0.8);
+        crack2.setAttribute('d', `M${90} ${pTop+pH*0.6} Q${120} ${pTop+pH*0.65} ${160} ${pTop+pH*0.55}`);
+        crack2.setAttribute('opacity', sp*0.6);
+      }
+
+      // Rollos con ornamentos
+      setRoll(rtCyl, rtShine, ringTL, ringTR, medalT, medalTCV, medalTCH, knobTL, knobTR, topY, rs);
+      setRoll(rbCyl, rbShine, ringBL, ringBR, medalB, medalBCV, medalBCH, knobBL, knobBR, botY, rs);
+
+      // Cruz
+      const cp = ep(p, 0.20, 0.10);
+      const ccy = pTop + 18;
+      crossV.setAttribute('y1', ccy-cp*10); crossV.setAttribute('y2', ccy+cp*10); crossV.setAttribute('opacity', cp);
+      crossH.setAttribute('x1', 130-cp*8); crossH.setAttribute('x2', 130+cp*8);
+      crossH.setAttribute('y1', ccy-2); crossH.setAttribute('y2', ccy-2); crossH.setAttribute('opacity', cp);
+
+      // Pluma aparece
+      quill.setAttribute('opacity', ep(p, 0.24, 0.08));
+
+      // Líneas
+      const lw=[80, 72, 76, 60, 44];
+      const ly=[pTop+40, pTop+56, pTop+72, pTop+88, pTop+104];
+      lines.forEach((line, i) => {
+        const lp = ep(p, 0.32+i*0.09, 0.09);
+        const x2 = 82 + lp*lw[i];
+        line.setAttribute('y1', ly[i]); line.setAttribute('y2', ly[i]);
+        line.setAttribute('x2', x2); line.setAttribute('opacity', lp*(0.28+i*0.06));
+      });
+
+      // Pluma sigue la línea
+      if (p >= 0.32 && p <= 0.82) {
+        const li = Math.min(Math.floor((p-0.32)/0.09), 4);
+        const lp = ep(p, 0.32+li*0.09, 0.09);
+        const qx = 82 + lp*lw[li];
+        const qy = ly[li] || ly[4];
+        quill.setAttribute('transform', `translate(${qx+6}, ${qy-48}) rotate(-28)`);
+        const pulse = 0.5+0.5*Math.sin(Date.now()/280);
+        qGlow.setAttribute('cx', qx); qGlow.setAttribute('cy', qy);
+        qGlow.setAttribute('r', 4+pulse*3); qGlow.setAttribute('opacity', 0.4*pulse);
+        if (lp > 0.92 && lp < 0.99) {
+          inkDrop.setAttribute('cx', qx); inkDrop.setAttribute('cy', qy+2);
+          inkDrop.setAttribute('r', 1.5); inkDrop.setAttribute('opacity', 0.35);
+        } else { inkDrop.setAttribute('opacity', 0); }
+      }
+
+      // Pluma se retira
+      if (p > 0.82) {
+        const fp = ep(p, 0.82, 0.18);
+        quill.setAttribute('transform', `translate(${lerp(162,195,fp)}, ${lerp(ly[4]||160,35,fp)}) rotate(${lerp(-28,-10,fp)})`);
+        quill.setAttribute('opacity', 1-fp*0.4);
+        qGlow.setAttribute('opacity', (1-fp)*0.3); inkDrop.setAttribute('opacity', 0);
+        const pulse = 0.5+0.5*Math.sin(Date.now()/600);
+        glow.setAttribute('r', 120+fp*12*pulse); glow.setAttribute('opacity', 0.35+fp*0.1*pulse);
+      }
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // Observer for Mensajes section
+  const mensajesObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateScroll();
+        mensajesObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+  const mensajesSection = document.getElementById('mensajes');
+  if (mensajesSection) mensajesObserver.observe(mensajesSection);
 
 </script>
 </body>
