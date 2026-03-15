@@ -1541,14 +1541,18 @@
           </svg>
         </div>
         <p class="of-card-sub">Alias · iglesia.mjc.dolarapp</p>
-        <a href="https://www.mercadopago.com.ar/money-transfer" target="_blank" rel="noopener" style="display:inline-block; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(184,151,90,0.3);" onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 0 24px rgba(184,151,90,0.35)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+        <div class="qr-copy-wrap" onclick="copyAlias(this, 'Ofrenda-MJC')" style="cursor:pointer; display:inline-block; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(184,151,90,0.3); position:relative;" onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 0 24px rgba(184,151,90,0.35)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
           <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAEICAIAAAAslP2oAAAEeklEQVR4nO3dwW0dNxRAUctIBVpooYpSRxoJ0kjqSHleeBXgjg0CJEh+nbMUhD/jL1wQ4PMM3z4/3r8B//d99w3AiYQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEP5YfYF///lz9SWm+Ovv//Lnq+9/1nWfPmfU7X+vWawYEIQBQRgQhAFBGBCEAUEYEJbPMZ6s3od+cto+/Wn38+Sr/b2sGBCEAUEYEIQBQRgQhAFBGBC2zTGezNq3Xr3vPvocxej9zPoeZt3P6OeP2jUneWLFgCAMCMKAIAwIwoAgDAjCgHDcHOM0o/vrq+cVq++Hn6wYEIQBQRgQhAFBGBCEAUEYEMwxfmP18xWr5wy7rns7KwYEYUAQBgRhQBAGBGFAEAaE4+YYp+2v73p/1KzvYdf7tW5nxYAgDAjCgCAMCMKAIAwIwoCwbY5xy/nWo3OGWb+/635Gr/uqrBgQhAFBGBCEAUEYEIQBQRgQ3j4/3nffw5VWzytGvepzEbtYMSAIA4IwIAgDgjAgCAOCMCAsn2O86vMAq+cVt8xDds1zVs9trBgQhAFBGBCEAUEYEIQBQRgQtj2PsXr/+5b9+CennbNxy/xhFisGBGFAEAYEYUAQBgRhQBAGhOXnY8w6/2GWXfOHWddd/TmnzRl23acVA4IwIAgDgjAgCAOCMCAIA8LyOcbtzwOc9p6o0+YMo0bnErv+vVYMCMKAIAwIwoAgDAjCgCAMCNuex5i1P337ORWr5xu73t+1+lwUz2PABsKAIAwIwoAgDAjCgCAMCMvnGKNuee5i9dxg9Pdv+d5GeR4DDiIMCMKAIAwIwoAgDAjCgLBtjrHr/+uf9pzA6n3629+jNfr5s1gxIAgDgjAgCAOCMCAIA4IwIGybY5w2r1j9XMGT0657+/c5ixUDgjAgCAOCMCAIA4IwIAgDwpd7r9Tq90c92XWe9+r73HX+xmpWDAjCgCAMCMKAIAwIwoAgDAjL5xiv+p6l1eeUr7ZrTnILKwYEYUAQBgRhQBAGBGFAEAaE5XOMW/a5V+/r33JexGlzm9X388SKAUEYEIQBQRgQhAFBGBCEAeGa8zFmcR7Fr90yD1nNigFBGBCEAUEYEIQBQRgQhAHhy52Psdot5167n1+zYkAQBgRhQBAGBGFAEAYEYUA4bo5xi13nhc/6/Fm//6qsGBCEAUEYEIQBQRgQhAFBGBDMMX5j1nkOp70nata84lXnHlYMCMKAIAwIwoAgDAjCgCAMCMfNMW7f/x6dG+x6n9LqecVp74kaZcWAIAwIwoAgDAjCgCAMCMKAsG2Occs+9y33+WTW+69u+fxZrBgQhAFBGBCEAUEYEIQBQRgQ3j4/3nffAxzHigFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAHhByXCaF8CXg59AAAAAElFTkSuQmCC" alt="QR Ofrenda — iglesia.mjc.dolarapp" style="width:150px;height:150px;display:block;" />
-        </a>
+          <div class="qr-copied-toast" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(26,22,18,0.92); opacity:0; transition:opacity 0.3s; pointer-events:none;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span style="font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-top:0.3rem;">Alias copiado</span>
+          </div>
+        </div>
         <div style="margin-top:0.8rem; padding:0.5rem 1rem; border:1px solid rgba(184,151,90,0.3); background:rgba(184,151,90,0.08); text-align:center;">
           <span style="font-size:0.45rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(245,240,232,0.4); display:block; margin-bottom:0.3rem;">Motivo de la transferencia</span>
           <span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--gold); letter-spacing:0.08em;">Ofrenda-MJC</span>
         </div>
-        <p class="of-link-hint">Tocá el QR para abrir Mercado Pago</p>
+        <p class="of-link-hint">Tocá el QR · copia el alias y abrí Mercado Pago</p>
       </div>
 
       <!-- COLUMNA 2: TRANSFERENCIA BANCARIA (centro) -->
@@ -1556,8 +1560,11 @@
         <h4 class="of-card-title">Transferencia Bancaria</h4>
         <p class="of-card-sub" style="margin-bottom:2rem;">Podés realizar una transferencia o depósito a la cuenta del Ministerio:</p>
         <div class="ofrendar-datos">
+          <div class="dato-row"><span class="dato-label">Titular</span><span class="dato-val">Marina De Los Angeles Sanchez</span></div>
+          <div class="dato-row"><span class="dato-label">CUIT/CUIL</span><span class="dato-val">27-32452226-9</span></div>
           <div class="dato-row"><span class="dato-label">Alias</span><span class="dato-val">iglesia.mjc.dolarapp</span></div>
           <div class="dato-row"><span class="dato-label">CBU</span><span class="dato-val">0000069700095638726514</span></div>
+          <div class="dato-row"><span class="dato-label">Entidad</span><span class="dato-val">Garpa SA (DolarApp)</span></div>
         </div>
       </div>
 
@@ -1614,14 +1621,18 @@
         </div>
 
         <p class="of-card-sub">Alias · iglesia.mjc.dolarapp</p>
-        <a href="https://www.mercadopago.com.ar/money-transfer" target="_blank" rel="noopener" style="display:inline-block; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(184,151,90,0.3);" onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 0 24px rgba(184,151,90,0.35)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+        <div class="qr-copy-wrap" onclick="copyAlias(this, 'Cimientos-MJC')" style="cursor:pointer; display:inline-block; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(184,151,90,0.3); position:relative;" onmouseover="this.style.transform='scale(1.04)'; this.style.boxShadow='0 0 24px rgba(184,151,90,0.35)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
           <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAAEICAIAAAAslP2oAAAEeklEQVR4nO3dwW0dNxRAUctIBVpooYpSRxoJ0kjqSHleeBXgjg0CJEh+nbMUhD/jL1wQ4PMM3z4/3r8B//d99w3AiYQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEP5YfYF///lz9SWm+Ovv//Lnq+9/1nWfPmfU7X+vWawYEIQBQRgQhAFBGBCEAUEYEJbPMZ6s3od+cto+/Wn38+Sr/b2sGBCEAUEYEIQBQRgQhAFBGBC2zTGezNq3Xr3vPvocxej9zPoeZt3P6OeP2jUneWLFgCAMCMKAIAwIwoAgDAjCgHDcHOM0o/vrq+cVq++Hn6wYEIQBQRgQhAFBGBCEAUEYEMwxfmP18xWr5wy7rns7KwYEYUAQBgRhQBAGBGFAEAaE4+YYp+2v73p/1KzvYdf7tW5nxYAgDAjCgCAMCMKAIAwIwoCwbY5xy/nWo3OGWb+/635Gr/uqrBgQhAFBGBCEAUEYEIQBQRgQ3j4/3nffw5VWzytGvepzEbtYMSAIA4IwIAgDgjAgCAOCMCAsn2O86vMAq+cVt8xDds1zVs9trBgQhAFBGBCEAUEYEIQBQRgQtj2PsXr/+5b9+CennbNxy/xhFisGBGFAEAYEYUAQBgRhQBAGhOXnY8w6/2GWXfOHWddd/TmnzRl23acVA4IwIAgDgjAgCAOCMCAIA8LyOcbtzwOc9p6o0+YMo0bnErv+vVYMCMKAIAwIwoAgDAjCgCAMCNuex5i1P337ORWr5xu73t+1+lwUz2PABsKAIAwIwoAgDAjCgCAMCMvnGKNuee5i9dxg9Pdv+d5GeR4DDiIMCMKAIAwIwoAgDAjCgLBtjrHr/+uf9pzA6n3629+jNfr5s1gxIAgDgjAgCAOCMCAIA4IwIGybY5w2r1j9XMGT0657+/c5ixUDgjAgCAOCMCAIA4IwIAgDwpd7r9Tq90c92XWe9+r73HX+xmpWDAjCgCAMCMKAIAwIwoAgDAjL5xiv+p6l1eeUr7ZrTnILKwYEYUAQBgRhQBAGBGFAEAaE5XOMW/a5V+/r33JexGlzm9X388SKAUEYEIQBQRgQhAFBGBCEAeGa8zFmcR7Fr90yD1nNigFBGBCEAUEYEIQBQRgQhAHhy52Psdot5167n1+zYkAQBgRhQBAGBGFAEAYEYUA4bo5xi13nhc/6/Fm//6qsGBCEAUEYEIQBQRgQhAFBGBDMMX5j1nkOp70nata84lXnHlYMCMKAIAwIwoAgDAjCgCAMCMfNMW7f/x6dG+x6n9LqecVp74kaZcWAIAwIwoAgDAjCgCAMCMKAsG2Occs+9y33+WTW+69u+fxZrBgQhAFBGBCEAUEYEIQBQRgQ3j4/3nffAxzHigFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAFBGBCEAUEYEIQBQRgQhAHhByXCaF8CXg59AAAAAElFTkSuQmCC" alt="QR Cimientos — iglesia.mjc.dolarapp" style="width:150px;height:150px;display:block;" />
-        </a>
+          <div class="qr-copied-toast" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(26,22,18,0.92); opacity:0; transition:opacity 0.3s; pointer-events:none;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span style="font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-top:0.3rem;">Alias copiado</span>
+          </div>
+        </div>
         <div style="margin-top:0.8rem; padding:0.5rem 1rem; border:1px solid rgba(184,151,90,0.3); background:rgba(184,151,90,0.08); text-align:center;">
           <span style="font-size:0.45rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(245,240,232,0.4); display:block; margin-bottom:0.3rem;">Motivo de la transferencia</span>
           <span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--gold); letter-spacing:0.08em;">Cimientos-MJC</span>
         </div>
-        <p class="of-link-hint">Tocá el QR para abrir Mercado Pago</p>
+        <p class="of-link-hint">Tocá el QR · copia el alias y abrí Mercado Pago</p>
       </div>
 
     </div>
@@ -1717,6 +1728,30 @@
 </footer>
 
 <script>
+  // Copy alias to clipboard — triggers MP's "Copiaste un Alias" dialog on mobile
+  function copyAlias(el, motivo) {
+    const alias = 'iglesia.mjc.dolarapp';
+    const toast = el.querySelector('.qr-copied-toast');
+
+    navigator.clipboard.writeText(alias).then(() => {
+      // Show toast
+      if (toast) {
+        toast.style.opacity = '1';
+        setTimeout(() => { toast.style.opacity = '0'; }, 1800);
+      }
+    }).catch(() => {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = alias; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (toast) {
+        toast.style.opacity = '1';
+        setTimeout(() => { toast.style.opacity = '0'; }, 1800);
+      }
+    });
+  }
+
   // Preloader
   window.addEventListener('load', () => {
     setTimeout(() => {
