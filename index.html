@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="Logo.png"/>
   <link rel="apple-touch-icon" href="Logo.png"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -156,6 +156,79 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 .fab-live:hover .fab-live-badge{background:rgba(220,50,50,.28)}
 /* Divider inside menu */
 .fab-divider{height:1px;background:rgba(184,151,90,.15);margin:.15rem .4rem}
+
+
+
+/* ══ PREDICA READER ══ */
+.rd-wrap{padding:0 0 1.5rem}
+.rd-header{padding:1.4rem 1.4rem .8rem;border-bottom:1px solid rgba(184,151,90,.15)}
+.rd-eyebrow{font-size:.44rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.rd-title-main{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,7vw,2.4rem);font-weight:300;color:var(--cream);line-height:1.15;margin:0 0 .2rem}
+.rd-sub{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+.rd-cover-trigger{display:flex;align-items:center;gap:1.1rem;padding:1.2rem 1.4rem;cursor:pointer;border-bottom:1px solid rgba(184,151,90,.12);transition:background .22s;-webkit-tap-highlight-color:transparent}
+.rd-cover-trigger:hover,.rd-cover-trigger:active{background:rgba(184,151,90,.05)}
+.rd-cover-book{flex-shrink:0;position:relative;width:48px;height:64px}
+.rd-book-spine{position:absolute;left:0;top:0;bottom:0;width:7px;background:linear-gradient(to right,#1a0a02,#5a2e10 60%,#3a1808);border-radius:2px 0 0 2px}
+.rd-book-cover{position:absolute;left:7px;right:0;top:0;bottom:0;background:linear-gradient(135deg,#6a3a18 0%,#5a2e10 55%,#4a2208 100%);border-radius:0 3px 3px 0;display:flex;align-items:center;justify-content:center;padding:.3rem}
+.rd-book-cover::after{content:'';position:absolute;inset:3px;border:1px solid rgba(200,165,80,.22);border-radius:1px;pointer-events:none}
+.rd-book-pages{position:absolute;left:6px;right:-2px;top:3px;bottom:3px;background:#f0e4c2;border-radius:0 2px 2px 0;z-index:-1}
+.rd-book-pages::after{content:'';position:absolute;right:-2px;top:0;bottom:0;width:2px;background:repeating-linear-gradient(to bottom,#ddd0a0 0,#ddd0a0 1px,#c9bc7a 1px,#c9bc7a 2px)}
+.rd-cover-text{flex:1}
+.rd-cover-kicker{font-size:.42rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem}
+.rd-cover-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--cream);font-weight:300;line-height:1.25;margin-bottom:.2rem}
+.rd-cover-hint{font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);display:flex;align-items:center;gap:.3rem}
+.rd-cover-hint svg{color:var(--gold)}
+.rd-reader{display:none}
+.rd-reader.open{display:block}
+.rd-progress{height:2px;background:rgba(184,151,90,.12);position:relative;margin:0}
+.rd-progress-bar{height:100%;background:linear-gradient(to right,rgba(184,151,90,.5),var(--gold));transition:width .4s ease;width:0%}
+.rd-pages{position:relative}
+.rd-page{display:none;padding:1.5rem 1.4rem 1.8rem;animation:rd-in .32s ease both}
+.rd-page.rd-active{display:block}
+@keyframes rd-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.rd-pg-label{font-size:.38rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(184,151,90,.5);margin-bottom:1.2rem}
+.rd-chapter{font-size:.46rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.rd-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,5.5vw,2rem);font-weight:300;color:var(--cream);line-height:1.2;margin:0 0 1rem}
+.rd-dropcap::first-letter{font-family:'Cormorant Garamond',serif;font-size:3.4rem;float:left;line-height:.78;margin:.08em .1em 0 0;color:var(--gold);font-weight:300}
+.rd-body{font-size:.65rem;letter-spacing:.04em;line-height:2.15;color:rgba(245,240,232,.78);margin:0 0 .8rem;clear:none}
+[data-theme="light"] .rd-body{color:rgba(46,35,24,.75)}
+.rd-em{font-family:'Cormorant Garamond',serif;font-size:.88rem;font-style:italic;color:var(--gold-light);line-height:1.8;display:block;margin:.2rem 0}
+.rd-fire{color:#d45030;font-style:normal}
+.rd-pull{border-left:2px solid var(--gold);padding:.6rem .9rem;margin:1rem 0;background:rgba(184,151,90,.05)}
+.rd-pull p{font-family:'Cormorant Garamond',serif;font-size:clamp(.95rem,3.8vw,1.15rem);font-style:italic;color:var(--cream);line-height:1.75;margin:0 0 .25rem}
+.rd-pull span{font-size:.4rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.rd-rule{display:flex;align-items:center;gap:.8rem;margin:1rem 0}
+.rd-rule::before,.rd-rule::after{content:'';flex:1;height:1px;background:rgba(184,151,90,.18)}
+.rd-ornament{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(184,151,90,.45);letter-spacing:.1em}
+.rd-bullet{display:flex;align-items:flex-start;gap:.6rem;margin:.3rem 0}
+.rd-bullet-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:.55rem;opacity:.7}
+.rd-bullet p{font-size:.62rem;letter-spacing:.06em;line-height:2;color:rgba(245,240,232,.75);margin:0}
+[data-theme="light"] .rd-bullet p{color:rgba(46,35,24,.7)}
+.rd-big{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,4.5vw,1.5rem);color:var(--cream);line-height:1.45;margin:.8rem 0;font-style:italic}
+/* ── READER NAV ── */
+/* Swipe zones: invisible tap areas L/R */
+.rd-swipe-wrap{position:relative}
+.rd-tap-prev,.rd-tap-next{position:absolute;top:0;bottom:0;width:22%;z-index:10;cursor:pointer;-webkit-tap-highlight-color:transparent;background:transparent}
+.rd-tap-prev{left:0}
+.rd-tap-next{right:0}
+/* Bottom pill nav */
+.rd-nav{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1rem;border-top:1px solid rgba(184,151,90,.12);gap:.5rem}
+.rd-nav-arrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(184,151,90,.25);background:none;color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s,border-color .18s;-webkit-tap-highlight-color:transparent;flex-shrink:0}
+.rd-nav-arrow:active{background:rgba(184,151,90,.15);border-color:var(--gold)}
+.rd-nav-arrow:disabled{opacity:.18;cursor:default}
+.rd-nav-arrow svg{width:18px;height:18px}
+/* Dot indicators */
+.rd-dots{display:flex;align-items:center;justify-content:center;gap:5px;flex:1}
+.rd-dot{width:6px;height:6px;border-radius:50%;background:rgba(184,151,90,.22);transition:background .25s,transform .25s;flex-shrink:0;cursor:pointer}
+.rd-dot.active{background:var(--gold);transform:scale(1.25)}
+/* Chapter label above dots */
+.rd-nav-label{font-size:.38rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text-muted);text-align:center;padding:.2rem 1rem .1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Close button */
+.rd-close{display:flex;align-items:center;gap:.4rem;background:none;border:none;color:var(--text-muted);font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;font-family:'Montserrat',sans-serif;cursor:pointer;padding:.5rem .8rem;-webkit-tap-highlight-color:transparent;width:100%;justify-content:center;border-top:1px solid rgba(184,151,90,.08);margin-top:0}
+.rd-close:hover{color:var(--gold)}
+.rd-close svg{width:12px;height:12px}
+.rd-signature-block{text-align:right;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(184,151,90,.18)}
+.rd-sig-role{font-size:.4rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(184,151,90,.5);margin-bottom:.35rem}
 
 /* ── TAB BAR ── */
 #tabbar{position:fixed;bottom:0;left:0;right:0;z-index:800;height:calc(var(--tab-h) + var(--safe-bottom));background:rgba(20,17,13,.94);backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);border-top:1px solid rgba(184,151,90,.15);display:flex;align-items:flex-start;justify-content:space-around;padding-top:0}
@@ -1134,16 +1207,233 @@ html.senior .map-addr-text{font-size:.72rem;line-height:2}
     <a class="social-chip" href="https://www.instagram.com/mjcboulogne/" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>Instagram</a>
     <a class="social-chip" href="https://www.facebook.com/share/1AioxqC8CD/" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook</a>
   </div>
-  <div class="mensajes-coming">
-    <div style="margin:2rem 0;">
-      <svg viewBox="0 0 260 280" width="170" height="200"><circle cx="130" cy="140" r="90" fill="rgba(184,151,90,.04)"/><rect x="55" y="55" width="150" height="170" rx="3" fill="rgba(184,151,90,.08)" stroke="#b8975a" stroke-width="1"/><rect x="52" y="49" width="156" height="14" rx="7" fill="#b8975a" opacity=".7"/><rect x="52" y="219" width="156" height="14" rx="7" fill="#b8975a" opacity=".7"/><rect x="123" y="75" width="14" height="38" rx="2" fill="#b8975a"/><rect x="110" y="88" width="40" height="14" rx="2" fill="#b8975a"/><line x1="80" y1="130" x2="180" y2="130" stroke="#b8975a" stroke-width="1.5" opacity=".4"/><line x1="80" y1="148" x2="170" y2="148" stroke="#b8975a" stroke-width="1.5" opacity=".35"/><line x1="80" y1="166" x2="162" y2="166" stroke="#b8975a" stroke-width="1.5" opacity=".3"/><line x1="80" y1="184" x2="148" y2="184" stroke="#b8975a" stroke-width="1.5" opacity=".25"/></svg>
+  <!-- ═══ PREDICA READER — 15 de Junio 2025 ═══ -->
+  <div class="rd-wrap" id="rdWrap">
+
+    <!-- Header -->
+    <div class="rd-header">
+      <p class="rd-eyebrow">Enseñanza · 15 de Junio 2025</p>
+      <h2 class="rd-title-main">El Poder de la Oración</h2>
+      <p class="rd-sub">Santiago 5:17 · Lucas Sisneros</p>
     </div>
-    <p class="mensajes-desc">Pronto podrás acceder a las predicaciones<br>y enseñanzas de nuestro ministerio.</p>
-    <div class="mensajes-verse-block">
-      <div class="verse-toggle-row"><button class="verse-ver-btn active" onclick="mvToggle(this,'rvr')">RVR</button><button class="verse-ver-btn" onclick="mvToggle(this,'nvi')">NVI</button></div>
-      <p class="mensajes-verse-text" id="mv-text">"Escudriñad las Escrituras; porque a vosotros os parece que en ellas tenéis la vida eterna; y ellas son las que dan testimonio de mí."</p>
-      <p class="mensajes-verse-ref" id="mv-ref">Juan 5:39 · RVR1960</p>
+
+    <!-- Cover trigger -->
+    <div class="rd-cover-trigger" onclick="rdOpen()" id="rdTrigger">
+      <div class="rd-cover-book">
+        <div class="rd-book-pages"></div>
+        <div class="rd-book-spine"></div>
+        <div class="rd-book-cover">
+          <svg viewBox="0 0 28 40" width="16" height="22" fill="none"><rect x="11" y="0" width="6" height="40" rx="1.5" fill="rgba(200,165,80,.6)"/><rect x="0" y="11" width="28" height="6" rx="1.5" fill="rgba(200,165,80,.6)"/></svg>
+        </div>
+      </div>
+      <div class="rd-cover-text">
+        <p class="rd-cover-kicker">Predica del domingo</p>
+        <p class="rd-cover-name">"El Poder de la Oración"</p>
+        <p class="rd-cover-hint">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Tocá para leer
+        </p>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--gold);opacity:.5;flex-shrink:0"><polyline points="9 18 15 12 9 6"/></svg>
     </div>
+
+    <!-- Reader (hidden until opened) -->
+    <div class="rd-reader" id="rdReader">
+      <div class="rd-progress"><div class="rd-progress-bar" id="rdBar"></div></div>
+
+      <div class="rd-swipe-wrap"><div class="rd-tap-prev" onclick="rdPage(-1)"></div><div class="rd-tap-next" onclick="rdPage(1)"></div><div class="rd-pages" id="rdPages">
+
+        <!-- 0: Portada interior -->
+        <div class="rd-page rd-active" id="rp0">
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;padding:1rem 0">
+            <p style="font-size:.42rem;letter-spacing:.45em;text-transform:uppercase;color:rgba(184,151,90,.55);margin-bottom:.8rem">MJC · Boulogne</p>
+            <div style="width:32px;height:1px;background:rgba(184,151,90,.3);margin-bottom:1.2rem"></div>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,6vw,2.2rem);color:var(--cream);font-weight:300;line-height:1.3;margin:0 0 .4rem;">"El Poder<br>de la Oración"</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:rgba(184,151,90,.7);margin:0 0 1.2rem">Basado en Santiago 5:17</p>
+            <div style="width:32px;height:1px;background:rgba(184,151,90,.3);margin-bottom:1.4rem"></div>
+            <div class="rd-sig-role">Pastor</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0">
+              <span style="font-family:'Great Vibes',cursive;font-size:2.4rem;color:#b8975a;line-height:1.1;letter-spacing:.02em;display:block">Lucas Sisneros</span>
+              <svg viewBox="0 0 200 18" width="180" height="16" xmlns="http://www.w3.org/2000/svg" style="display:block;margin-top:-2px;overflow:visible">
+                <path d="M10 6 Q60 14 100 9 Q140 4 178 10" stroke="#b8975a" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".5"/>
+                <path d="M160 8 Q173 3 180 10 Q174 15 161 13" stroke="#b8975a" stroke-width=".9" fill="none" stroke-linecap="round" opacity=".4"/>
+              </svg>
+            </div>
+            <p style="font-size:.4rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(184,151,90,.38);margin-top:.6rem">Domingo 15 · Junio 2025</p>
+          </div>
+        </div>
+
+        <!-- 1: Introducción -->
+        <div class="rd-page" id="rp1">
+          <p class="rd-pg-label">1 de 9</p>
+          <p class="rd-chapter">Introducción</p>
+          <h3 class="rd-h1">El problema de nuestra época</h3>
+          <p class="rd-body rd-dropcap">Vivimos en un tiempo donde la gente habla mucho… pero ora poco. Muchos buscan respuestas en redes sociales, consejos humanos, su propia lógica.</p>
+          <p class="rd-body">Pero olvidan el arma espiritual más poderosa que Dios nos dio:</p>
+          <p class="rd-big"><span class="rd-fire">🔥</span> LA ORACIÓN.</p>
+          <p class="rd-body">La oración puede hacer cosas que el esfuerzo humano jamás podrá lograr. La Biblia nos dice que un hombre común llamado Elías oró… y el cielo respondió.</p>
+          <div class="rd-rule"><span class="rd-ornament">✦</span></div>
+          <div class="rd-pull">
+            <p>"…un hombre sujeto a pasiones semejantes a las nuestras…"</p>
+            <span>Santiago 5:17 · RVR1960</span>
+          </div>
+        </div>
+
+        <!-- 2: Disciplina -->
+        <div class="rd-page" id="rp2">
+          <p class="rd-pg-label">2 de 9</p>
+          <p class="rd-chapter">Punto I</p>
+          <h3 class="rd-h1">La oración es una disciplina espiritual central</h3>
+          <p class="rd-body rd-dropcap">Desde el punto de vista teológico, la oración no es solo una práctica devocional. Es un medio de gracia.</p>
+          <p class="rd-body">Dios estableció ciertos medios por los cuales su gracia fluye hacia su pueblo:</p>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p>La Palabra</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p>La comunión</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p>Las doctrinas</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p>La oración</p></div>
+          <div class="rd-rule"><span class="rd-ornament">✦</span></div>
+          <p class="rd-body">La oración es el medio mediante el cual la criatura se relaciona con el Creador.</p>
+        </div>
+
+        <!-- 3: Personas comunes -->
+        <div class="rd-page" id="rp3">
+          <p class="rd-pg-label">3 de 9</p>
+          <p class="rd-chapter">Punto II</p>
+          <h3 class="rd-h1">Dios usa personas comunes</h3>
+          <div class="rd-pull">
+            <p>"Elías era hombre sujeto a pasiones semejantes a las nuestras…"</p>
+            <span>Santiago 5:17 · RVR1960</span>
+          </div>
+          <p class="rd-body">Elías no era perfecto. Tenía luchas, debilidades, momentos de miedo. Pero tenía algo que muchos creyentes han perdido: una vida de oración.</p>
+          <p class="rd-big"><span class="rd-fire">🔥</span> Dios no busca gente perfecta. Dios busca gente que ore.</p>
+          <div class="rd-rule"><span class="rd-ornament">✦</span></div>
+          <div class="rd-pull">
+            <p>"La oración es el ejercicio principal de la fe."</p>
+            <span>Porque cuando oramos estamos diciendo: "Dios, yo no puedo… pero Tú sí."</span>
+          </div>
+        </div>
+
+        <!-- 4: Oración ferviente -->
+        <div class="rd-page" id="rp4">
+          <p class="rd-pg-label">4 de 9</p>
+          <p class="rd-chapter">Punto III</p>
+          <h3 class="rd-h1">La oración ferviente mueve el cielo</h3>
+          <div class="rd-pull">
+            <p>"Oró fervientemente…"</p>
+            <span>Santiago 5:17 · RVR1960</span>
+          </div>
+          <p class="rd-body">La palabra <em>ferviente</em> significa:</p>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p><span class="rd-fire">🔥</span> Intenso</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p><span class="rd-fire">🔥</span> Apasionado</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p><span class="rd-fire">🔥</span> Con todo el corazón</p></div>
+          <p class="rd-body" style="margin-top:.6rem">No era una oración religiosa. Era un clamor. Cuando una persona clama de verdad… <span class="rd-fire">🔥</span> el cielo se mueve.</p>
+          <div class="rd-rule"><span class="rd-ornament">✦</span></div>
+          <p class="rd-body">En griego aparece la palabra <em>energeo</em> —de donde viene "energía"— que significa: activa, poderosa, operante.</p>
+        </div>
+
+        <!-- 5: Hombre común -->
+        <div class="rd-page" id="rp5">
+          <p class="rd-pg-label">5 de 9</p>
+          <p class="rd-chapter">Punto IV</p>
+          <h3 class="rd-h1">Un hombre común en manos de un Dios sobrenatural</h3>
+          <p class="rd-body rd-dropcap">Santiago está destruyendo un mito espiritual: que Dios solo usa personas extraordinarias.</p>
+          <p class="rd-body">Elías tuvo miedo (1 Reyes 19), se desanimó, pidió morir. Pero aun así Dios lo usó.</p>
+          <p class="rd-big">✨ El poder no estaba en Elías. <span class="rd-fire">🔥</span> El poder estaba en Dios.</p>
+          <div class="rd-rule"><span class="rd-ornament">✦</span></div>
+          <p class="rd-chapter" style="margin-top:.5rem">La oración cambia las circunstancias</p>
+          <p class="rd-body">Elías oró… y no llovió por tres años y medio. Después volvió a orar… y la lluvia volvió. La oración puede cambiar situaciones, familias, corazones y destinos.</p>
+        </div>
+
+        <!-- 6: Providencia -->
+        <div class="rd-page" id="rp6">
+          <p class="rd-pg-label">6 de 9</p>
+          <p class="rd-chapter">Punto V</p>
+          <h3 class="rd-h1">La oración participa en la providencia de Dios</h3>
+          <p class="rd-body rd-dropcap">Aquí hay un punto teológico muy profundo. Dios es soberano. Pero en su soberanía decidió actuar a través de la oración de su pueblo.</p>
+          <p class="rd-body">Dios no solo decreta el fin… también decreta los medios. Y uno de esos medios es: la oración.</p>
+          <p class="rd-body">Por eso Santiago conecta la oración de Elías con un evento natural. Dios usó la oración para intervenir en la historia.</p>
+          <div class="rd-pull">
+            <p>"La oración eficaz del justo puede mucho."</p>
+            <span>Santiago 5:16 · RVR1960</span>
+          </div>
+        </div>
+
+        <!-- 7: Iglesia NT -->
+        <div class="rd-page" id="rp7">
+          <p class="rd-pg-label">7 de 9</p>
+          <p class="rd-chapter">Punto VI</p>
+          <h3 class="rd-h1">La iglesia del Nuevo Testamento era una iglesia que oraba</h3>
+          <p class="rd-body">En el libro de Hechos vemos un patrón claro. Cuando la iglesia oraba:</p>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p>El Espíritu Santo descendía</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p>Los enfermos eran sanados</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p>Las prisiones se abrían</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p>El evangelio avanzaba</p></div>
+          <div class="rd-rule"><span class="rd-ornament">✦</span></div>
+          <div class="rd-pull">
+            <p>"Cuando hubieron orado, el lugar en que estaban congregados tembló."</p>
+            <span>Hechos 4:31 · RVR1960</span>
+          </div>
+        </div>
+
+        <!-- 8: Llamado -->
+        <div class="rd-page" id="rp8">
+          <p class="rd-pg-label">8 de 9</p>
+          <p class="rd-chapter">Llamado</p>
+          <h3 class="rd-h1">¡Dios quiere levantar una iglesia que ore!</h3>
+          <p class="rd-body rd-dropcap">Una iglesia que clame. Porque cuando la iglesia ora:</p>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p><span class="rd-fire">🔥</span> Las cadenas se rompen</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p><span class="rd-fire">🔥</span> Las vidas cambian</p></div>
+          <div class="rd-bullet"><div class="rd-bullet-dot"></div><p><span class="rd-fire">🔥</span> El Espíritu Santo se mueve</p></div>
+        </div>
+
+        <!-- 9: Conclusión -->
+        <div class="rd-page" id="rp9">
+          <p class="rd-pg-label">9 de 9</p>
+          <p class="rd-chapter">Conclusión</p>
+          <h3 class="rd-h1">Seamos esa iglesia</h3>
+          <p class="rd-body rd-dropcap">En conclusión, podemos observar que la iglesia de nuestro Señor Jesucristo empezó en un ámbito de oración poderosa y fervorosa. Seamos esa <strong style="color:var(--cream)">IGLESIA</strong> que nuestro Señor quiere y no una que quede cómoda para la actualidad en la que vivimos.</p>
+          <div class="rd-pull">
+            <p>"Llamaréis a mí, y vendréis y oraréis a mí, y yo os oiré."</p>
+            <span>Jeremías 29:12 · RVR1960</span>
+          </div>
+          <p class="rd-body" style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--gold-light)">Dios los bendiga.</p>
+          <div class="rd-signature-block">
+            <p class="rd-sig-role">Pastor</p>
+            <div style="display:inline-flex;flex-direction:column;align-items:flex-end;gap:0">
+              <span style="font-family:'Great Vibes',cursive;font-size:2.1rem;color:#b8975a;line-height:1.1;letter-spacing:.02em;display:block">Lucas Sisneros</span>
+              <svg viewBox="0 0 180 16" width="162" height="14" xmlns="http://www.w3.org/2000/svg" style="display:block;margin-top:-2px;overflow:visible">
+                <path d="M8 5 Q55 13 90 8 Q126 3 162 9" stroke="#b8975a" stroke-width="1" fill="none" stroke-linecap="round" opacity=".48"/>
+                <path d="M145 7 Q157 2 163 9 Q157 14 145 11" stroke="#b8975a" stroke-width=".85" fill="none" stroke-linecap="round" opacity=".38"/>
+              </svg>
+            </div>
+            <p style="font-size:.38rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(184,151,90,.38);margin-top:.2rem">MJC · Boulogne · 15 Jun 2025</p>
+          </div>
+        </div>
+
+      </div><!-- /rd-pages --></div><!-- /rd-swipe-wrap -->
+
+      <!-- Nav -->
+      <p class="rd-nav-label" id="rdLabel">Portada</p>
+      <div class="rd-nav">
+        <button class="rd-nav-arrow" id="rdPrev" onclick="rdPage(-1)" disabled aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="rd-dots" id="rdDots"></div>
+        <button class="rd-nav-arrow" id="rdNext" onclick="rdPage(1)" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <button class="rd-close" onclick="rdClose()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+        Cerrar
+      </button>
+    </div><!-- /rd-reader -->
+  </div><!-- /rd-wrap -->
+
+
+  <div class="mensajes-verse-block" style="margin:0 1.4rem 1rem;">
+    <div class="verse-toggle-row"><button class="verse-ver-btn active" onclick="mvToggle(this,'rvr')">RVR</button><button class="verse-ver-btn" onclick="mvToggle(this,'nvi')">NVI</button></div>
+    <p class="mensajes-verse-text" id="mv-text">"Escudriñad las Escrituras; porque a vosotros os parece que en ellas tenéis la vida eterna; y ellas son las que dan testimonio de mí."</p>
+    <p class="mensajes-verse-ref" id="mv-ref">Juan 5:39 · RVR1960</p>
   </div>
   <div class="screen-footer">
     <div class="screen-footer-logo">✝</div>
@@ -1972,6 +2262,95 @@ function ofModalVerse(ver){
   document.getElementById('ofModalNVI').classList.toggle('active',ver==='nvi');
 }
 
+
+
+// ─── PREDICA READER ───
+(function(){
+  const TOTAL = 10;
+  const LABELS = ['Portada','Introducción','Disciplina espiritual','Personas comunes','Oración ferviente','Hombre común · Dios sobrenatural','Providencia de Dios','Iglesia del NT','Llamado','Conclusión'];
+  let cur = 0;
+  var swipeStartX = 0, swipeStartY = 0;
+
+  // Build dots once reader opens
+  function buildDots(){
+    var container = document.getElementById('rdDots');
+    if(!container || container.children.length) return;
+    for(var i = 0; i < TOTAL; i++){
+      var d = document.createElement('span');
+      d.className = 'rd-dot' + (i===0?' active':'');
+      d.dataset.pg = i;
+      d.onclick = (function(idx){ return function(){ rdGoTo(idx); }; })(i);
+      container.appendChild(d);
+    }
+  }
+
+  window.rdOpen = function(){
+    var t = document.getElementById('rdTrigger');
+    if(t) t.style.display = 'none';
+    var r = document.getElementById('rdReader');
+    if(r) r.classList.add('open');
+    buildDots();
+    rdUI();
+    // Swipe listeners on pages area
+    var wrap = document.querySelector('.rd-swipe-wrap');
+    if(wrap){
+      wrap.addEventListener('touchstart', function(e){ swipeStartX=e.touches[0].clientX; swipeStartY=e.touches[0].clientY; }, {passive:true});
+      wrap.addEventListener('touchend', function(e){
+        var dx = e.changedTouches[0].clientX - swipeStartX;
+        var dy = e.changedTouches[0].clientY - swipeStartY;
+        if(Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy)*1.4){
+          rdPage(dx < 0 ? 1 : -1);
+        }
+      }, {passive:true});
+    }
+  };
+
+  window.rdGoTo = function(idx){
+    var pages = document.querySelectorAll('#rdPages .rd-page');
+    if(idx < 0 || idx >= TOTAL || idx >= pages.length) return;
+    pages[cur].classList.remove('rd-active');
+    pages[idx].classList.add('rd-active');
+    cur = idx;
+    scrollToTop();
+    rdUI();
+  };
+
+  window.rdPage = function(dir){
+    rdGoTo(cur + dir);
+  };
+
+  window.rdClose = function(){
+    var r = document.getElementById('rdReader');
+    if(r) r.classList.remove('open');
+    var t = document.getElementById('rdTrigger');
+    if(t) t.style.display = '';
+    var wrap = document.getElementById('rdWrap');
+    if(wrap) wrap.scrollIntoView({behavior:'smooth', block:'start'});
+    cur = 0;
+    var pages = document.querySelectorAll('#rdPages .rd-page');
+    pages.forEach(function(p){ p.classList.remove('rd-active'); });
+    if(pages[0]) pages[0].classList.add('rd-active');
+    rdUI();
+  };
+
+  function scrollToTop(){
+    var wrap = document.getElementById('rdWrap');
+    if(wrap) wrap.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function rdUI(){
+    var prev  = document.getElementById('rdPrev');
+    var next  = document.getElementById('rdNext');
+    var label = document.getElementById('rdLabel');
+    var bar   = document.getElementById('rdBar');
+    var dots  = document.querySelectorAll('.rd-dot');
+    if(prev)  prev.disabled  = cur === 0;
+    if(next)  next.disabled  = cur === TOTAL - 1;
+    if(label) label.textContent = LABELS[cur] || '';
+    if(bar)   bar.style.width = (cur / (TOTAL - 1) * 100) + '%';
+    dots.forEach(function(d, i){ d.classList.toggle('active', i === cur); });
+  }
+})();
 
 // ─── FAB SPEED-DIAL ───
 const fabWrap = document.getElementById('fabWrap');
