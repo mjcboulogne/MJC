@@ -111,7 +111,7 @@
 [data-theme="light"] .yv-card{background:rgba(158,124,62,.06);border-color:rgba(158,124,62,.2)}
 [data-theme="light"] .ofrendar-top-verse{background:rgba(158,124,62,.05);border-color:rgba(158,124,62,.22)}
 html{scroll-behavior:smooth;height:100%}
-body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--cream);overflow-x:hidden;min-height:100%;transition:background-color .4s,color .4s}
+body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--cream);overflow-x:hidden;min-height:100%;transition:background-color .4s,color .4s,font-size .35s ease}
 
 /* ── PRELOADER ── */
 #preloader{position:fixed;inset:0;background:radial-gradient(ellipse 60% 45% at 50% 55%,rgba(184,151,90,.08) 0%,#0d0b09 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;z-index:9999;transition:opacity .5s,visibility .5s}
@@ -789,21 +789,45 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 [data-theme="light"] .topbar-soc{background:rgba(158,124,62,.07);border-color:rgba(158,124,62,.2)}
 
 /* ══════════════════════════════════════════
-   MODO ADULTO MAYOR (WCAG AA+ / Senior UX)
-   Aplicado en: html.senior
-   ─ Recomendaciones WCAG 2.1, Apple HIG,
-     Google Material You para seniors
+   MODO ADULTO MAYOR
+   ─ WCAG 2.1 AA+: contraste ≥4.5:1, texto ≥16px
+   ─ Apple HIG: targets ≥44pt, Dynamic Type
+   ─ Google Material You: 19sp base, lineheight 1.6+
+   ─ NIA / Age-Friendly Digital Services:
+       sans-serif body, líneas cortas, espacio generoso
+   ─ ISO 9241-171: reducir carga cognitiva,
+       patrones familiares, feedback visual claro
    ══════════════════════════════════════════ */
 
-/* --- Botón activo --- */
+/* ── Transición suave al activar/desactivar ── */
+html.senior *{transition:font-size .3s ease,line-height .3s ease,padding .3s ease!important}
+
+/* ── Botón activo en FAB — estado visible y claro ── */
 .fab-item.senior-fab-active,.fab-item#seniorBtn.senior-fab-active{
-  background:rgba(184,151,90,.25)!important;
-  border-color:var(--gold)!important;
-  box-shadow:0 0 0 2px rgba(184,151,90,.4);
+  background:rgba(184,151,90,.18)!important;
+  color:var(--gold)!important;
+  border-radius:9px;
+}
+.fab-item.senior-fab-active .fab-item-label::after{
+  content:' ✓';font-size:.45rem;opacity:.8;
 }
 
-/* --- Tamaño de letra base aumentado --- */
-html.senior body{font-size:19px}
+/* ── Toast de confirmación ── */
+.senior-toast{
+  position:fixed;bottom:calc(var(--tab-h) + var(--safe-bottom) + 1rem);
+  left:50%;transform:translateX(-50%) translateY(8px);
+  background:rgba(26,22,18,.95);border:1px solid rgba(184,151,90,.4);
+  color:var(--gold);font-family:'Montserrat',sans-serif;
+  font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  padding:.6rem 1.2rem;
+  opacity:0;pointer-events:none;z-index:9999;
+  transition:opacity .3s,transform .3s;white-space:nowrap;
+}
+.senior-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+[data-theme="light"] .senior-toast{background:rgba(226,210,180,.97);color:#6e4e10;border-color:rgba(110,78,16,.4)}
+
+/* ── Base ── */
+html.senior body{font-size:19px;line-height:1.7}
 
 /* --- Títulos de secciones más grandes --- */
 html.senior .screen-title{font-size:clamp(2.8rem,9.5vw,3.8rem)}
@@ -920,6 +944,32 @@ html.senior .yv-card-logo-name{font-size:1.3rem}
 
 /* --- Schedule map --- */
 html.senior .map-addr-text{font-size:.72rem;line-height:2}
+
+
+/* ── PRÉDICA READER — Modo adulto mayor ── */
+html.senior .rd-body{font-size:.8rem!important;line-height:2.35!important;letter-spacing:.06em}
+html.senior .rd-h1{font-size:clamp(1.7rem,6.5vw,2.2rem)!important;line-height:1.3!important}
+html.senior .rd-chapter{font-size:.58rem!important;letter-spacing:.38em}
+html.senior .rd-pg-label{font-size:.52rem!important;letter-spacing:.28em}
+html.senior .rd-pull p{font-size:clamp(1.1rem,4.2vw,1.35rem)!important;line-height:1.85!important}
+html.senior .rd-pull span{font-size:.52rem!important;letter-spacing:.2em}
+html.senior .rd-big{font-size:clamp(1.25rem,5vw,1.65rem)!important;line-height:1.55!important}
+html.senior .rd-bullet p{font-size:.76rem!important;line-height:2.1!important}
+html.senior .rd-em{font-size:1.05rem!important}
+html.senior .rd-page{padding:1.6rem 1.4rem 2rem!important}
+html.senior .rd-nav-arrow{width:52px!important;height:52px!important}
+html.senior .rd-nav-arrow svg{width:22px!important;height:22px!important}
+html.senior .rd-dot{width:8px!important;height:8px!important}
+html.senior .rd-nav-label{font-size:.5rem!important;letter-spacing:.28em}
+html.senior .rd-cover-name{font-size:1.18rem!important}
+html.senior .rd-cover-kicker,.rd-cover-pastor{font-size:.52rem!important}
+html.senior .rd-cover-hint{font-size:.52rem!important}
+html.senior .rd-cover-trigger{padding:1.4rem!important;gap:1.2rem!important}
+html.senior .rd-sig-role{font-size:.52rem!important}
+html.senior .msg-hero-title{font-size:clamp(2.2rem,8.5vw,3rem)!important}
+html.senior .msg-hero-verse{font-size:1.05rem!important}
+html.senior .msg-platform-btn{font-size:.6rem!important;padding:.65rem 1.1rem!important}
+html.senior .event-msg-link span{font-size:.62rem!important}
 
 /* ── LIGHT MODE: verse & italic text legibility fixes ── */
 [data-theme="light"] .hero-verse{color:rgba(80,55,15,.82)}
@@ -2545,30 +2595,48 @@ document.getElementById('helpBtn').addEventListener('click', () => {
 
 // ─────────────────────────────────────────
 // MODO ADULTO MAYOR
-// Buenas prácticas aplicadas:
-// ─ WCAG 2.1 AA: contraste ≥4.5:1, texto ≥16px
-// ─ Apple HIG: touch targets mínimo 44pt
-// ─ Google Material You: 17sp base, line-height 1.5+
-// ─ Alzheimer's/Age-Friendly: interlineado amplio,
-//   sin cursiva en cuerpo, iconos + etiquetas
+// Mejores prácticas:
+// ─ WCAG 2.1 AA+: contraste ≥4.5:1, texto ≥16px
+// ─ Apple HIG: Dynamic Type, targets ≥44pt
+// ─ Google Material You: 19sp base, lineheight 1.7+
+// ─ NIA Age-Friendly: feedback visual inmediato,
+//   sin cursiva en body, espacio generoso
+// ─ ISO 9241-171: confirmación toast breve
+//   (no modal — no interrumpe el flujo)
 // ─────────────────────────────────────────
 let seniorMode = false;
 const seniorBtn = document.getElementById('seniorBtn');
 
-// Restore saved preference
+// ── Toast helper ──
+function showSeniorToast(msg){
+  var t = document.getElementById('seniorToast');
+  if(!t){ t=document.createElement('div'); t.id='seniorToast'; t.className='senior-toast'; document.body.appendChild(t); }
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+// ── Apply/remove ──
+function applySeniorMode(active, silent){
+  document.documentElement.classList.toggle('senior', active);
+  seniorBtn.classList.toggle('senior-fab-active', active);
+  if(!silent) showSeniorToast(active ? 'A  Letra grande activada' : 'Letra normal');
+  try { localStorage.setItem('mjc-senior', active ? '1' : '0'); } catch(e){}
+}
+
+// Restore saved preference silently
 try {
   if(localStorage.getItem('mjc-senior') === '1'){
     seniorMode = true;
-    document.documentElement.classList.add('senior');
-    seniorBtn.classList.add('senior-fab-active');
+    applySeniorMode(true, true);
   }
 } catch(e){}
 
 seniorBtn.addEventListener('click', () => {
   seniorMode = !seniorMode;
-  document.documentElement.classList.toggle('senior', seniorMode);
-  seniorBtn.classList.toggle('senior-fab-active', seniorMode);
-  try { localStorage.setItem('mjc-senior', seniorMode ? '1' : '0'); } catch(e){}
+  applySeniorMode(seniorMode, false);
+  closeFab();
 });
 </script>
 
