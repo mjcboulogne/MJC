@@ -2186,7 +2186,7 @@ html.hc .s-btn.active{background:#444;border-color:#c8a84b;color:#c8a84b}
       <div id="galDots" class="gal-dots"></div>
 
       <!-- Fallback: grid Instagram cuando el Sheet no está configurado -->
-      <div id="galIgGrid" style="display:none">
+      <div id="galIgGrid">
         <p style="font-size:.44rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);text-align:center;padding:.8rem 0 1rem">Seguinos en Instagram</p>
         <div class="gal-ig-grid">
           <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
@@ -2464,19 +2464,7 @@ function switchPanel(el){
   el.classList.add('active');
   const pan=ps.querySelector('#panel-'+pid);
   if(pan)pan.classList.add('active');
-  if(pid==='galeria'){
-    if(galLoaded){
-      // Ya cargó antes — solo asegurar que el estado correcto sea visible
-      const igGrid=document.getElementById('galIgGrid');
-      const car=document.getElementById('galCarousel');
-      const loading=document.getElementById('galLoading');
-      if(loading)loading.style.display='none';
-      if(car&&car.children.length>0){car.style.display='flex';}
-      else if(igGrid)igGrid.style.display='block';
-    } else {
-      loadGaleria();
-    }
-  }
+  if(pid==='galeria') loadGaleria();
 }
 
 // ─────────────────────────────────────────
@@ -3042,7 +3030,6 @@ async function loadGaleria() {
 
   if (!sheetReady()) {
     if (loading) loading.style.display = 'none';
-    if (igGrid)  igGrid.style.display  = 'block';
     return;
   }
 
@@ -3051,9 +3038,11 @@ async function loadGaleria() {
   if (loading) loading.style.display = 'none';
 
   if (!data || data.length === 0) {
-    if (igGrid) igGrid.style.display = 'block';
     return;
   }
+
+  // Hay datos del Sheet: ocultar el grid de IG fallback
+  if (igGrid) igGrid.style.display = 'none';
 
   // Render slides
   carousel.innerHTML = data.map((row, i) => `
