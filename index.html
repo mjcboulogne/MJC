@@ -1080,6 +1080,76 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 [data-theme="light"] .prox-body{color:rgba(46,35,24,.65)}
 [data-theme="light"] .yv-action-label{color:#1e1508}
 [data-theme="light"] .yv-card-logo-name{color:#1e1508}
+
+/* ══ REDUCED MOTION (Epilepsia / Vértigo) ══ */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ══ GALERÍA CAROUSEL ══ */
+.gal-wrap{padding:0 0 1.2rem}
+.gal-header{padding:1.4rem 1.4rem .8rem;border-bottom:1px solid rgba(184,151,90,.12)}
+.gal-carousel{overflow-x:auto;scroll-snap-type:x mandatory;display:flex;gap:0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.gal-carousel::-webkit-scrollbar{display:none}
+.gal-slide{flex:0 0 100%;scroll-snap-align:start;position:relative}
+.gal-slide img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.gal-caption{position:absolute;bottom:0;left:0;right:0;padding:.6rem .9rem;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 100%);font-size:.5rem;letter-spacing:.1em;color:rgba(255,255,255,.9);line-height:1.5}
+.gal-dots{display:flex;justify-content:center;gap:5px;padding:.7rem 0 .4rem}
+.gal-dot{width:6px;height:6px;border-radius:50%;background:rgba(184,151,90,.25);cursor:pointer;transition:background .25s,transform .25s;border:none;padding:0}
+.gal-dot.active{background:var(--gold);transform:scale(1.3)}
+.gal-ig-link{display:flex;justify-content:center;padding:.4rem 1.4rem .8rem}
+.gal-counter{font-size:.42rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-muted);text-align:center;padding:.2rem 0 .4rem}
+.gal-loading{display:flex;align-items:center;justify-content:center;height:200px;color:var(--text-muted);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase}
+.gal-empty-state{display:flex;flex-direction:column;align-items:center;padding:2.5rem 1.4rem;text-align:center;gap:.7rem}
+
+/* ══ PETICIÓN DE ORACIÓN ══ */
+.oracion-overlay{position:fixed;inset:0;z-index:8800;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:flex-end;justify-content:center;padding:0;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.oracion-overlay.open{opacity:1;visibility:visible}
+.oracion-card{background:var(--dark);border:1px solid rgba(184,151,90,.28);border-bottom:none;width:100%;max-width:600px;max-height:92svh;overflow-y:auto;border-radius:20px 20px 0 0;transform:translateY(30px);transition:transform .38s cubic-bezier(.4,0,.2,1);padding-bottom:calc(env(safe-area-inset-bottom,0px) + .5rem);scrollbar-width:none}
+.oracion-card::-webkit-scrollbar{display:none}
+.oracion-overlay.open .oracion-card{transform:translateY(0)}
+[data-theme="light"] .oracion-card{background:#e8dbc0}
+.oracion-drag{width:36px;height:4px;border-radius:2px;background:rgba(184,151,90,.35);margin:.9rem auto .5rem;flex-shrink:0}
+.oracion-hdr{display:flex;align-items:flex-start;justify-content:space-between;padding:.5rem 1.2rem 1rem}
+.oracion-eyebrow{font-size:.42rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.oracion-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream);font-weight:300;line-height:1.2}
+[data-theme="light"] .oracion-title{color:#1e1508}
+.oracion-close-btn{background:none;border:none;cursor:pointer;color:var(--text-muted);display:flex;align-items:center;justify-content:center;padding:4px;transition:color .2s;flex-shrink:0;margin-top:2px}
+.oracion-close-btn:hover{color:var(--gold)}
+.oracion-body{padding:0 1.2rem 1rem}
+.oracion-verse-block{border-left:2px solid rgba(184,151,90,.5);padding:.55rem .85rem;background:rgba(184,151,90,.05);margin-bottom:1.1rem}
+.oracion-verse-block p{font-family:'Cormorant Garamond',serif;font-size:clamp(.9rem,3.5vw,1.05rem);font-style:italic;color:var(--gold-light);line-height:1.75;margin:0 0 .2rem}
+.oracion-verse-block span{font-size:.4rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-muted)}
+.or-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:.75rem}
+.or-field{display:flex;flex-direction:column;gap:.28rem;margin-bottom:.75rem}
+.or-label{font-size:.42rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.or-input,.or-textarea{background:rgba(184,151,90,.06);border:1px solid rgba(184,151,90,.22);color:var(--cream);font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:.05em;padding:.7rem .85rem;outline:none;border-radius:0;-webkit-appearance:none;transition:border-color .22s,background .22s;width:100%}
+.or-input:focus,.or-textarea:focus{border-color:var(--gold);background:rgba(184,151,90,.1)}
+.or-textarea{min-height:110px;resize:vertical;line-height:1.75}
+[data-theme="light"] .or-input,[data-theme="light"] .or-textarea{color:var(--cream);background:rgba(138,104,40,.06)}
+.or-submit{width:100%;background:var(--gold);color:var(--dark);border:none;padding:.9rem;font-size:.54rem;letter-spacing:.3em;text-transform:uppercase;font-family:'Montserrat',sans-serif;font-weight:700;cursor:pointer;transition:background .25s,transform .18s;-webkit-tap-highlight-color:transparent;margin-top:.4rem}
+.or-submit:hover{background:var(--gold-light)}
+.or-submit:active{transform:scale(.98)}
+.or-submit:disabled{opacity:.4;cursor:default;transform:none}
+.or-privacy{font-size:.44rem;letter-spacing:.1em;color:var(--text-muted);text-align:center;margin-top:.6rem;line-height:1.8}
+.or-success{display:none;flex-direction:column;align-items:center;text-align:center;padding:2rem 1rem 1.5rem;gap:.8rem}
+.or-success.show{display:flex}
+.or-success-cross{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--gold);line-height:1}
+.or-success-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--cream);font-weight:300}
+.or-success-body{font-size:.6rem;letter-spacing:.1em;line-height:2.1;color:var(--text-muted);max-width:280px}
+[data-theme="light"] .or-success-title{color:#1e1508}
+/* Quick card de oración */
+.quick-card.oracion-card-btn{border-color:rgba(184,151,90,.28);background:rgba(184,151,90,.07)}
+/* Senior */
+html.senior .or-input,html.senior .or-textarea{font-size:.78rem;padding:.85rem 1rem}
+html.senior .or-label{font-size:.55rem;letter-spacing:.28em}
+html.senior .or-submit{font-size:.68rem;padding:1rem}
+html.senior .oracion-title{font-size:2rem}
+
+/* ══ SHEET LOADING STATE ══ */
+.sheet-loading{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:1.2rem;color:var(--text-muted);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase}
+.sheet-spinner{width:16px;height:16px;border:2px solid rgba(184,151,90,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -1135,6 +1205,12 @@ html.senior .event-msg-link span{font-size:.62rem!important}
         <button class="fab-item" role="menuitem" onclick="closeFab();showScreen('iglesia','ofrendar')">
           <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
           <span class="fab-item-label">Ofrendar</span>
+        </button>
+
+        <!-- Oración -->
+        <button class="fab-item" role="menuitem" onclick="closeFab();openOracion()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          <span class="fab-item-label">Petición de Oración</span>
         </button>
 
         <!-- MJC FM — EN VIVO (debajo de Ofrendar, icono antena) -->
@@ -1221,6 +1297,8 @@ html.senior .event-msg-link span{font-size:.62rem!important}
       <a class="quick-card" href="#" onclick="showScreen('mensajes');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="quick-card-label">Mensajes</div><div class="quick-card-sub">Predicaciones</div></a>
       <a class="quick-card" href="#" onclick="showScreen('iglesia','unete');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="quick-card-label">Únete</div><div class="quick-card-sub">Comunidad</div></a>
       <a class="quick-card" href="#" onclick="showScreen('iglesia','ofrendar');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="quick-card-label">Ofrendar</div><div class="quick-card-sub">Diezmo · Ofrenda</div></a>
+      <button class="quick-card oracion-card-btn" onclick="openOracion()"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><div class="quick-card-label">Oración</div><div class="quick-card-sub">Pedí por vos o tu familia</div></button>
+      <a class="quick-card" href="#" onclick="showScreen('iglesia','galeria');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="quick-card-label">Galería</div><div class="quick-card-sub">Fotos del ministerio</div></a>
     </div>
   </div>
   <div class="screen-footer"><div class="screen-footer-logo">✝ MJC · Boulogne</div><div class="screen-footer-copy">© 2025 Ministerio Jesucristo es el Camino</div></div>
@@ -1994,14 +2072,35 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
   <!-- Galería -->
   <div class="inner-panel" id="panel-galeria">
-    <div class="prox-container">
-      <div class="prox-cross">✝</div>
-      <p class="prox-label">Galería</p>
-      <h3 class="prox-title">Próximamente</h3>
-      <div class="prox-divider"></div>
-      <p class="prox-body">Estamos preparando un espacio para compartir<br>los momentos de nuestra comunidad.</p>
-      <p class="prox-sub">Mientras tanto, seguinos en Instagram</p>
-      <a href="https://www.instagram.com/mjcboulogne/" target="_blank" class="btn-ghost prox-btn"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>@mjcboulogne</a>
+    <div class="gal-wrap">
+      <div class="gal-header">
+        <p class="screen-label" style="margin-bottom:.4rem">Comunidad</p>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,7vw,2.5rem);font-weight:300;color:var(--cream);line-height:1.2;margin:0">Momentos<br>del Ministerio.</h3>
+        <div class="divider-line"></div>
+      </div>
+      <!-- Estado: cargando -->
+      <div id="galLoading" class="sheet-loading">
+        <div class="sheet-spinner"></div>
+        <span>Cargando fotos...</span>
+      </div>
+      <!-- Carousel (se llena dinámicamente) -->
+      <div id="galCarousel" class="gal-carousel" style="display:none" role="region" aria-label="Galería de fotos"></div>
+      <p class="gal-counter" id="galCounter" style="display:none"></p>
+      <div id="galDots" class="gal-dots"></div>
+      <!-- Estado vacío / sin Sheet configurado -->
+      <div id="galEmpty" class="gal-empty-state" style="display:none">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 80 60" width="80" height="60" fill="none"><rect x="4" y="4" width="72" height="52" rx="4" stroke="#b8975a" stroke-width="1.5" opacity=".4"/><circle cx="22" cy="22" r="7" stroke="#b8975a" stroke-width="1.5" opacity=".4"/><path d="M4 44l20-18 14 14 10-9 28 23" stroke="#b8975a" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg>
+        <p style="font-size:.5rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)">Galería</p>
+        <p style="font-size:.6rem;letter-spacing:.08em;color:var(--text-muted);line-height:1.9;text-align:center">Las fotos del ministerio aparecen acá<br>una vez que el Pastor configure el acceso.</p>
+        <p style="font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)">Mientras tanto →</p>
+      </div>
+      <!-- Siempre visible: link Instagram -->
+      <div class="gal-ig-link">
+        <a href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" class="msg-platform-btn">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+          Ver más en Instagram
+        </a>
+      </div>
     </div>
   </div>
 
@@ -2398,29 +2497,106 @@ function calNav(dir){
 }
 
 // ─────────────────────────────────────────
-// VOTD
+// VOTD — sincronizado con YouVersion via Google Sheet
 // ─────────────────────────────────────────
-let votdVer='rvr';
-function getTodayVerse(){return VERSES[new Date().getDay()%VERSES.length];}
-function openVOTD(){
-  const now=new Date();
-  document.getElementById('votdDate').textContent=now.toLocaleDateString('es-AR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  showVOTD('rvr');
+
+// ID del Sheet VOTD — el mismo que en el Google Apps Script
+const VOTD_SHEET_ID  = '1CUwJl2a_DpQPU3iH7h3Bz8MD_hF5v0q1Cs4Fvm97FBs';
+const VOTD_SHEET_GID = '0'; // primera pestaña
+
+let votdVer = 'rvr';
+let votdDynamic = null;   // versículo del día cargado desde el Sheet
+let votdLoaded  = false;
+
+// Fallback: versículos hardcodeados por día de la semana
+function getFallbackVerse(){
+  return VERSES[new Date().getDay() % VERSES.length];
+}
+
+// Formatear fecha como YYYY-MM-DD
+function todayStr(){
+  const d = new Date();
+  return d.getFullYear() + '-' +
+    String(d.getMonth()+1).padStart(2,'0') + '-' +
+    String(d.getDate()).padStart(2,'0');
+}
+
+// Cargar versículo desde el Sheet (una sola vez por sesión)
+async function loadVOTDFromSheet(){
+  if(votdLoaded) return;
+  votdLoaded = true;
+  if(!VOTD_SHEET_ID || VOTD_SHEET_ID.includes('REEMPLAZAR')) return;
+  try {
+    const url = `https://docs.google.com/spreadsheets/d/${VOTD_SHEET_ID}/export?format=csv&gid=${VOTD_SHEET_GID}`;
+    const res  = await fetch(url, {cache:'no-store'});
+    if(!res.ok) return;
+    const text = await res.text();
+    if(text.includes('<!DOCTYPE')) return; // Sheet no es público
+    const rows = text.replace(/
+/g,'').split('
+').slice(1); // saltar encabezado
+    const hoy  = todayStr();
+    for(const row of rows){
+      if(!row.trim()) continue;
+      // CSV: fecha,versiculo,referencia (con posibles comas en el texto)
+      const firstComma  = row.indexOf(',');
+      const secondComma = row.indexOf(',', firstComma + 1);
+      if(firstComma < 0 || secondComma < 0) continue;
+      const fecha     = row.substring(0, firstComma).trim().split('"').join('');
+      const versiculo = row.substring(firstComma+1, secondComma).trim().split('"').join('');
+      const ref       = row.substring(secondComma+1).trim().split('"').join('');
+      if(fecha === hoy && versiculo && ref){
+        votdDynamic = { texto: versiculo, ref: ref };
+        break;
+      }
+    }
+  } catch(e){
+    // Sin red o Sheet no configurado → usa el fallback silenciosamente
+  }
+}
+
+// Obtener el versículo activo (Sheet si disponible, fallback si no)
+function getActiveVerse(){
+  if(votdDynamic){
+    return { texto: votdDynamic.texto, ref: votdDynamic.ref, isDynamic: true };
+  }
+  const v = getFallbackVerse();
+  return { texto: votdVer==='rvr' ? v.rvr : v.nvi, ref: v.ref + ' · ' + (votdVer==='rvr'?'RVR1960':'NVI'), isDynamic: false };
+}
+
+async function openVOTD(){
+  const now = new Date();
+  document.getElementById('votdDate').textContent = now.toLocaleDateString('es-AR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  // Mostrar fallback inmediatamente mientras carga
+  renderVOTD();
   document.getElementById('votdOverlay').classList.add('open');
-  const cb=document.getElementById('votdCloseBtn');
+  const cb = document.getElementById('votdCloseBtn');
   cb.classList.remove('visible');
   setTimeout(()=>cb.classList.add('visible'),1500);
+  // Cargar desde Sheet y actualizar si llegó
+  await loadVOTDFromSheet();
+  renderVOTD();
 }
+
+function renderVOTD(){
+  const v = getActiveVerse();
+  document.getElementById('votdText').textContent = v.texto;
+  document.getElementById('votdRef').textContent  = v.ref;
+  // Si es dinámico (de YouVersion), ocultar los botones RVR/NVI
+  const verBtns = document.querySelector('.votd-ver-row');
+  if(verBtns) verBtns.style.display = v.isDynamic ? 'none' : 'flex';
+}
+
 function closeVOTD(){document.getElementById('votdOverlay').classList.remove('open');}
 function showVOTD(ver){
-  votdVer=ver;
-  const v=getTodayVerse();
-  document.getElementById('votdText').textContent=ver==='rvr'?v.rvr:v.nvi;
-  document.getElementById('votdRef').textContent=v.ref+' · '+(ver==='rvr'?'RVR1960':'NVI');
-  document.getElementById('btnRVR').classList.toggle('active',ver==='rvr');
-  document.getElementById('btnNVI').classList.toggle('active',ver==='nvi');
+  votdVer = ver;
+  if(!votdDynamic){ renderVOTD(); }
+  document.getElementById('btnRVR').classList.toggle('active', ver==='rvr');
+  document.getElementById('btnNVI').classList.toggle('active', ver==='nvi');
 }
 document.getElementById('votdCloseBtn').addEventListener('click',closeVOTD);
+// Precargar silenciosamente al cargar la página
+loadVOTDFromSheet();
 // votdBtn wired in FAB JS
 
 // ─────────────────────────────────────────
@@ -2619,6 +2795,234 @@ function ofModalVerse(ver){
   }
 })();
 
+
+// ═══════════════════════════════════════════════════════════
+//  CONFIGURACIÓN GOOGLE SHEETS — editar una sola vez
+//  El Pastor Lucas completa estos valores en la guía
+// ═══════════════════════════════════════════════════════════
+const SHEET = {
+  // PASO 1: reemplazá con el ID de tu Google Sheet
+  // Lo encontrás en la URL: docs.google.com/spreadsheets/d/AQUI_VA_EL_ID/edit
+  id: 'REEMPLAZAR_CON_ID_DEL_SHEET',
+
+  // GID de cada hoja (no cambiar si usás la plantilla oficial)
+  galeria_gid:  '0',   // hoja "Galeria"  → primera pestaña
+  predicas_gid: '1',   // hoja "Predicas" → segunda pestaña
+};
+
+// ── Chequeá si el Sheet está configurado ──────────────────
+const sheetReady = () => SHEET.id && SHEET.id !== 'REEMPLAZAR_CON_ID_DEL_SHEET';
+
+// ── Parser CSV robusto (maneja comas dentro de comillas) ──
+function parseCSV(text) {
+  const result = [];
+  const lines = text.replace(/\r/g, '').split('\n');
+  if (!lines.length) return result;
+
+  function parseLine(line) {
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') { inQ = !inQ; continue; }
+      if (c === ',' && !inQ) { cols.push(cur); cur = ''; continue; }
+      cur += c;
+    }
+    cols.push(cur);
+    return cols.map(c => c.trim());
+  }
+
+  const headers = parseLine(lines[0]);
+  for (let i = 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    const vals = parseLine(lines[i]);
+    const row = {};
+    headers.forEach((h, j) => row[h] = vals[j] || '');
+    if (row[headers[0]]) result.push(row);
+  }
+  return result;
+}
+
+// ── Fetch desde Google Sheets publicado como CSV ──────────
+async function fetchSheet(gid) {
+  if (!sheetReady()) return null;
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET.id}/export?format=csv&gid=${gid}`;
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    if (text.includes('<!DOCTYPE')) throw new Error('Sheet no es público');
+    return parseCSV(text);
+  } catch(e) {
+    console.warn('[MJC Sheets]', e.message);
+    return null;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  GALERÍA — carga fotos desde Google Sheets
+// ═══════════════════════════════════════════════════════════
+let galLoaded = false;
+
+async function loadGaleria() {
+  if (galLoaded) return;
+  galLoaded = true;
+
+  const loading = document.getElementById('galLoading');
+  const carousel = document.getElementById('galCarousel');
+  const dotsEl   = document.getElementById('galDots');
+  const counter  = document.getElementById('galCounter');
+  const empty    = document.getElementById('galEmpty');
+
+  if (!sheetReady()) {
+    if (loading) loading.style.display = 'none';
+    if (empty)   empty.style.display   = 'flex';
+    return;
+  }
+
+  const data = await fetchSheet(SHEET.galeria_gid);
+
+  if (loading) loading.style.display = 'none';
+
+  if (!data || data.length === 0) {
+    if (empty) empty.style.display = 'flex';
+    return;
+  }
+
+  // Render slides
+  carousel.innerHTML = data.map((row, i) => `
+    <div class="gal-slide" role="img" aria-label="${row.descripcion || 'Foto MJC ' + (i+1)}">
+      <img src="${row.imagen_url}"
+           alt="${row.descripcion || 'Ministerio Jesucristo es el Camino Boulogne'}"
+           loading="lazy"
+           onerror="this.closest('.gal-slide').style.display='none'"/>
+      ${row.descripcion ? `<p class="gal-caption">${row.descripcion}</p>` : ''}
+    </div>
+  `).join('');
+
+  carousel.style.display = 'flex';
+
+  // Dots
+  if (data.length > 1 && dotsEl) {
+    dotsEl.innerHTML = data.map((_, i) =>
+      `<button class="gal-dot${i===0?' active':''}" onclick="galTo(${i})" aria-label="Foto ${i+1}" title="Foto ${i+1}"></button>`
+    ).join('');
+  }
+
+  // Counter
+  if (counter) {
+    counter.textContent = `1 de ${data.length}`;
+    counter.style.display = 'block';
+  }
+
+  // Scroll → update dots & counter
+  let scrollTimer;
+  carousel.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const w = carousel.clientWidth;
+      if (!w) return;
+      const idx = Math.round(carousel.scrollLeft / w);
+      document.querySelectorAll('.gal-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      if (counter) counter.textContent = `${idx + 1} de ${data.length}`;
+    }, 60);
+  }, { passive: true });
+}
+
+function galTo(i) {
+  const c = document.getElementById('galCarousel');
+  if (c) c.scrollTo({ left: i * c.clientWidth, behavior: 'smooth' });
+}
+
+// Cargar galería cuando se activa la pestaña
+const _origSwitchPanel = switchPanel;
+function switchPanel(el) {
+  _origSwitchPanel(el);
+  if (el.dataset.panel === 'galeria') loadGaleria();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  PETICIÓN DE ORACIÓN
+// ═══════════════════════════════════════════════════════════
+function openOracion() {
+  const overlay = document.getElementById('oracionOverlay');
+  const form    = document.getElementById('oracionForm');
+  const success = document.getElementById('orSuccess');
+  if (form)    form.style.display    = '';
+  if (success) success.classList.remove('show');
+  if (overlay) overlay.classList.add('open');
+  // Focus en primer campo tras animación
+  setTimeout(() => {
+    const first = document.getElementById('orNombre');
+    if (first) first.focus();
+  }, 400);
+}
+
+function closeOracion(e) {
+  if (e && e.target !== document.getElementById('oracionOverlay')) return;
+  document.getElementById('oracionOverlay').classList.remove('open');
+}
+
+async function submitOracion(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn  = document.getElementById('orSubmitBtn');
+
+  // Honeypot check
+  if (form['bot-trap'] && form['bot-trap'].value) return;
+
+  // Basic validation
+  const nombre   = form.nombre.value.trim();
+  const apellido = form.apellido.value.trim();
+  const email    = form.email.value.trim();
+  const peticion = form.peticion.value.trim();
+  if (!nombre || !apellido || !email || !peticion) return;
+
+  btn.disabled    = true;
+  btn.textContent = 'Enviando...';
+
+  const encode = d => Object.entries(d)
+    .map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v))
+    .join('&');
+
+  let enviado = false;
+
+  try {
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': 'peticion-oracion',
+        nombre, apellido, email, peticion
+      })
+    });
+    enviado = res.ok;
+  } catch(_) { }
+
+  if (!enviado) {
+    // Fallback: WhatsApp con el texto de la petición
+    const msg = `🙏 *PETICIÓN DE ORACIÓN*\n\n*Nombre:* ${nombre} ${apellido}\n*Email:* ${email}\n\n*Petición:*\n${peticion}`;
+    window.open('https://api.whatsapp.com/send?phone=5491135702698&text=' + encodeURIComponent(msg), '_blank');
+    enviado = true; // consideramos enviado por WA
+  }
+
+  btn.disabled    = false;
+  btn.textContent = 'Enviar Petición 🙏';
+
+  if (enviado) {
+    form.style.display = 'none';
+    document.getElementById('orSuccess').classList.add('show');
+    form.reset();
+  }
+}
+
+// ESC cierra el overlay de oración
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('oracionOverlay').classList.remove('open');
+  }
+});
+
 // ─── FAB SPEED-DIAL ───
 const fabWrap = document.getElementById('fabWrap');
 document.getElementById('fabTrigger').addEventListener('click', (e) => {
@@ -2726,6 +3130,68 @@ seniorBtn.addEventListener('click', () => {
           Copiar Alias
         </button>
         <p class="of-hint-row">Abrí <strong>Mercado Pago</strong>, tu billetera virtual o app de tu banco · Tocá <strong>"Transferir"</strong> · Pegá el alias · Completá el motivo</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PETICIÓN DE ORACIÓN OVERLAY ═══ -->
+<!-- Formulario oculto para detección de Netlify -->
+<form name="peticion-oracion" data-netlify="true" netlify-honeypot="bot-trap" style="display:none" aria-hidden="true">
+  <input name="bot-trap"/><input name="nombre"/><input name="apellido"/>
+  <input name="email"/><input name="parroquia"/><textarea name="peticion"></textarea>
+</form>
+
+<div class="oracion-overlay" id="oracionOverlay" onclick="closeOracion(event)" role="dialog" aria-modal="true" aria-labelledby="oracionTitleEl">
+  <div class="oracion-card">
+    <div class="oracion-drag" aria-hidden="true"></div>
+    <div class="oracion-hdr">
+      <div>
+        <p class="oracion-eyebrow">🙏 Equipo pastoral MJC</p>
+        <h2 class="oracion-title" id="oracionTitleEl">Petición de Oración</h2>
+      </div>
+      <button class="oracion-close-btn" onclick="closeOracion()" aria-label="Cerrar">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="22" height="22"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="oracion-body">
+      <div class="oracion-verse-block">
+        <p>"No se inquieten por nada; más bien, en toda ocasión, con oración y ruego, presenten sus peticiones a Dios y su paz guardará sus corazones."</p>
+        <span>Filipenses 4:6-7 · NVI</span>
+      </div>
+
+      <!-- Formulario visual -->
+      <form id="oracionForm" onsubmit="submitOracion(event)" novalidate>
+        <input name="bot-trap" style="display:none" tabindex="-1" aria-hidden="true"/>
+        <div class="or-row">
+          <div class="or-field">
+            <label class="or-label" for="orNombre">Nombre *</label>
+            <input class="or-input" id="orNombre" name="nombre" type="text" placeholder="Tu nombre" required autocomplete="given-name" aria-required="true"/>
+          </div>
+          <div class="or-field">
+            <label class="or-label" for="orApellido">Apellido *</label>
+            <input class="or-input" id="orApellido" name="apellido" type="text" placeholder="Tu apellido" required autocomplete="family-name" aria-required="true"/>
+          </div>
+        </div>
+        <div class="or-field">
+          <label class="or-label" for="orEmail">Correo electrónico *</label>
+          <input class="or-input" id="orEmail" name="email" type="email" placeholder="tu@correo.com" required autocomplete="email" aria-required="true" inputmode="email"/>
+        </div>
+        <div class="or-field">
+          <label class="or-label" for="orPeticion">Tu petición de oración *</label>
+          <textarea class="or-textarea" id="orPeticion" name="peticion" placeholder="Escribí acá con toda confianza. Tu petición llega directamente al equipo pastoral." required aria-required="true"></textarea>
+        </div>
+        <button class="or-submit" type="submit" id="orSubmitBtn">Enviar Petición 🙏</button>
+        <p class="or-privacy">Tu información es confidencial y solo la verá el equipo pastoral de MJC Boulogne.</p>
+      </form>
+
+      <!-- Estado de éxito -->
+      <div class="or-success" id="orSuccess" role="status" aria-live="polite">
+        <div class="or-success-cross">✝</div>
+        <div class="or-success-title">Petición recibida</div>
+        <div class="or-success-body">Tu petición llegó al equipo pastoral.<br>Estamos orando contigo y tu familia.<br><br>"El Señor está cerca de los que tienen quebrantado el corazón." — Sal 34:18</div>
+        <button class="or-submit" style="max-width:180px;margin-top:.5rem" onclick="closeOracion()">Amén · Cerrar</button>
       </div>
     </div>
   </div>
