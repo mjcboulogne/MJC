@@ -2307,6 +2307,7 @@ function switchPanel(el){
   el.classList.add('active');
   const pan=ps.querySelector('#panel-'+pid);
   if(pan)pan.classList.add('active');
+  if(pid==='galeria') loadGaleria();
 }
 
 // ─────────────────────────────────────────
@@ -2932,12 +2933,7 @@ function galTo(i) {
   if (c) c.scrollTo({ left: i * c.clientWidth, behavior: 'smooth' });
 }
 
-// Cargar galería cuando se activa la pestaña
-const _origSwitchPanel = switchPanel;
-function switchPanel(el) {
-  _origSwitchPanel(el);
-  if (el.dataset.panel === 'galeria') loadGaleria();
-}
+// Galería: carga integrada en switchPanel
 
 // ═══════════════════════════════════════════════════════════
 //  PETICIÓN DE ORACIÓN
