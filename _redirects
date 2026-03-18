@@ -1,0 +1,3 @@
+# Netlify redirects — MJC Boulogne
+# Fuerza todas las rutas al index.html (SPA)
+/*  /index.html  200

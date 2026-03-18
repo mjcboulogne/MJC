@@ -1,0 +1,36 @@
+# Netlify headers — MJC Boulogne
+# Controla caché y seguridad por tipo de archivo
+
+# ── Service Worker: NUNCA cachear ──────────────────
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Content-Type: application/javascript
+
+# ── Manifest: caché corto ──────────────────────────
+/manifest.json
+  Cache-Control: public, max-age=3600
+  Content-Type: application/manifest+json
+
+# ── HTML: siempre revalidar ────────────────────────
+/*.html
+  Cache-Control: no-cache, must-revalidate
+
+/
+  Cache-Control: no-cache, must-revalidate
+
+# ── Imágenes: caché largo ──────────────────────────
+/Logo.png
+  Cache-Control: public, max-age=604800, immutable
+
+/og-image.png
+  Cache-Control: public, max-age=604800, immutable
+
+# ── Fuentes y assets ──────────────────────────────
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# ── Seguridad base ────────────────────────────────
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
