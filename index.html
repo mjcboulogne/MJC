@@ -858,18 +858,7 @@ html.senior *{transition:font-size .3s ease,line-height .3s ease,padding .3s eas
 }
 
 /* ── Toast de confirmación ── */
-.senior-toast{
-  position:fixed;bottom:calc(var(--tab-h) + var(--safe-bottom) + 1rem);
-  left:50%;transform:translateX(-50%) translateY(8px);
-  background:rgba(26,22,18,.95);border:1px solid rgba(184,151,90,.4);
-  color:var(--gold);font-family:'Montserrat',sans-serif;
-  font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
-  padding:.6rem 1.2rem;
-  opacity:0;pointer-events:none;z-index:9999;
-  transition:opacity .3s,transform .3s;white-space:nowrap;
-}
-.senior-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-[data-theme="light"] .senior-toast{background:rgba(226,210,180,.97);color:#6e4e10;border-color:rgba(110,78,16,.4)}
+
 
 /* ── Base ── */
 html.senior body{font-size:19px;line-height:1.7}
@@ -3167,14 +3156,7 @@ document.getElementById('helpBtn').addEventListener('click', () => {
 // ═══════════════════════════════════════════════════════════
 
 // ── Toast ──
-function showToast(msg){
-  let t = document.getElementById('seniorToast');
-  if(!t){ t=document.createElement('div'); t.id='seniorToast'; t.className='senior-toast'; document.body.appendChild(t); }
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(()=>t.classList.remove('show'), 2800);
-}
+function showToast(msg){ /* notificaciones desactivadas */ }
 
 // ── Font size (0=Normal, 1=Mediano, 2=Grande) ──
 let curSize = 0;
