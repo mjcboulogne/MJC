@@ -1150,6 +1150,105 @@ html.senior .oracion-title{font-size:2rem}
 .sheet-loading{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:1.2rem;color:var(--text-muted);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase}
 .sheet-spinner{width:16px;height:16px;border:2px solid rgba(184,151,90,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ══ FONT LEVELS — 3 escalones ══ */
+html.sz1 body{font-size:17px;line-height:1.65}
+html.sz2 body{font-size:20px;line-height:1.75}
+/* sz1=Mediano, sz2=Grande — sin clase = Normal (16px) */
+html.sz1 *,html.sz2 *{transition:font-size .3s ease,line-height .3s ease,padding .3s ease}
+/* Títulos */
+html.sz1 .screen-title{font-size:clamp(2.6rem,9vw,3.5rem)}
+html.sz2 .screen-title{font-size:clamp(3rem,10vw,4rem)}
+/* Tabs */
+html.sz1 .tab-label{font-size:.54rem}
+html.sz2 .tab-label{font-size:.6rem}
+html.sz1 .tab-item svg,html.sz2 .tab-item svg{width:23px;height:23px}
+html.sz2 #tabbar{height:calc(78px + var(--safe-bottom))}
+html.sz2 .tab-item{height:78px}
+/* Inner tabs */
+html.sz1 .inner-tab{font-size:.52rem;padding:1rem .7rem}
+html.sz2 .inner-tab{font-size:.6rem;padding:1.1rem .8rem}
+/* Quick cards */
+html.sz1 .quick-card-label{font-size:.65rem}
+html.sz2 .quick-card-label{font-size:.76rem}
+html.sz1 .quick-card-sub{font-size:.54rem}
+html.sz2 .quick-card-sub{font-size:.62rem}
+html.sz1 .quick-card-icon svg,html.sz2 .quick-card-icon svg{width:24px;height:24px}
+/* Reader */
+html.sz1 .rd-body{font-size:.72rem;line-height:2.2}
+html.sz2 .rd-body{font-size:.82rem;line-height:2.4}
+html.sz1 .rd-h1{font-size:clamp(1.5rem,6vw,2rem)}
+html.sz2 .rd-h1{font-size:clamp(1.7rem,6.5vw,2.2rem)}
+html.sz1 .rd-pull p{font-size:clamp(.95rem,3.8vw,1.15rem)}
+html.sz2 .rd-pull p{font-size:clamp(1.1rem,4.2vw,1.35rem)}
+html.sz1 .rd-big{font-size:clamp(1.1rem,4.5vw,1.45rem)}
+html.sz2 .rd-big{font-size:clamp(1.25rem,5vw,1.65rem)}
+html.sz2 .rd-nav-arrow{width:52px;height:52px}
+html.sz2 .rd-dot{width:8px;height:8px}
+/* Event items */
+html.sz1 .event-item-name{font-size:.68rem}
+html.sz2 .event-item-name{font-size:.78rem}
+html.sz1 .event-item-date,.sz1 .event-item-desc{font-size:.58rem}
+html.sz2 .event-item-date,.sz2 .event-item-desc{font-size:.65rem}
+/* Calendar */
+html.sz1 .cal-day{font-size:.62rem;min-height:40px}
+html.sz2 .cal-day{font-size:.68rem;min-height:44px}
+html.sz1 .cal-month-label{font-size:1.45rem}
+html.sz2 .cal-month-label{font-size:1.6rem}
+/* Ofrendar */
+html.sz1 .of-card-title{font-size:.65rem}
+html.sz2 .of-card-title{font-size:.72rem}
+/* Mensajes */
+html.sz1 .msg-hero-title{font-size:clamp(2rem,8vw,2.6rem)}
+html.sz2 .msg-hero-title{font-size:clamp(2.2rem,8.5vw,3rem)}
+/* Oracion form */
+html.sz1 .or-input,.sz1 .or-textarea{font-size:.7rem;padding:.8rem 1rem}
+html.sz2 .or-input,.sz2 .or-textarea{font-size:.78rem;padding:.85rem 1rem}
+html.sz1 .or-submit{font-size:.58rem}
+html.sz2 .or-submit{font-size:.68rem;padding:1rem}
+/* VOTD */
+html.sz1 .votd-text{font-size:clamp(1.1rem,4vw,1.35rem)}
+html.sz2 .votd-text{font-size:clamp(1.25rem,4.5vw,1.55rem)}
+
+/* ══ ALTO CONTRASTE ══ */
+html.hc{--gold:#c8a84b;--gold-light:#d4b86a;--dark:#000000;--cream:#ffffff;--text-muted:#cccccc;--bg-dark:#000;color-scheme:dark}
+html.hc body{background:#000;color:#fff;font-weight:500}
+html.hc .screen-header,html.hc .inner-tabs,html.hc #tabbar{background:#000!important;border-color:#666!important}
+html.hc .rd-page,html.hc .bk-page{background:#000!important;color:#fff}
+html.hc .of-modal-card,html.hc .oracion-card,html.hc .votd-card,html.hc .faq-sheet{background:#111!important;border-color:#888!important}
+html.hc .quick-card,html.hc .fe-card,html.hc .of-card{background:#111!important;border-color:#666!important}
+html.hc .hero-bg{filter:grayscale(1) contrast(1.1)}
+html.hc img{filter:grayscale(1) contrast(1.05)}
+html.hc .sf-seed,.sf-stem,.sf-petal,.sf-head,.sf-disc,.wh-stem-l,.wh-stem-c,.wh-stem-r,.pa-stem{filter:grayscale(1)}
+html.hc [data-theme="light"] body{background:#fff;color:#000}
+html.hc [data-theme="light"] .quick-card{background:#f0f0f0!important;border-color:#888!important}
+/* HC × font levels */
+html.hc.sz1 body,html.hc.sz2 body{color:#fff}
+
+/* ══ SETTINGS OVERLAY ══ */
+.settings-overlay{position:fixed;inset:0;z-index:8900;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:opacity .28s,visibility .28s}
+.settings-overlay.open{opacity:1;visibility:visible}
+.settings-card{background:var(--dark);border:1px solid rgba(184,151,90,.28);border-bottom:none;width:100%;max-width:520px;border-radius:18px 18px 0 0;padding:1.2rem 1.4rem calc(env(safe-area-inset-bottom,0px) + 1.4rem);transform:translateY(20px);transition:transform .32s cubic-bezier(.4,0,.2,1)}
+.settings-overlay.open .settings-card{transform:translateY(0)}
+[data-theme="light"] .settings-card{background:#e8dbc0}
+.settings-drag{width:36px;height:4px;border-radius:2px;background:rgba(184,151,90,.35);margin:0 auto .9rem}
+.settings-title{font-size:.42rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;text-align:center}
+.settings-group{margin-bottom:1.1rem}
+.settings-group-label{font-size:.38rem;letter-spacing:.32em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.55rem}
+.settings-row{display:grid;gap:.5rem}
+.settings-row.cols3{grid-template-columns:1fr 1fr 1fr}
+.settings-row.cols3-theme{grid-template-columns:1fr 1fr 1fr}
+.s-btn{background:rgba(184,151,90,.06);border:1px solid rgba(184,151,90,.2);color:var(--text-muted);font-family:'Montserrat',sans-serif;font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:.65rem .4rem;cursor:pointer;transition:background .2s,border-color .2s,color .2s;-webkit-tap-highlight-color:transparent;display:flex;flex-direction:column;align-items:center;gap:.35rem;border-radius:2px}
+.s-btn svg{width:18px;height:18px;flex-shrink:0}
+.s-btn:active,.s-btn.active{background:rgba(184,151,90,.18);border-color:var(--gold);color:var(--gold)}
+[data-theme="light"] .s-btn{color:#5a4030}
+[data-theme="light"] .s-btn.active{color:#6e4e10}
+.settings-close{width:100%;margin-top:.6rem;background:none;border:1px solid rgba(184,151,90,.18);color:var(--text-muted);padding:.65rem;font-size:.44rem;letter-spacing:.28em;text-transform:uppercase;font-family:'Montserrat',sans-serif;cursor:pointer;transition:color .2s}
+.settings-close:hover{color:var(--gold)}
+/* Alto contraste en settings */
+html.hc .settings-card{background:#111;border-color:#666}
+html.hc .s-btn{background:#222;border-color:#666;color:#ccc}
+html.hc .s-btn.active{background:#444;border-color:#c8a84b;color:#c8a84b}
 </style>
 </head>
 <body>
@@ -1183,10 +1282,10 @@ html.senior .oracion-title{font-size:2rem}
       </button>
       <div class="fab-menu" id="fabMenu" role="menu">
 
-        <!-- 1st: Letra grande A+ -->
-        <button class="fab-item" id="seniorBtn" role="menuitem">
-          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 20 L9 5 L14 20"/><line x1="6" y1="14" x2="12" y2="14"/><line x1="17" y1="10" x2="21" y2="10"/><line x1="19" y1="8" x2="19" y2="12"/></svg>
-          <span class="fab-item-label">Letra grande</span>
+        <!-- Ajustes visuales -->
+        <button class="fab-item" id="settingsBtn" role="menuitem" onclick="closeFab();openSettings()">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          <span class="fab-item-label">Ajustes visuales</span>
         </button>
 
         <!-- Versículo del día -->
@@ -1800,6 +1899,7 @@ html.senior .oracion-title{font-size:2rem}
     <div class="inner-tab" data-panel="ofrendar" onclick="switchPanel(this)">Ofrendar</div>
     <div class="inner-tab" data-panel="youversion" onclick="switchPanel(this)">YouVersion</div>
     <div class="inner-tab" data-panel="galeria" onclick="switchPanel(this)">Galería</div>
+    <div class="inner-tab" data-panel="oracion-panel" onclick="switchPanel(this)">Oración</div>
   </div>
 
   <!-- Misión -->
@@ -2104,6 +2204,31 @@ html.senior .oracion-title{font-size:2rem}
     </div>
   </div>
 
+
+  <!-- Panel Oración (en Iglesia) -->
+  <div class="inner-panel" id="panel-oracion-panel">
+    <div style="padding:1.4rem 1.4rem .8rem;border-bottom:1px solid rgba(184,151,90,.12)">
+      <p class="screen-label" style="margin-bottom:.4rem">Comunidad · MJC</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,7vw,2.4rem);font-weight:300;color:var(--cream);line-height:1.2;margin:0">Petición<br>de Oración.</h3>
+      <div class="divider-line"></div>
+    </div>
+    <div style="padding:1.2rem 1.4rem 1.5rem">
+      <div class="oracion-verse-block">
+        <div class="verse-toggle-row" style="justify-content:flex-end;margin-bottom:.4rem">
+          <button class="verse-ver-btn or-ver-btn" data-ver="rvr" onclick="orVerse('rvr',this)">RVR</button>
+          <button class="verse-ver-btn or-ver-btn active" data-ver="nvi" onclick="orVerse('nvi',this)">NVI</button>
+        </div>
+        <p id="orPanelVerseText" style="font-family:'Cormorant Garamond',serif;font-size:clamp(.9rem,3.5vw,1.05rem);font-style:italic;color:var(--gold-light);line-height:1.75;margin:0 0 .25rem">"No se inquieten por nada; más bien, en toda ocasión, con oración y ruego, presenten sus peticiones a Dios y su paz guardará sus corazones."</p>
+        <span id="orPanelVerseRef" style="font-size:.4rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-muted)">Filipenses 4:6-7 · NVI</span>
+      </div>
+      <p style="font-size:.58rem;letter-spacing:.08em;line-height:2;color:var(--text-muted);margin-bottom:1.3rem">Tu petición llega directamente al equipo pastoral de MJC Boulogne. Oramos juntos por cada necesidad.</p>
+      <button onclick="openOracion()" style="width:100%;background:rgba(184,151,90,.08);border:1px solid rgba(184,151,90,.35);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:.54rem;letter-spacing:.28em;text-transform:uppercase;font-weight:700;padding:1.1rem;cursor:pointer;transition:background .22s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;gap:.7rem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="18" height="18" aria-hidden="true" focusable="false"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        Enviar Petición 🙏
+      </button>
+    </div>
+  </div>
+
   <div class="screen-footer">
     <div class="screen-footer-logo">✝</div>
     <div class="screen-footer-verse" id="footer-iglesia-v">"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos."</div>
@@ -2161,6 +2286,8 @@ html.senior .oracion-title{font-size:2rem}
     <p class="votd-text votd-interactive" id="votdText"></p>
     <p class="votd-ref votd-interactive" id="votdRef"></p>
     <span class="votd-cross votd-interactive">✝</span>
+    <p id="votdDynNote" style="display:none;font-size:.42rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(184,151,90,.5);margin:.3rem 0 0;text-align:center">Sincronizado con YouVersion · 
+Seleccioná RVR para versión alternativa</p>
     <a class="votd-link votd-interactive" href="https://www.bible.com/es/verse-of-the-day" target="_blank" rel="noopener">Ver en YouVersion →</a>
   </div>
 </div>
@@ -2582,8 +2709,9 @@ function renderVOTD(){
   document.getElementById('votdText').textContent = v.texto;
   document.getElementById('votdRef').textContent  = v.ref;
   // Si es dinámico (de YouVersion), ocultar los botones RVR/NVI
-  const verBtns = document.querySelector('.votd-ver-row');
-  if(verBtns) verBtns.style.display = v.isDynamic ? 'none' : 'flex';
+  // Keep RVR/NVI always visible — when dynamic, they trigger fallback gracefully
+  const dynNote = document.getElementById('votdDynNote');
+  if(dynNote) dynNote.style.display = v.isDynamic ? 'block' : 'none';
 }
 
 function closeVOTD(){document.getElementById('votdOverlay').classList.remove('open');}
@@ -2621,13 +2749,10 @@ function triggerPWAInstall(){
 // ─────────────────────────────────────────
 // THEME
 // ─────────────────────────────────────────
-let isDark=true;
-const moonSVG=`<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`;
-const sunSVG=`<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
-document.getElementById('themeBtn').addEventListener('click',()=>{
-  isDark=!isDark;
-  document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
-  document.getElementById('themeBtn').innerHTML=isDark?sunSVG:moonSVG;
+// ── Topbar theme button — cicla entre 3 estados ──
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const next = curTheme === 'dark' ? 'light' : curTheme === 'light' ? 'hc' : 'dark';
+  setTheme(next);
 });
 
 // ─────────────────────────────────────────
@@ -3036,51 +3161,114 @@ document.getElementById('helpBtn').addEventListener('click', () => {
   closeFab(); document.getElementById('faqOverlay').classList.add('open');
 });
 
-// ─────────────────────────────────────────
-// MODO ADULTO MAYOR
-// Mejores prácticas:
-// ─ WCAG 2.1 AA+: contraste ≥4.5:1, texto ≥16px
-// ─ Apple HIG: Dynamic Type, targets ≥44pt
-// ─ Google Material You: 19sp base, lineheight 1.7+
-// ─ NIA Age-Friendly: feedback visual inmediato,
-//   sin cursiva en body, espacio generoso
-// ─ ISO 9241-171: confirmación toast breve
-//   (no modal — no interrumpe el flujo)
-// ─────────────────────────────────────────
-let seniorMode = false;
-const seniorBtn = document.getElementById('seniorBtn');
+// ═══════════════════════════════════════════════════════════
+// AJUSTES VISUALES — Tamaño de letra + Tema
+// WCAG 2.1 AA+ | Apple Dynamic Type | NIA Age-Friendly
+// ═══════════════════════════════════════════════════════════
 
-// ── Toast helper ──
-function showSeniorToast(msg){
+// ── Toast ──
+function showToast(msg){
   let t = document.getElementById('seniorToast');
   if(!t){ t=document.createElement('div'); t.id='seniorToast'; t.className='senior-toast'; document.body.appendChild(t); }
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(t._timer);
-  t._timer = setTimeout(()=>t.classList.remove('show'), 2200);
+  t._timer = setTimeout(()=>t.classList.remove('show'), 2800);
 }
 
-// ── Apply/remove ──
-function applySeniorMode(active, silent){
-  document.documentElement.classList.toggle('senior', active);
-  seniorBtn.classList.toggle('senior-fab-active', active);
-  if(!silent) showSeniorToast(active ? 'A  Letra grande activada' : 'Letra normal');
-  try { localStorage.setItem('mjc-senior', active ? '1' : '0'); } catch(e){}
+// ── Font size (0=Normal, 1=Mediano, 2=Grande) ──
+let curSize = 0;
+const SIZE_LABELS = ['Normal','Mediano','Grande'];
+const SIZE_CLASSES = ['','sz1','sz2'];
+
+function setFontSize(n) {
+  const root = document.documentElement;
+  root.classList.remove('senior','sz1','sz2');
+  curSize = n;
+  if(n > 0) root.classList.add(SIZE_CLASSES[n]);
+  ['szBtn0','szBtn1','szBtn2'].forEach((id,i) => {
+    const b = document.getElementById(id);
+    if(b) b.classList.toggle('active', i === n);
+  });
+  try { localStorage.setItem('mjc-font-size', n); } catch(e){}
+  showToast('Letra: ' + SIZE_LABELS[n]);
 }
 
-// Restore saved preference silently
+// ── Theme (dark | light | hc) ──
+let curTheme = 'dark';
+const THEME_LABELS = {dark:'Tema dorado', light:'Tema claro', hc:'Alto contraste activado'};
+
+function setTheme(t) {
+  const root = document.documentElement;
+  curTheme = t;
+  root.classList.toggle('hc', t === 'hc');
+  root.setAttribute('data-theme', t === 'hc' ? 'dark' : t);
+  // update topbar theme btn icon
+  const isDark = (t === 'dark' || t === 'hc');
+  // 3 distinct icons: luna=dorado · sol=claro · círculo dividido=alto contraste
+  const THEME_ICONS = {
+    dark: '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>',
+    light: '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+    hc: '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M12 2a10 10 0 010 20z" fill="currentColor" opacity=".7" stroke="none"/></svg>'
+  };
+  document.getElementById('themeBtn').innerHTML = THEME_ICONS[t] || THEME_ICONS.dark;
+  ['themeBtn0','themeBtn1','themeBtn2'].forEach((id,i) => {
+    const b = document.getElementById(id);
+    const themes = ['dark','light','hc'];
+    if(b) b.classList.toggle('active', themes[i] === t);
+  });
+  try { localStorage.setItem('mjc-theme', t); } catch(e){}
+  showToast(THEME_LABELS[t]);
+}
+
+// ── Settings overlay ──
+function openSettings(){
+  document.getElementById('settingsOverlay').classList.add('open');
+  // Sync button states to current values
+  setFontSize(curSize);
+  ['themeBtn0','themeBtn1','themeBtn2'].forEach((id,i) => {
+    const b = document.getElementById(id);
+    const themes = ['dark','light','hc'];
+    if(b) b.classList.toggle('active', themes[i] === curTheme);
+  });
+}
+function closeSettings(){
+  document.getElementById('settingsOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeSettings();
+});
+
+// ── Restore saved preferences ──
 try {
-  if(localStorage.getItem('mjc-senior') === '1'){
-    seniorMode = true;
-    applySeniorMode(true, true);
-  }
+  const savedSize = parseInt(localStorage.getItem('mjc-font-size') || '0');
+  if(savedSize > 0) setFontSize(savedSize);
+  const savedTheme = localStorage.getItem('mjc-theme') || 'dark';
+  if(savedTheme !== 'dark') setTheme(savedTheme);
 } catch(e){}
 
-seniorBtn.addEventListener('click', () => {
-  seniorMode = !seniorMode;
-  applySeniorMode(seniorMode, false);
-  closeFab();
-});
+// ── Petición de Oración — versículo RVR/NVI ──
+const ORACION_VERSES = {
+  rvr: { t: '"No os afanéis por nada; sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones."', r: 'Filipenses 4:6-7 · RVR1960' },
+  nvi: { t: '"No se inquieten por nada; más bien, en toda ocasión, con oración y ruego, presenten sus peticiones a Dios y su paz guardará sus corazones."', r: 'Filipenses 4:6-7 · NVI' }
+};
+function orVerse(ver, btn) {
+  const v = ORACION_VERSES[ver];
+  // Update overlay block
+  const p1 = document.getElementById('orVerseText');
+  const r1 = document.getElementById('orVerseRef');
+  if (p1) p1.textContent = v.t;
+  if (r1) r1.textContent = v.r;
+  // Update panel block
+  const p2 = document.getElementById('orPanelVerseText');
+  const r2 = document.getElementById('orPanelVerseRef');
+  if (p2) p2.textContent = v.t;
+  if (r2) r2.textContent = v.r;
+  // Toggle active state on all paired RVR/NVI buttons
+  document.querySelectorAll('.or-ver-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.ver === ver);
+  });
+}
 </script>
 
 <!-- ═══ OFRENDAR MODAL OVERLAY ═══ -->
@@ -3151,8 +3339,12 @@ seniorBtn.addEventListener('click', () => {
 
     <div class="oracion-body">
       <div class="oracion-verse-block">
-        <p>"No se inquieten por nada; más bien, en toda ocasión, con oración y ruego, presenten sus peticiones a Dios y su paz guardará sus corazones."</p>
-        <span>Filipenses 4:6-7 · NVI</span>
+        <div class="verse-toggle-row" style="justify-content:flex-end;margin-bottom:.4rem">
+          <button class="verse-ver-btn or-ver-btn" data-ver="rvr" onclick="orVerse('rvr',this)">RVR</button>
+          <button class="verse-ver-btn or-ver-btn active" data-ver="nvi" onclick="orVerse('nvi',this)">NVI</button>
+        </div>
+        <p id="orVerseText">"No se inquieten por nada; más bien, en toda ocasión, con oración y ruego, presenten sus peticiones a Dios y su paz guardará sus corazones."</p>
+        <span id="orVerseRef">Filipenses 4:6-7 · NVI</span>
       </div>
 
       <!-- Formulario visual -->
@@ -3188,6 +3380,66 @@ seniorBtn.addEventListener('click', () => {
         <button class="or-submit" style="max-width:180px;margin-top:.5rem" onclick="closeOracion()">Amén · Cerrar</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ═══ AJUSTES VISUALES ═══ -->
+<div class="settings-overlay" id="settingsOverlay" onclick="if(event.target===this)closeSettings()">
+  <div class="settings-card">
+    <div class="settings-drag" aria-hidden="true"></div>
+    <p class="settings-title">✝ Ajustes Visuales</p>
+
+    <!-- Tamaño de letra -->
+    <div class="settings-group">
+      <p class="settings-group-label">Tamaño de letra</p>
+      <div class="settings-row cols3">
+        <button class="s-btn" id="szBtn0" onclick="setFontSize(0)" aria-label="Letra normal">
+          <svg viewBox="0 0 32 32" aria-hidden="true" style="width:32px;height:32px">
+            <text x="50%" y="72%" dominant-baseline="middle" text-anchor="middle"
+              font-size="14" font-family="Georgia,serif" font-weight="400"
+              fill="currentColor">A</text>
+          </svg>
+          Normal
+        </button>
+        <button class="s-btn" id="szBtn1" onclick="setFontSize(1)" aria-label="Letra mediana">
+          <svg viewBox="0 0 32 32" aria-hidden="true" style="width:32px;height:32px">
+            <text x="50%" y="74%" dominant-baseline="middle" text-anchor="middle"
+              font-size="20" font-family="Georgia,serif" font-weight="400"
+              fill="currentColor">A</text>
+          </svg>
+          Mediano
+        </button>
+        <button class="s-btn" id="szBtn2" onclick="setFontSize(2)" aria-label="Letra grande">
+          <svg viewBox="0 0 32 32" aria-hidden="true" style="width:32px;height:32px">
+            <text x="50%" y="76%" dominant-baseline="middle" text-anchor="middle"
+              font-size="27" font-family="Georgia,serif" font-weight="400"
+              fill="currentColor">A</text>
+          </svg>
+          Grande
+        </button>
+      </div>
+    </div>
+
+    <!-- Tema / Contraste -->
+    <div class="settings-group">
+      <p class="settings-group-label">Tema y contraste</p>
+      <div class="settings-row cols3-theme">
+        <button class="s-btn" id="themeBtn0" onclick="setTheme('dark')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          Dorado
+        </button>
+        <button class="s-btn" id="themeBtn1" onclick="setTheme('light')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+          Claro
+        </button>
+        <button class="s-btn" id="themeBtn2" onclick="setTheme('hc')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M12 2a10 10 0 010 20z" fill="currentColor" opacity=".6" stroke="none"/><line x1="8" y1="7" x2="16" y2="7" stroke-width="1"/><line x1="8" y1="12" x2="16" y2="12" stroke-width="1"/><line x1="8" y1="17" x2="16" y2="17" stroke-width="1"/></svg>
+          Alto Contraste
+        </button>
+      </div>
+    </div>
+
+    <button class="settings-close" onclick="closeSettings()">Cerrar</button>
   </div>
 </div>
 </body>
