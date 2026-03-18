@@ -2532,9 +2532,7 @@ async function loadVOTDFromSheet(){
     if(!res.ok) return;
     const text = await res.text();
     if(text.includes('<!DOCTYPE')) return; // Sheet no es público
-    const rows = text.replace(/
-/g,'').split('
-').slice(1); // saltar encabezado
+    const rows = text.replace(/\r/g,'').split('\n').slice(1); // saltar encabezado
     const hoy  = todayStr();
     for(const row of rows){
       if(!row.trim()) continue;
