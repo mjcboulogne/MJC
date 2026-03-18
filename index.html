@@ -1397,7 +1397,7 @@ html.hc .s-btn.active{background:#444;border-color:#c8a84b;color:#c8a84b}
       <a class="quick-card" href="#" onclick="showScreen('iglesia','unete');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="quick-card-label">Únete</div><div class="quick-card-sub">Comunidad</div></a>
       <a class="quick-card" href="#" onclick="showScreen('iglesia','ofrendar');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="quick-card-label">Ofrendar</div><div class="quick-card-sub">Diezmo · Ofrenda</div></a>
       <button class="quick-card oracion-card-btn" onclick="openOracion()"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><div class="quick-card-label">Oración</div><div class="quick-card-sub">Pedí por vos o tu familia</div></button>
-      <a class="quick-card" href="#" onclick="showScreen('iglesia','galeria');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="quick-card-label">Galería</div><div class="quick-card-sub">Fotos del ministerio</div></a>
+      <a class="quick-card" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="quick-card-label">Galería</div><div class="quick-card-sub">Fotos del ministerio</div></a>
     </div>
   </div>
   <div class="screen-footer"><div class="screen-footer-logo">✝ MJC · Boulogne</div><div class="screen-footer-copy">© 2025 Ministerio Jesucristo es el Camino</div></div>
@@ -1898,7 +1898,7 @@ html.hc .s-btn.active{background:#444;border-color:#c8a84b;color:#c8a84b}
     <div class="inner-tab" data-panel="unete" onclick="switchPanel(this)">Únete</div>
     <div class="inner-tab" data-panel="ofrendar" onclick="switchPanel(this)">Ofrendar</div>
     <div class="inner-tab" data-panel="youversion" onclick="switchPanel(this)">YouVersion</div>
-    <div class="inner-tab" data-panel="galeria" onclick="switchPanel(this)">Galería</div>
+
     <div class="inner-tab" data-panel="oracion-panel" onclick="switchPanel(this)">Oración</div>
   </div>
 
@@ -2167,72 +2167,6 @@ html.hc .s-btn.active{background:#444;border-color:#c8a84b;color:#c8a84b}
     </div>
   </div>
 
-  <!-- Galería -->
-  <div class="inner-panel" id="panel-galeria">
-    <div class="gal-wrap">
-      <div class="gal-header">
-        <p class="screen-label" style="margin-bottom:.4rem">Comunidad</p>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,7vw,2.5rem);font-weight:300;color:var(--cream);line-height:1.2;margin:0">Momentos<br>del Ministerio.</h3>
-        <div class="divider-line"></div>
-      </div>
-      <!-- Estado: cargando -->
-      <div id="galLoading" class="sheet-loading">
-        <div class="sheet-spinner"></div>
-        <span>Cargando fotos...</span>
-      </div>
-      <!-- Carousel Sheet (se llena dinámicamente cuando el Sheet está configurado) -->
-      <div id="galCarousel" class="gal-carousel" style="display:none" role="region" aria-label="Galería de fotos"></div>
-      <p class="gal-counter" id="galCounter" style="display:none"></p>
-      <div id="galDots" class="gal-dots"></div>
-
-      <!-- Fallback: grid Instagram cuando el Sheet no está configurado -->
-      <div id="galIgGrid">
-        <p style="font-size:.44rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);text-align:center;padding:.8rem 0 1rem">Seguinos en Instagram</p>
-        <div class="gal-ig-grid">
-          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
-            <img src="https://raw.githubusercontent.com/mjcboulogne/MJC/main/01.jpg" alt="Comunidad MJC Boulogne" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
-            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
-          </a>
-          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
-            <img src="https://raw.githubusercontent.com/mjcboulogne/MJC/main/02.jpg" alt="Ministerio MJC Boulogne" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
-            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
-          </a>
-          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
-            <img src="https://raw.githubusercontent.com/mjcboulogne/MJC/main/03.jpg" alt="Culto MJC Boulogne" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
-            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
-          </a>
-          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
-            <img src="https://raw.githubusercontent.com/mjcboulogne/MJC/main/04.jpg" alt="Iglesia MJC Boulogne" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
-            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
-          </a>
-          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
-            <img src="https://raw.githubusercontent.com/mjcboulogne/MJC/main/05.jpg" alt="Fe MJC Boulogne" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
-            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
-          </a>
-          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
-            <img src="https://raw.githubusercontent.com/mjcboulogne/MJC/main/06.jpg" alt="Alabanza MJC Boulogne" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
-            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
-          </a>
-          <a class="gal-ig-cell gal-ig-cell--more" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver todo en Instagram">
-            <div class="gal-ig-more-inner">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
-              <span>Ver todo<br>en Instagram</span>
-            </div>
-          </a>        </div>
-      </div>
-          </a>
-        </div>
-      </div>
-
-      <!-- Siempre visible: link Instagram -->
-      <div class="gal-ig-link">
-        <a href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" class="msg-platform-btn">
-          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
-          @mjcboulogne en Instagram
-        </a>
-      </div>
-    </div>
-  </div>
 
 
   <!-- Panel Oración (en Iglesia) -->
