@@ -2464,7 +2464,19 @@ function switchPanel(el){
   el.classList.add('active');
   const pan=ps.querySelector('#panel-'+pid);
   if(pan)pan.classList.add('active');
-  if(pid==='galeria') loadGaleria();
+  if(pid==='galeria'){
+    if(galLoaded){
+      // Ya cargó antes — solo asegurar que el estado correcto sea visible
+      const igGrid=document.getElementById('galIgGrid');
+      const car=document.getElementById('galCarousel');
+      const loading=document.getElementById('galLoading');
+      if(loading)loading.style.display='none';
+      if(car&&car.children.length>0){car.style.display='flex';}
+      else if(igGrid)igGrid.style.display='block';
+    } else {
+      loadGaleria();
+    }
+  }
 }
 
 // ─────────────────────────────────────────
