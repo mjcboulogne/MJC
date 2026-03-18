@@ -1,0 +1,60 @@
+{
+  "name": "Ministerio Jesucristo es el Camino",
+  "short_name": "MJC Boulogne",
+  "description": "Iglesia en Boulogne, Buenos Aires. Cultos Viernes 19:30 y Domingos 9:30. Junín 1734.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#1a1612",
+  "background_color": "#1a1612",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["lifestyle", "social"],
+  "icons": [
+    {
+      "src": "Logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Horarios",
+      "short_name": "Horarios",
+      "description": "Ver horarios de cultos",
+      "url": "/?s=horarios",
+      "icons": [{ "src": "Logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Ofrendar",
+      "short_name": "Ofrendar",
+      "description": "Realizar una ofrenda",
+      "url": "/?s=ofrendar",
+      "icons": [{ "src": "Logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Mensajes",
+      "short_name": "Predicación",
+      "description": "Leer la última predicación",
+      "url": "/?s=mensajes",
+      "icons": [{ "src": "Logo.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-home.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Pantalla principal de MJC Boulogne"
+    }
+  ]
+}
