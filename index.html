@@ -3,14 +3,59 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+
+  <!-- ── PWA & App ── -->
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-  <meta name="theme-color" content="#1a1612"/>
-  <title>Ministerio JC · Boulogne</title>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="theme-color" content="#1a1612" media="(prefers-color-scheme: dark)"/>
+  <meta name="theme-color" content="#c8b890" media="(prefers-color-scheme: light)"/>
+  <link rel="manifest" href="manifest.json"/>
+
+  <!-- ── Identidad ── -->
+  <title>Ministerio Jesucristo es el Camino · Boulogne</title>
+  <meta name="description" content="Ministerio Jesucristo es el Camino — Iglesia en Boulogne, Buenos Aires. Cultos los Viernes 19:30 y Domingos 9:30. Junín 1734, Boulogne."/>
+  <meta name="keywords" content="iglesia boulogne, ministerio cristiano, culto evangelico, jesucristo, predicacion, oración"/>
+  <meta name="author" content="Ministerio Jesucristo es el Camino"/>
+  <meta name="robots" content="index, follow"/>
+
+  <!-- ── Open Graph (WhatsApp, Facebook) ── -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Ministerio Jesucristo es el Camino · Boulogne"/>
+  <meta property="og:description" content="Iglesia en Boulogne, Buenos Aires. Cultos Viernes 19:30 y Domingos 9:30. Junín 1734."/>
+  <meta property="og:image" content="https://mjcboulogne.netlify.app/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:url" content="https://mjcboulogne.netlify.app"/>
+  <meta property="og:locale" content="es_AR"/>
+  <meta property="og:site_name" content="MJC Boulogne"/>
+
+  <!-- ── Twitter / X Cards ── -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Ministerio Jesucristo es el Camino · Boulogne"/>
+  <meta name="twitter:description" content="Iglesia en Boulogne. Cultos Viernes 19:30 y Domingos 9:30."/>
+  <meta name="twitter:image" content="https://mjcboulogne.netlify.app/og-image.png"/>
+
+  <!-- ── Icons ── -->
   <link rel="icon" type="image/png" href="Logo.png"/>
   <link rel="apple-touch-icon" href="Logo.png"/>
+
+  <!-- ── Fonts: preconnect + display=swap para evitar FOIT ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap&font-display=swap" rel="stylesheet"/>
+
+  <!-- ── Service Worker registro ── -->
+  <script>
+    if('serviceWorker' in navigator){
+      window.addEventListener('load',()=>{
+        navigator.serviceWorker.register('sw.js')
+          .then(r=>console.log('[SW] Registrado:',r.scope))
+          .catch(e=>console.warn('[SW] Error:',e));
+      });
+    }
+  </script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -44,8 +89,8 @@
 [data-theme="light"] .cal-day-label{background:#e3d9c8}
 [data-theme="light"] .cal-grid-bg{background:rgba(158,124,62,.14)}
 [data-theme="light"] .faq-sheet,[data-theme="light"] .faq-sheet-hdr{background:#e3d9c8}
-[data-theme="light"] .of-modal-card{background:#ede5d8}
-[data-theme="light"] .votd-card{background:#ede5d8;border-color:rgba(158,124,62,.35)}
+[data-theme="light"] .of-modal-card{will-change:transform;background:#ede5d8}
+[data-theme="light"] .votd-card{will-change:transform;background:#ede5d8;border-color:rgba(158,124,62,.35)}
 [data-theme="light"] .social-chip{color:#2e2318}
 [data-theme="light"] .quick-card{background:rgba(158,124,62,.07);border-color:rgba(158,124,62,.2)}
 [data-theme="light"] .fe-card{background:rgba(158,124,62,.06);border-color:rgba(158,124,62,.2)}
@@ -116,7 +161,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 /* ── PRELOADER ── */
 #preloader{position:fixed;inset:0;background:radial-gradient(ellipse 60% 45% at 50% 55%,rgba(184,151,90,.08) 0%,#0d0b09 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;z-index:9999;transition:opacity .5s,visibility .5s}
 #preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
-.pl-cross{font-family:'Cormorant Garamond',serif;font-size:clamp(5rem,22vw,9rem);line-height:1;color:var(--gold);filter:drop-shadow(0 0 20px rgba(184,151,90,.9)) drop-shadow(0 8px 40px rgba(184,151,90,.4));animation:pl-pulse .65s ease-in-out infinite}
+.pl-cross{will-change:transform,opacity;font-family:'Cormorant Garamond',serif;font-size:clamp(5rem,22vw,9rem);line-height:1;color:var(--gold);filter:drop-shadow(0 0 20px rgba(184,151,90,.9)) drop-shadow(0 8px 40px rgba(184,151,90,.4));animation:pl-pulse .65s ease-in-out infinite}
 @keyframes pl-pulse{0%,100%{opacity:.65;transform:scale(.95)}50%{opacity:1;transform:scale(1.07)}}
 .pl-text{font-size:.52rem;letter-spacing:.5em;text-transform:uppercase;color:rgba(184,151,90,.7);font-weight:300}
 
@@ -155,7 +200,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 .fab-wrap.open .fab-backdrop{display:block}
 
 /* Dropdown panel */
-.fab-menu{
+.fab-menu{will-change:opacity,transform;
   position:absolute;top:calc(100% + 8px);right:0;
   background:rgba(20,16,12,.95);
   backdrop-filter:blur(20px) saturate(1.4);
@@ -234,7 +279,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 .rd-progress{height:2px;background:rgba(184,151,90,.12);position:relative;margin:0}
 .rd-progress-bar{height:100%;background:linear-gradient(to right,rgba(184,151,90,.5),var(--gold));transition:width .4s ease;width:0%}
 .rd-pages{position:relative}
-.rd-page{display:none;padding:1.5rem 1.4rem 1.8rem;animation:rd-in .32s ease both}
+.rd-page{will-change:opacity,transform;display:none;padding:1.5rem 1.4rem 1.8rem;animation:rd-in .32s ease both}
 .rd-page.rd-active{display:block}
 @keyframes rd-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .rd-pg-label{font-size:.38rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(184,151,90,.5);margin-bottom:1.2rem}
@@ -258,7 +303,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 .rd-big{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,4.5vw,1.5rem);color:var(--cream);line-height:1.45;margin:.8rem 0;font-style:italic}
 /* ── READER NAV ── */
 /* Swipe zones: invisible tap areas L/R */
-.rd-swipe-wrap{position:relative}
+.rd-swipe-wrap{position:relative;touch-action:pan-y}
 .rd-tap-prev,.rd-tap-next{position:absolute;top:0;bottom:0;width:22%;z-index:10;cursor:pointer;-webkit-tap-highlight-color:transparent;background:transparent}
 .rd-tap-prev{left:0}
 .rd-tap-next{right:0}
@@ -474,21 +519,21 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 /* ══ SUNFLOWER (OFRENDA) ══ */
 /* Seed falls from above */
 @keyframes sf-seed-fall{0%{transform:translateY(-30px);opacity:0}60%{transform:translateY(2px);opacity:1}75%{transform:translateY(-2px)}100%{transform:translateY(0);opacity:1}}
-.sf-seed{animation:sf-seed-fall .6s cubic-bezier(.4,0,.2,1) forwards .2s;opacity:0}
+.sf-seed{will-change:transform,opacity;animation:sf-seed-fall .6s cubic-bezier(.4,0,.2,1) forwards .2s;opacity:0}
 /* Ground absorbs seed */
 @keyframes sf-ground-bulge{0%,60%{rx:18;ry:3}75%{rx:22;ry:4.5}100%{rx:20;ry:3.5}}
 .sf-ground{animation:sf-ground-bulge .6s ease forwards .7s}
 /* Stem grows up via clip/scaleY */
 @keyframes sf-stem-grow{from{stroke-dashoffset:90}to{stroke-dashoffset:0}}
-.sf-stem{stroke-dasharray:90;stroke-dashoffset:90;animation:sf-stem-grow 1.2s cubic-bezier(.4,0,.2,1) forwards 1.1s}
+.sf-stem{will-change:stroke-dashoffset;animation:sf-stem-grow 1.2s cubic-bezier(.4,0,.2,1) forwards 1.1s}
 /* Leaves unfurl - kept in gold palette */
 @keyframes sf-leaf-l{0%{opacity:0;transform:scale(0) rotate(40deg)}70%{opacity:.9;transform:scale(1.08) rotate(-5deg)}100%{opacity:.85;transform:scale(1) rotate(0deg)}}
 @keyframes sf-leaf-r{0%{opacity:0;transform:scale(0) rotate(-40deg)}70%{opacity:.9;transform:scale(1.08) rotate(5deg)}100%{opacity:.85;transform:scale(1) rotate(0deg)}}
-.sf-leaf-l{opacity:0;transform-origin:40px 62px;animation:sf-leaf-l .55s ease forwards 2.0s}
-.sf-leaf-r{opacity:0;transform-origin:40px 52px;animation:sf-leaf-r .55s ease forwards 2.2s}
+.sf-leaf-l{will-change:transform,opacity;opacity:0;transform-origin:40px 62px;animation:sf-leaf-l .55s ease forwards 2.0s}
+.sf-leaf-r{will-change:transform,opacity;opacity:0;transform-origin:40px 52px;animation:sf-leaf-r .55s ease forwards 2.2s}
 /* Head disc appears */
 @keyframes sf-head{0%{r:0;opacity:0}70%{r:13;opacity:1}100%{r:12;opacity:1}}
-.sf-head{animation:sf-head .45s ease forwards 2.55s;r:0}
+.sf-head{will-change:opacity;animation:sf-head .45s ease forwards 2.55s;r:0}
 /* Petals open one by one - stay in gold/amber */
 @keyframes sf-petal{0%{opacity:0;transform:scale(0) rotate(var(--pr,0deg))}65%{opacity:1;transform:scale(1.1) rotate(var(--pr,0deg))}100%{opacity:.95;transform:scale(1) rotate(var(--pr,0deg))}}
 .sf-petal{opacity:0;transform-origin:40px 24px;animation:sf-petal .4s ease forwards}
@@ -510,19 +555,19 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 .sf-p16{--pr:337.5deg;animation-delay:3.8s}
 /* Inner dark disc */
 @keyframes sf-disc{to{opacity:1}}
-.sf-disc{opacity:0;animation:sf-disc .3s ease forwards 4.0s}
+.sf-disc{will-change:opacity;animation:sf-disc .3s ease forwards 4.0s}
 
 /* ══ WHEAT / DIEZMO ══ */
 /* 3 seeds fall */
 @keyframes wh-seed-fall{0%{transform:translateY(-28px);opacity:0}55%{transform:translateY(2px);opacity:1}70%{transform:translateY(-1px)}100%{transform:translateY(0);opacity:1}}
-.wh-seed-1{animation:wh-seed-fall .5s ease forwards .1s;opacity:0}
-.wh-seed-2{animation:wh-seed-fall .5s ease forwards .25s;opacity:0}
-.wh-seed-3{animation:wh-seed-fall .5s ease forwards .4s;opacity:0}
+.wh-seed-1{will-change:transform,opacity;animation:wh-seed-fall .5s ease forwards .1s;opacity:0}
+.wh-seed-2{will-change:transform,opacity;animation:wh-seed-fall .5s ease forwards .25s;opacity:0}
+.wh-seed-3{will-change:transform,opacity;animation:wh-seed-fall .5s ease forwards .4s;opacity:0}
 /* stems grow */
 @keyframes wh-stem-grow{from{stroke-dashoffset:110}to{stroke-dashoffset:0}}
-.wh-stem-l{stroke-dasharray:110;stroke-dashoffset:110;animation:wh-stem-grow 1.1s cubic-bezier(.35,0,.2,1) forwards .9s}
-.wh-stem-c{stroke-dasharray:130;stroke-dashoffset:130;animation:wh-stem-grow 1.2s cubic-bezier(.35,0,.2,1) forwards 1.0s}
-.wh-stem-r{stroke-dasharray:110;stroke-dashoffset:110;animation:wh-stem-grow 1.1s cubic-bezier(.35,0,.2,1) forwards 1.1s}
+.wh-stem-l{will-change:stroke-dashoffset;stroke-dasharray:110;stroke-dashoffset:110;animation:wh-stem-grow 1.1s cubic-bezier(.35,0,.2,1) forwards .9s}
+.wh-stem-c{will-change:stroke-dashoffset;stroke-dasharray:130;stroke-dashoffset:130;animation:wh-stem-grow 1.2s cubic-bezier(.35,0,.2,1) forwards 1.0s}
+.wh-stem-r{will-change:stroke-dashoffset;stroke-dasharray:110;stroke-dashoffset:110;animation:wh-stem-grow 1.1s cubic-bezier(.35,0,.2,1) forwards 1.1s}
 /* leaves */
 @keyframes wh-leaf-draw{from{stroke-dashoffset:28}to{stroke-dashoffset:0;opacity:.85}}
 .wh-leaf{stroke-dasharray:28;stroke-dashoffset:28;opacity:0;animation:wh-leaf-draw .6s ease forwards}
@@ -534,7 +579,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 .wh-leaf-6{animation-delay:2.3s}
 /* grains pop with scale */
 @keyframes wh-grain-pop{0%{opacity:0;transform:scale(0)}70%{opacity:1;transform:scale(1.12)}100%{opacity:.95;transform:scale(1)}}
-.wh-gl{opacity:0;animation:wh-grain-pop .35s ease forwards}
+.wh-gl{will-change:transform,opacity;animation:wh-grain-pop .35s ease forwards}
 .wh-gl-1{animation-delay:2.1s}.wh-gl-2{animation-delay:2.25s}.wh-gl-3{animation-delay:2.4s}.wh-gl-4{animation-delay:2.55s}
 .wh-gc-1{animation-delay:2.0s}.wh-gc-2{animation-delay:2.15s}.wh-gc-3{animation-delay:2.3s}.wh-gc-4{animation-delay:2.45s}.wh-gc-5{animation-delay:2.6s}
 .wh-gr-1{animation-delay:2.05s}.wh-gr-2{animation-delay:2.2s}.wh-gr-3{animation-delay:2.35s}.wh-gr-4{animation-delay:2.5s}
@@ -691,7 +736,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
 /* ── FAQ / INFO ── */
 .faq-overlay{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.65);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;padding:1.2rem}
 .faq-overlay.open{opacity:1;visibility:visible}
-.faq-sheet{background:var(--dark);border:1px solid rgba(184,151,90,.28);width:100%;max-width:420px;max-height:82svh;overflow-y:auto;border-radius:16px;transform:scale(.92) translateY(12px);transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;padding-bottom:1rem}
+.faq-sheet{will-change:transform;background:var(--dark);border:1px solid rgba(184,151,90,.28);width:100%;max-width:420px;max-height:82svh;overflow-y:auto;border-radius:16px;transform:scale(.92) translateY(12px);transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;padding-bottom:1rem}
 .faq-overlay.open .faq-sheet{transform:scale(1) translateY(0);opacity:1}
 [data-theme="light"] .faq-sheet{background:var(--dark)}
 .faq-sheet-hdr{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.4rem .8rem;border-bottom:1px solid rgba(184,151,90,.15);position:sticky;top:0;background:var(--dark);z-index:2}
@@ -800,7 +845,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--crea
    ══════════════════════════════════════════ */
 
 /* ── Transición suave al activar/desactivar ── */
-html.senior *{transition:font-size .3s ease,line-height .3s ease,padding .3s ease!important}
+html.senior *{transition:font-size .3s ease,line-height .3s ease,padding .3s ease}
 
 /* ── Botón activo en FAB — estado visible y claro ── */
 .fab-item.senior-fab-active,.fab-item#seniorBtn.senior-fab-active{
@@ -947,19 +992,19 @@ html.senior .map-addr-text{font-size:.72rem;line-height:2}
 
 
 /* ── PRÉDICA READER — Modo adulto mayor ── */
-html.senior .rd-body{font-size:.8rem!important;line-height:2.35!important;letter-spacing:.06em}
-html.senior .rd-h1{font-size:clamp(1.7rem,6.5vw,2.2rem)!important;line-height:1.3!important}
+html.senior .rd-body{font-size:.8rem;line-height:2.35;letter-spacing:.06em}
+html.senior .rd-h1{font-size:clamp(1.7rem,6.5vw,2.2rem);line-height:1.3}
 html.senior .rd-chapter{font-size:.58rem!important;letter-spacing:.38em}
 html.senior .rd-pg-label{font-size:.52rem!important;letter-spacing:.28em}
-html.senior .rd-pull p{font-size:clamp(1.1rem,4.2vw,1.35rem)!important;line-height:1.85!important}
+html.senior .rd-pull p{font-size:clamp(1.1rem,4.2vw,1.35rem);line-height:1.85}
 html.senior .rd-pull span{font-size:.52rem!important;letter-spacing:.2em}
-html.senior .rd-big{font-size:clamp(1.25rem,5vw,1.65rem)!important;line-height:1.55!important}
-html.senior .rd-bullet p{font-size:.76rem!important;line-height:2.1!important}
+html.senior .rd-big{font-size:clamp(1.25rem,5vw,1.65rem);line-height:1.55}
+html.senior .rd-bullet p{font-size:.76rem;line-height:2.1}
 html.senior .rd-em{font-size:1.05rem!important}
-html.senior .rd-page{padding:1.6rem 1.4rem 2rem!important}
-html.senior .rd-nav-arrow{width:52px!important;height:52px!important}
-html.senior .rd-nav-arrow svg{width:22px!important;height:22px!important}
-html.senior .rd-dot{width:8px!important;height:8px!important}
+html.senior .rd-page{padding:1.6rem 1.4rem 2rem}
+html.senior .rd-nav-arrow{width:52px;height:52px}
+html.senior .rd-nav-arrow svg{width:22px;height:22px}
+html.senior .rd-dot{width:8px;height:8px}
 html.senior .rd-nav-label{font-size:.5rem!important;letter-spacing:.28em}
 html.senior .rd-cover-name{font-size:1.18rem!important}
 html.senior .rd-cover-kicker,.rd-cover-pastor{font-size:.52rem!important}
@@ -1054,14 +1099,14 @@ html.senior .event-msg-link span{font-size:.62rem!important}
   <div class="topbar-right">
     <!-- Toggle de tema (siempre visible) -->
     <button class="theme-toggle-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
 
     <!-- FAB speed-dial: agrupa todos los demás botones -->
     <div class="fab-wrap" id="fabWrap">
       <div class="fab-backdrop" onclick="closeFab()"></div>
       <button class="fab-trigger" id="fabTrigger" aria-label="Más opciones" title="Más opciones">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <line x1="12" y1="5" x2="12" y2="19"/>
           <line x1="5" y1="12" x2="19" y2="12"/>
         </svg>
@@ -1070,32 +1115,32 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
         <!-- 1st: Letra grande A+ -->
         <button class="fab-item" id="seniorBtn" role="menuitem">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 20 L9 5 L14 20"/><line x1="6" y1="14" x2="12" y2="14"/><line x1="17" y1="10" x2="21" y2="10"/><line x1="19" y1="8" x2="19" y2="12"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 20 L9 5 L14 20"/><line x1="6" y1="14" x2="12" y2="14"/><line x1="17" y1="10" x2="21" y2="10"/><line x1="19" y1="8" x2="19" y2="12"/></svg>
           <span class="fab-item-label">Letra grande</span>
         </button>
 
         <!-- Versículo del día -->
         <button class="fab-item" id="votdBtn" role="menuitem">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="11" y="2" width="2" height="20" rx="1"/><rect x="2" y="8" width="20" height="2" rx="1"/><circle cx="12" cy="8" r="2.5" fill="currentColor" opacity=".35" stroke="none"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="11" y="2" width="2" height="20" rx="1"/><rect x="2" y="8" width="20" height="2" rx="1"/><circle cx="12" cy="8" r="2.5" fill="currentColor" opacity=".35" stroke="none"/></svg>
           <span class="fab-item-label">Versículo del día</span>
         </button>
 
         <!-- Info -->
         <button class="fab-item" id="helpBtn" role="menuitem">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r=".5" fill="currentColor" stroke="none"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><circle cx="12" cy="8" r=".5" fill="currentColor" stroke="none"/></svg>
           <span class="fab-item-label">Info</span>
         </button>
 
         <!-- Ofrendar -->
         <button class="fab-item" role="menuitem" onclick="closeFab();showScreen('iglesia','ofrendar')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
           <span class="fab-item-label">Ofrendar</span>
         </button>
 
         <!-- MJC FM — EN VIVO (debajo de Ofrendar, icono antena) -->
         <a class="fab-item fab-live" href="https://zeno.fm/radio/cristianos-en-linea/" target="_blank" rel="noopener" role="menuitem" onclick="closeFab()">
           <!-- Antena con ondas de transmisión -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <!-- Mástil de antena -->
             <line x1="12" y1="21" x2="12" y2="12"/>
             <!-- Base en T -->
@@ -1121,25 +1166,25 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
         <!-- WhatsApp -->
         <a class="fab-item" href="https://api.whatsapp.com/send?phone=5491135702698" target="_blank" rel="noopener" role="menuitem" onclick="closeFab()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           <span class="fab-item-label">WhatsApp</span>
         </a>
 
         <!-- Instagram -->
         <a class="fab-item" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" role="menuitem" onclick="closeFab()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
           <span class="fab-item-label">Instagram</span>
         </a>
 
         <!-- Facebook -->
         <a class="fab-item" href="https://www.facebook.com/share/1AioxqC8CD/" target="_blank" rel="noopener" role="menuitem" onclick="closeFab()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
           <span class="fab-item-label">Facebook</span>
         </a>
 
         <!-- YouTube -->
         <a class="fab-item" href="https://www.youtube.com/@MJCBoulogne" target="_blank" rel="noopener" role="menuitem" onclick="closeFab()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
           <span class="fab-item-label">YouTube</span>
         </a>
 
@@ -1160,22 +1205,22 @@ html.senior .event-msg-link span{font-size:.62rem!important}
       <p class="hero-verse">...la Verdad y la Vida. — Juan 14:6</p>
       <div class="hero-ctas">
         <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9" target="_blank" class="btn-gold">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Visitanos
+          <svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Visitanos
         </a>
         <button class="btn-ghost" onclick="showScreen('fe')">En qué creemos</button>
       </div>
     </div>
-    <div class="scroll-bounce-icon"><svg viewBox="0 0 28 40" fill="none"><rect x="11" y="0" width="6" height="40" rx="1.5" fill="currentColor"/><rect x="0" y="11" width="28" height="6" rx="1.5" fill="currentColor"/></svg></div>
+    <div class="scroll-bounce-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 28 40" fill="none"><rect x="11" y="0" width="6" height="40" rx="1.5" fill="currentColor"/><rect x="0" y="11" width="28" height="6" rx="1.5" fill="currentColor"/></svg></div>
   </div>
   <div class="marquee-strip"><div class="marquee-track"><span>Fe</span><span>·</span><span>Esperanza</span><span>·</span><span>Comunidad</span><span>·</span><span>Amor</span><span>·</span><span>Transformación</span><span>·</span><span>Servicio</span><span>·</span><span>Propósito</span><span>·</span><span>Verdad</span><span>·</span><span>Fe</span><span>·</span><span>Esperanza</span><span>·</span><span>Comunidad</span><span>·</span><span>Amor</span><span>·</span><span>Transformación</span><span>·</span><span>Servicio</span><span>·</span><span>Propósito</span><span>·</span><span>Verdad</span><span>·</span></div></div>
   <div class="frase-band"><p class="frase-text">¡Jesús es la respuesta a tu necesidad!</p></div>
   <div class="home-quick">
     <p class="home-quick-title">¿Qué buscás?</p>
     <div class="quick-grid">
-      <a class="quick-card" href="#" onclick="showScreen('horarios');return false;"><div class="quick-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="quick-card-label">Horarios</div><div class="quick-card-sub">Vie 19:30 · Dom 9:30</div></a>
-      <a class="quick-card" href="#" onclick="showScreen('mensajes');return false;"><div class="quick-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="quick-card-label">Mensajes</div><div class="quick-card-sub">Predicaciones</div></a>
-      <a class="quick-card" href="#" onclick="showScreen('iglesia','unete');return false;"><div class="quick-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="quick-card-label">Únete</div><div class="quick-card-sub">Comunidad</div></a>
-      <a class="quick-card" href="#" onclick="showScreen('iglesia','ofrendar');return false;"><div class="quick-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="quick-card-label">Ofrendar</div><div class="quick-card-sub">Diezmo · Ofrenda</div></a>
+      <a class="quick-card" href="#" onclick="showScreen('horarios');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="quick-card-label">Horarios</div><div class="quick-card-sub">Vie 19:30 · Dom 9:30</div></a>
+      <a class="quick-card" href="#" onclick="showScreen('mensajes');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="quick-card-label">Mensajes</div><div class="quick-card-sub">Predicaciones</div></a>
+      <a class="quick-card" href="#" onclick="showScreen('iglesia','unete');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="quick-card-label">Únete</div><div class="quick-card-sub">Comunidad</div></a>
+      <a class="quick-card" href="#" onclick="showScreen('iglesia','ofrendar');return false;"><div class="quick-card-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="quick-card-label">Ofrendar</div><div class="quick-card-sub">Diezmo · Ofrenda</div></a>
     </div>
   </div>
   <div class="screen-footer"><div class="screen-footer-logo">✝ MJC · Boulogne</div><div class="screen-footer-copy">© 2025 Ministerio Jesucristo es el Camino</div></div>
@@ -1200,19 +1245,19 @@ html.senior .event-msg-link span{font-size:.62rem!important}
     </div>
     <div class="map-card" style="margin-left:0;margin-right:0;">
       <iframe title="Ubicación MJC" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.764!2d-58.5852135!3d-34.5005939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bca6cb3dc2b3c3%3A0x4e2e8c6a7d9e1f5b!2sJun%C3%ADn%201734%2C%20Boulogne!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <div class="map-address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><div class="map-addr-text">Junín 1734<br>Boulogne, Buenos Aires, Argentina</div></div>
+      <div class="map-address"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><div class="map-addr-text">Junín 1734<br>Boulogne, Buenos Aires, Argentina</div></div>
     </div>
     <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9" target="_blank" class="btn-gold" style="display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;margin-bottom:1.2rem;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Cómo llegar
+      <svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Cómo llegar
     </a>
   </div>
   <!-- Panel Eventos -->
   <div class="inner-panel" id="panel-eventos-tab">
     <div class="calendar-wrap">
       <div class="cal-month-nav">
-        <button class="cal-nav-btn" onclick="calNav(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="cal-nav-btn" onclick="calNav(-1)"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
         <span class="cal-month-label" id="calMonthLabel"></span>
-        <button class="cal-nav-btn" onclick="calNav(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button class="cal-nav-btn" onclick="calNav(1)"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
       </div>
       <div class="cal-frame">
         <div class="cal-days-header" id="calDaysHdr"></div>
@@ -1252,7 +1297,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
       <div class="fe-card" onclick="toggleFe(this)">
         <div class="fe-card-hdr">
-          <div class="fe-card-ico"><svg viewBox="0 0 28 40" fill="none"><rect x="11" y="0" width="6" height="40" rx="1.5" fill="currentColor"/><rect x="0" y="11" width="28" height="6" rx="1.5" fill="currentColor"/></svg></div>
+          <div class="fe-card-ico"><svg aria-hidden="true" focusable="false" viewBox="0 0 28 40" fill="none"><rect x="11" y="0" width="6" height="40" rx="1.5" fill="currentColor"/><rect x="0" y="11" width="28" height="6" rx="1.5" fill="currentColor"/></svg></div>
           <div class="fe-card-name">En Jesucristo</div>
           <span class="fe-card-chev">▾</span>
         </div>
@@ -1266,7 +1311,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
       <div class="fe-card" onclick="toggleFe(this)">
         <div class="fe-card-hdr">
-          <div class="fe-card-ico"><svg viewBox="0 0 36 20" fill="none"><circle cx="6" cy="10" r="5" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="10" r="5" stroke="currentColor" stroke-width="2"/><circle cx="30" cy="10" r="5" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div class="fe-card-ico"><svg aria-hidden="true" focusable="false" viewBox="0 0 36 20" fill="none"><circle cx="6" cy="10" r="5" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="10" r="5" stroke="currentColor" stroke-width="2"/><circle cx="30" cy="10" r="5" stroke="currentColor" stroke-width="2"/></svg></div>
           <div class="fe-card-name">La Trinidad</div>
           <span class="fe-card-chev">▾</span>
         </div>
@@ -1280,7 +1325,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
       <div class="fe-card" onclick="toggleFe(this)">
         <div class="fe-card-hdr">
-          <div class="fe-card-ico"><svg viewBox="0 0 36 28" fill="none"><path d="M18 5C14 4 7 4 2 6L2 24C7 22 14 22 18 24Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 5C22 4 29 4 34 6L34 24C29 22 22 22 18 24Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><line x1="18" y1="5" x2="18" y2="24" stroke="currentColor" stroke-width="1.5"/></svg></div>
+          <div class="fe-card-ico"><svg aria-hidden="true" focusable="false" viewBox="0 0 36 28" fill="none"><path d="M18 5C14 4 7 4 2 6L2 24C7 22 14 22 18 24Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 5C22 4 29 4 34 6L34 24C29 22 22 22 18 24Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><line x1="18" y1="5" x2="18" y2="24" stroke="currentColor" stroke-width="1.5"/></svg></div>
           <div class="fe-card-name">La Biblia</div>
           <span class="fe-card-chev">▾</span>
         </div>
@@ -1294,7 +1339,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
       <div class="fe-card" onclick="toggleFe(this)">
         <div class="fe-card-hdr">
-          <div class="fe-card-ico"><svg viewBox="0 0 32 32" fill="none"><path d="M16 4C8 4 4 10 4 16C4 24 16 30 16 30C16 30 28 24 28 16C28 10 24 4 16 4Z" stroke="currentColor" stroke-width="2"/><path d="M16 10L16 22M10 16L22 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="fe-card-ico"><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" fill="none"><path d="M16 4C8 4 4 10 4 16C4 24 16 30 16 30C16 30 28 24 28 16C28 10 24 4 16 4Z" stroke="currentColor" stroke-width="2"/><path d="M16 10L16 22M10 16L22 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
           <div class="fe-card-name">El Perdón</div>
           <span class="fe-card-chev">▾</span>
         </div>
@@ -1308,7 +1353,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
       <div class="fe-card" onclick="toggleFe(this)">
         <div class="fe-card-hdr">
-          <div class="fe-card-ico"><svg viewBox="0 0 32 32" fill="none"><path d="M16 3L4 10L4 22L16 29L28 22L28 10Z" stroke="currentColor" stroke-width="2"/><path d="M16 3L16 29M4 10L28 10M4 22L28 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg></div>
+          <div class="fe-card-ico"><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" fill="none"><path d="M16 3L4 10L4 22L16 29L28 22L28 10Z" stroke="currentColor" stroke-width="2"/><path d="M16 3L16 29M4 10L28 10M4 22L28 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg></div>
           <div class="fe-card-name">La Salvación</div>
           <span class="fe-card-chev">▾</span>
         </div>
@@ -1322,7 +1367,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
       <div class="fe-card" onclick="toggleFe(this)">
         <div class="fe-card-hdr">
-          <div class="fe-card-ico"><svg viewBox="0 0 32 32" fill="none"><path d="M8 12Q16 4 24 12Q28 16 24 22L16 30L8 22Q4 16 8 12Z" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="16" r="3" fill="currentColor" opacity=".7"/></svg></div>
+          <div class="fe-card-ico"><svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" fill="none"><path d="M8 12Q16 4 24 12Q28 16 24 22L16 30L8 22Q4 16 8 12Z" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="16" r="3" fill="currentColor" opacity=".7"/></svg></div>
           <div class="fe-card-name">El Espíritu Santo</div>
           <span class="fe-card-chev">▾</span>
         </div>
@@ -1354,7 +1399,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
   <div class="msg-hero">
     <!-- Ilustración: llama de oración -->
     <div class="msg-hero-art" aria-hidden="true">
-      <svg viewBox="0 0 120 110" width="120" height="110" xmlns="http://www.w3.org/2000/svg">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 120 110" width="120" height="110" xmlns="http://www.w3.org/2000/svg">
           <!-- Flame -->
           <path d="M60 8 Q64 18 65 28 Q66 38 60 46 Q54 38 55 28 Q56 18 60 8 Z" fill="rgba(184,151,90,.25)" stroke="#c9985e" stroke-width=".9" stroke-linecap="round"/>
           <path d="M60 20 Q62 28 62 36 Q62 43 60 48 Q58 43 58 36 Q58 28 60 20 Z" fill="rgba(212,180,122,.45)"/>
@@ -1395,15 +1440,15 @@ html.senior .event-msg-link span{font-size:.62rem!important}
     <p class="msg-platforms-label">Seguinos en</p>
     <div class="msg-platform-row">
       <a class="msg-platform-btn" href="https://www.youtube.com/@MJCBoulogne" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
         <span>YouTube</span>
       </a>
       <a class="msg-platform-btn" href="https://www.instagram.com/mjcboulogne/" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
         <span>Instagram</span>
       </a>
       <a class="msg-platform-btn" href="https://www.facebook.com/share/1AioxqC8CD/" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
         <span>Facebook</span>
       </a>
     </div>
@@ -1423,7 +1468,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
     <div class="rd-cover-trigger" onclick="rdOpen()" id="rdTrigger">
       <!-- Thumbnail ilustración -->
       <div class="rd-thumb">
-        <svg viewBox="0 0 54 64" width="44" height="56" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 54 64" width="44" height="56" xmlns="http://www.w3.org/2000/svg">
           <!-- Flame small -->
           <path d="M27 4 Q30 11 31 18 Q32 26 27 32 Q22 26 23 18 Q24 11 27 4 Z" fill="rgba(184,151,90,.22)" stroke="#c9985e" stroke-width=".8"/>
           <path d="M27 12 Q29 18 29 25 Q29 30 27 34 Q25 30 25 25 Q25 18 27 12 Z" fill="rgba(212,180,122,.4)"/>
@@ -1448,11 +1493,11 @@ html.senior .event-msg-link span{font-size:.62rem!important}
         <p class="rd-cover-name">"El Poder de la Oración"</p>
         <p class="rd-cover-pastor">Lucas Sisneros · Santiago 5:17</p>
         <p class="rd-cover-hint">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg aria-hidden="true" focusable="false" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
           Tocá para leer
         </p>
       </div>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--gold);opacity:.45;flex-shrink:0"><polyline points="9 18 15 12 9 6"/></svg>
+      <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--gold);opacity:.45;flex-shrink:0"><polyline points="9 18 15 12 9 6"/></svg>
     </div>
 
     <!-- Reader (hidden until opened) -->
@@ -1472,7 +1517,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
             <div class="rd-sig-role">Pastor</div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:0">
               <span style="font-family:'Great Vibes',cursive;font-size:2.4rem;color:#b8975a;line-height:1.1;letter-spacing:.02em;display:block">Lucas Sisneros</span>
-              <svg viewBox="0 0 200 18" width="180" height="16" xmlns="http://www.w3.org/2000/svg" style="display:block;margin-top:-2px;overflow:visible">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 200 18" width="180" height="16" xmlns="http://www.w3.org/2000/svg" style="display:block;margin-top:-2px;overflow:visible">
                 <path d="M10 6 Q60 14 100 9 Q140 4 178 10" stroke="#b8975a" stroke-width="1.1" fill="none" stroke-linecap="round" opacity=".5"/>
                 <path d="M160 8 Q173 3 180 10 Q174 15 161 13" stroke="#b8975a" stroke-width=".9" fill="none" stroke-linecap="round" opacity=".4"/>
               </svg>
@@ -1618,7 +1663,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
             <p class="rd-sig-role">Pastor</p>
             <div style="display:inline-flex;flex-direction:column;align-items:flex-end;gap:0">
               <span style="font-family:'Great Vibes',cursive;font-size:2.1rem;color:#b8975a;line-height:1.1;letter-spacing:.02em;display:block">Lucas Sisneros</span>
-              <svg viewBox="0 0 180 16" width="162" height="14" xmlns="http://www.w3.org/2000/svg" style="display:block;margin-top:-2px;overflow:visible">
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 180 16" width="162" height="14" xmlns="http://www.w3.org/2000/svg" style="display:block;margin-top:-2px;overflow:visible">
                 <path d="M8 5 Q55 13 90 8 Q126 3 162 9" stroke="#b8975a" stroke-width="1" fill="none" stroke-linecap="round" opacity=".48"/>
                 <path d="M145 7 Q157 2 163 9 Q157 14 145 11" stroke="#b8975a" stroke-width=".85" fill="none" stroke-linecap="round" opacity=".38"/>
               </svg>
@@ -1633,15 +1678,15 @@ html.senior .event-msg-link span{font-size:.62rem!important}
       <p class="rd-nav-label" id="rdLabel">Portada</p>
       <div class="rd-nav">
         <button class="rd-nav-arrow" id="rdPrev" onclick="rdPage(-1)" disabled aria-label="Anterior">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
         <div class="rd-dots" id="rdDots"></div>
         <button class="rd-nav-arrow" id="rdNext" onclick="rdPage(1)" aria-label="Siguiente">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
       <button class="rd-close" onclick="rdClose()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
         Cerrar
       </button>
     </div><!-- /rd-reader -->
@@ -1707,10 +1752,10 @@ html.senior .event-msg-link span{font-size:.62rem!important}
     <p class="unete-body">Fortalece tu amor por Dios y profundiza tu fe en comunidad.<br>Escríbenos, te esperamos con los brazos abiertos.</p>
     <div class="unete-btns">
       <a href="https://api.whatsapp.com/send?phone=5491135702698" target="_blank" class="btn-gold" style="justify-content:center;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp
+        <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp
       </a>
-      <a href="https://www.instagram.com/mjcboulogne/" target="_blank" class="btn-ghost" style="justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>Instagram @mjcboulogne</a>
-      <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9" target="_blank" class="btn-ghost" style="justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Visitarnos · Junín 1734</a>
+      <a href="https://www.instagram.com/mjcboulogne/" target="_blank" class="btn-ghost" style="justify-content:center;"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>Instagram @mjcboulogne</a>
+      <a href="https://maps.app.goo.gl/4YHrh6iGA58LqhyX9" target="_blank" class="btn-ghost" style="justify-content:center;"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Visitarnos · Junín 1734</a>
     </div>
   </div>
 
@@ -1728,7 +1773,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
       <div class="of-card" onclick="openOfModal('ofrenda',this)">
         <div class="of-card-hdr">
           <div class="of-anim-wrap">
-            <svg viewBox="0 0 80 95" width="62" height="72" overflow="visible">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 80 95" width="62" height="72" overflow="visible">
               <!-- Ground -->
               <ellipse class="sf-ground" cx="40" cy="85" rx="18" ry="3" fill="rgba(184,151,90,.25)"/>
               <!-- Seed (oval, gold, falls from top) -->
@@ -1786,7 +1831,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
       <div class="of-card" onclick="openOfModal('cimientos',this)">
         <div class="of-card-hdr">
           <div class="of-anim-wrap">
-            <svg viewBox="0 0 80 90" width="60" height="68">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 80 90" width="60" height="68">
               <circle class="ca-glow" cx="40" cy="40" r="0" fill="rgba(184,151,90,.07)"/>
               <rect class="ca-base" x="10" y="72" width="60" height="12" fill="rgba(184,151,90,.12)" stroke="#b8975a" stroke-width=".8"/>
               <rect class="ca-wall" x="18" y="52" width="44" height="20" fill="rgba(184,151,90,.1)" stroke="#b8975a" stroke-width=".8"/>
@@ -1805,7 +1850,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
       <div class="of-card" onclick="openOfModal('diezmo',this)">
         <div class="of-card-hdr">
           <div class="of-anim-wrap">
-            <svg viewBox="0 0 80 95" width="64" height="72" overflow="visible">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 80 95" width="64" height="72" overflow="visible">
               <!-- Ground -->
               <ellipse cx="40" cy="86" rx="32" ry="4" fill="rgba(184,151,90,.2)"/>
               <!-- 3 seeds falling: left, center, right -->
@@ -1891,7 +1936,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
       <div class="of-card" onclick="openOfModal('banco',this)">
         <div class="of-card-hdr">
           <div class="of-anim-wrap">
-            <svg viewBox="0 0 80 90" width="60" height="68">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 80 90" width="60" height="68">
               <rect x="8" y="25" width="64" height="42" rx="5" fill="rgba(184,151,90,.08)" stroke="#b8975a" stroke-width=".9"/>
               <rect x="8" y="33" width="64" height="10" fill="rgba(184,151,90,.18)"/>
               <line class="bk-line" x1="18" y1="54" x2="50" y2="54" stroke="#b8975a" stroke-width="1.5" stroke-linecap="round" opacity="0"/>
@@ -1914,30 +1959,30 @@ html.senior .event-msg-link span{font-size:.62rem!important}
     <div class="yv-card" style="margin-top:1.5rem;">
       <div class="yv-card-logo">
         <div class="yv-card-logo-icon">
-          <svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#1a1612"/><path d="M12 10h16M12 20h10M12 28h14" stroke="#b8975a" stroke-width="2.5" stroke-linecap="round"/><circle cx="30" cy="20" r="7" fill="#b8975a"/><path d="M27 20l2 2 4-4" stroke="#1a1612" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#1a1612"/><path d="M12 10h16M12 20h10M12 28h14" stroke="#b8975a" stroke-width="2.5" stroke-linecap="round"/><circle cx="30" cy="20" r="7" fill="#b8975a"/><path d="M27 20l2 2 4-4" stroke="#1a1612" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div><div class="yv-card-logo-name">YouVersion Bible</div><div class="yv-card-logo-sub">Lectura bíblica · Plan de iglesia</div></div>
       </div>
       <div class="yv-actions">
         <a class="yv-action" href="https://www.bible.com/organizations/b58e6c18-0645-45d5-8dda-474451be81f5" target="_blank">
-          <div class="yv-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+          <div class="yv-action-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
           <div class="yv-action-text"><div class="yv-action-label">Colocar como mi Iglesia</div><div class="yv-action-sub">Seguí a MJC Boulogne en YouVersion</div></div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--text-muted)"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--text-muted)"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
         <a class="yv-action" href="https://www.bible.com/es/reading-plans" target="_blank">
-          <div class="yv-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="yv-action-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
           <div class="yv-action-text"><div class="yv-action-label">Planes de Lectura</div><div class="yv-action-sub">Planes bíblicos en comunidad</div></div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--text-muted)"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--text-muted)"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
         <a class="yv-action" href="https://www.bible.com/es/verse-of-the-day" target="_blank">
-          <div class="yv-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+          <div class="yv-action-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
           <div class="yv-action-text"><div class="yv-action-label">Versículo del Día</div><div class="yv-action-sub">Leé la Biblia en YouVersion</div></div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--text-muted)"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--text-muted)"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
         <a class="yv-action" href="https://www.bible.com/app" target="_blank">
-          <div class="yv-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/></svg></div>
+          <div class="yv-action-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/></svg></div>
           <div class="yv-action-text"><div class="yv-action-label">Descargar la App</div><div class="yv-action-sub">Disponible en iOS y Android</div></div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--text-muted)"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--text-muted)"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
       </div>
       <div class="yv-qr-row">
@@ -1956,7 +2001,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
       <div class="prox-divider"></div>
       <p class="prox-body">Estamos preparando un espacio para compartir<br>los momentos de nuestra comunidad.</p>
       <p class="prox-sub">Mientras tanto, seguinos en Instagram</p>
-      <a href="https://www.instagram.com/mjcboulogne/" target="_blank" class="btn-ghost prox-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>@mjcboulogne</a>
+      <a href="https://www.instagram.com/mjcboulogne/" target="_blank" class="btn-ghost prox-btn"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>@mjcboulogne</a>
     </div>
   </div>
 
@@ -1977,27 +2022,27 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 <nav id="tabbar" role="navigation" aria-label="Navegación principal">
   <div class="tab-item active" data-screen="inicio" onclick="showScreen('inicio')">
     <div class="tab-dot"></div>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     <span class="tab-label">Inicio</span>
   </div>
   <div class="tab-item" data-screen="horarios" onclick="showScreen('horarios')">
     <div class="tab-dot"></div>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
     <span class="tab-label">Horarios</span>
   </div>
   <div class="tab-item" data-screen="fe" onclick="showScreen('fe')">
     <div class="tab-dot"></div>
-    <svg viewBox="0 0 28 40" fill="none" style="width:22px;height:22px;"><rect x="11" y="0" width="6" height="40" rx="1.5" fill="currentColor"/><rect x="0" y="11" width="28" height="6" rx="1.5" fill="currentColor"/></svg>
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 28 40" fill="none" style="width:22px;height:22px;"><rect x="11" y="0" width="6" height="40" rx="1.5" fill="currentColor"/><rect x="0" y="11" width="28" height="6" rx="1.5" fill="currentColor"/></svg>
     <span class="tab-label">Fe</span>
   </div>
   <div class="tab-item" data-screen="mensajes" onclick="showScreen('mensajes')">
     <div class="tab-dot"></div>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
     <span class="tab-label">Mensajes</span>
   </div>
   <div class="tab-item" data-screen="iglesia" onclick="showScreen('iglesia')">
     <div class="tab-dot"></div>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
     <span class="tab-label">Iglesia</span>
   </div>
 </nav>
@@ -2007,7 +2052,7 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 <!-- VOTD Overlay -->
 <div class="votd-overlay" id="votdOverlay">
   <div class="votd-card">
-    <button class="votd-close-btn" id="votdCloseBtn" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button class="votd-close-btn" id="votdCloseBtn" aria-label="Cerrar"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <p class="votd-badge votd-interactive">✝ Mensaje del Día</p>
     <p class="votd-date-txt votd-interactive" id="votdDate"></p>
     <div class="votd-ver-toggle votd-interactive">
@@ -2026,21 +2071,21 @@ html.senior .event-msg-link span{font-size:.62rem!important}
   <div class="faq-sheet">
     <div class="faq-sheet-hdr">
       <span class="faq-sheet-title">Info</span>
-      <button class="faq-close" onclick="document.getElementById('faqOverlay').classList.remove('open')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <button class="faq-close" onclick="document.getElementById('faqOverlay').classList.remove('open')"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
 
     <p class="faq-section-label">App del Ministerio</p>
 
     <div class="faq-item" onclick="toggleFAQ(this)">
       <div class="faq-item-hdr">
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/></svg>
+        <svg aria-hidden="true" focusable="false" class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/></svg>
         <span class="faq-item-q">¿Cómo instalar la app en mi celular?</span>
-        <span class="faq-item-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="faq-item-chev"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
       </div>
       <div class="faq-item-body"><div class="faq-item-body-inner">
         <p class="faq-item-ans">Podés agregar esta página a tu pantalla de inicio para usarla como una app nativa, sin ir al navegador cada vez. Es rápido y no ocupa espacio.</p>
         <button class="faq-install-btn" id="pwaInstallBtn" onclick="triggerPWAInstall()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v13M5 15l7 7 7-7"/><path d="M3 19h18"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v13M5 15l7 7 7-7"/><path d="M3 19h18"/></svg>
           Agregar a pantalla de inicio
         </button>
         <p class="pwa-not-available" id="pwaManualHint" style="display:none;margin-top:.6rem;">En iOS: tocá el botón Compartir <strong>⎙</strong> en Safari y elegí "Agregar a inicio". En Android: tocá los tres puntos del navegador → "Instalar app".</p>
@@ -2051,9 +2096,9 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
     <div class="faq-item" onclick="toggleFAQ(this)">
       <div class="faq-item-hdr">
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        <svg aria-hidden="true" focusable="false" class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
         <span class="faq-item-q">¿Cómo hago una ofrenda o diezmo?</span>
-        <span class="faq-item-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="faq-item-chev"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
       </div>
       <div class="faq-item-body"><div class="faq-item-body-inner">
         <p class="faq-item-ans">1. Andá a la sección <strong style="color:var(--gold)">Iglesia → Ofrendar</strong>.<br>2. Elegí el tipo: Ofrenda, Diezmo o Cimientos.<br>3. Copiá el alias <em>iglesia.mjc.dolarapp</em>.<br>4. Abrí Mercado Pago, tu banco o billetera virtual.<br>5. Ingresá a "Transferir" o "Enviar dinero".<br>6. Pegá el alias y completá el monto.<br>7. En el motivo escribí: Ofrenda-MJC, Diezmo-MJC o Cimientos-MJC.</p>
@@ -2062,9 +2107,9 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
     <div class="faq-item" onclick="toggleFAQ(this)">
       <div class="faq-item-hdr">
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        <svg aria-hidden="true" focusable="false" class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
         <span class="faq-item-q">¿El alias funciona en cualquier app de banco?</span>
-        <span class="faq-item-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="faq-item-chev"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
       </div>
       <div class="faq-item-body"><div class="faq-item-body-inner">
         <p class="faq-item-ans">Sí. El alias <em style="color:var(--gold)">iglesia.mjc.dolarapp</em> funciona en cualquier billetera virtual o banco digital de Argentina: Mercado Pago, Naranja X, Uala, MODO, Brubank, Banco Nación, Santander y más. Solo necesitás ir a "Transferir" y pegar el alias.</p>
@@ -2075,9 +2120,9 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
     <div class="faq-item" onclick="toggleFAQ(this)">
       <div class="faq-item-hdr">
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <svg aria-hidden="true" focusable="false" class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         <span class="faq-item-q">¿Cómo agrego un evento a mi Google Calendar?</span>
-        <span class="faq-item-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="faq-item-chev"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
       </div>
       <div class="faq-item-body"><div class="faq-item-body-inner">
         <p class="faq-item-ans">En la sección <strong style="color:var(--gold)">Horarios → Eventos</strong>, tocá el botón "Google Calendar" en cualquier evento. Se abrirá automáticamente la app de Google Calendar (o el navegador) para que puedas confirmar y guardar el evento con recordatorio.</p>
@@ -2088,9 +2133,9 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 
     <div class="faq-item" onclick="toggleFAQ(this)">
       <div class="faq-item-hdr">
-        <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <svg aria-hidden="true" focusable="false" class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         <span class="faq-item-q">¿Dónde está ubicada la iglesia?</span>
-        <span class="faq-item-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        <span class="faq-item-chev"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg></span>
       </div>
       <div class="faq-item-body"><div class="faq-item-body-inner">
         <p class="faq-item-ans"><strong style="color:var(--gold)">Junín 1734, Boulogne, Buenos Aires, Argentina.</strong><br>Reuniones los Viernes a las 19:30 y Domingos a las 9:30. Para más info escribinos por WhatsApp al +54 9 11 3570-2698.</p>
@@ -2247,7 +2292,7 @@ function copyText(text,ev){
   if(ev)ev.stopPropagation();
   const btn=ev&&(ev.target.closest('.copy-btn')||ev.target.closest('.of-alias-val,.dato-val'));
   navigator.clipboard.writeText(text).then(()=>{
-    if(btn){const orig=btn.innerHTML;btn.innerHTML=(btn.classList.contains('copy-btn')?'<svg viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="2" stroke-linecap="round" width="14" height="14"><path d="M20 6L9 17l-5-5"/></svg> ¡Copiado!':'✓ Copiado');btn.style.color='var(--gold)';setTimeout(()=>{btn.innerHTML=orig;btn.style.color='';},2200);}
+    if(btn){const orig=btn.innerHTML;btn.innerHTML=(btn.classList.contains('copy-btn')?'<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="#b8975a" stroke-width="2" stroke-linecap="round" width="14" height="14"><path d="M20 6L9 17l-5-5"/></svg> ¡Copiado!':'✓ Copiado');btn.style.color='var(--gold)';setTimeout(()=>{btn.innerHTML=orig;btn.style.color='';},2200);}
   }).catch(()=>{const el=document.createElement('textarea');el.value=text;el.style.cssText='position:fixed;opacity:0';document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);});
 }
 
@@ -2310,17 +2355,17 @@ function showEvents(ds,evs){
       <div class="event-item-date">📅 ${formatDate(ds)} · ${e.time} hs</div>
       <div class="event-item-desc">${e.desc}</div>
       ${e.msgPage?`<div class="event-msg-link" onclick="showScreen('mensajes');setTimeout(rdOpen,320)" role="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         <span>Ver mensaje de este día</span>
-        <svg class="ev-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        <svg aria-hidden="true" focusable="false" class="ev-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
       </div>`:''}
       <div class="event-item-actions">
         <button class="event-action-btn" onclick="addToGCal('${encodeURIComponent(e.name)}','${ds}','${e.time}','${encodeURIComponent(e.desc)}')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Google Calendar
         </button>
         <button class="event-action-btn" onclick="shareEvent('${encodeURIComponent(e.name)}','${ds}','${e.time}')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
           Compartir
         </button>
       </div>
@@ -2402,8 +2447,8 @@ function triggerPWAInstall(){
 // THEME
 // ─────────────────────────────────────────
 let isDark=true;
-const moonSVG=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`;
-const sunSVG=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+const moonSVG=`<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`;
+const sunSVG=`<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
 document.getElementById('themeBtn').addEventListener('click',()=>{
   isDark=!isDark;
   document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
@@ -2432,19 +2477,19 @@ const OF_DATA={
   ofrenda:{title:'Ofrenda',sub:'Dar con alegría al Señor',motivo:'Ofrenda-MJC',
     rvr:{t:'"Dad, y se os dará; medida buena, apretada, remecida y rebosando darán en vuestro regazo."',r:'Lucas 6:38 · RVR1960'},
     nvi:{t:'"Den, y se les dará: se les echará en el regazo una medida llena, apretada, sacudida y desbordante."',r:'Lucas 6:38 · NVI'},
-    svg:'<svg viewBox="0 0 80 95" width="70" height="82" overflow="visible"><ellipse cx="40" cy="85" rx="20" ry="3.5" fill="rgba(184,151,90,.25)"/><ellipse class="sf-seed" cx="40" cy="82" rx="4" ry="6" fill="#c9985e" transform="rotate(-10 40 82)"/><path class="sf-stem" d="M40 82 Q38 70 39 58 Q39 44 40 30 Q40 26 40 20" stroke="#8a7035" stroke-width="2.4" fill="none" stroke-linecap="round"/><path class="sf-leaf-l" d="M39 62 Q24 57 20 46 Q28 44 36 54 Q38 58 39 62 Z" fill="#b89840" opacity="0" transform-origin="39px 62px"/><path class="sf-leaf-r" d="M41 50 Q56 45 60 34 Q52 32 44 42 Q42 46 41 50 Z" fill="#c9a045" opacity="0" transform-origin="41px 50px"/><ellipse class="sf-petal sf-p1" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030"/><ellipse class="sf-petal sf-p2" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(22.5 40 20)"/><ellipse class="sf-petal sf-p3" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(45 40 20)"/><ellipse class="sf-petal sf-p4" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(67.5 40 20)"/><ellipse class="sf-petal sf-p5" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(90 40 20)"/><ellipse class="sf-petal sf-p6" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(112.5 40 20)"/><ellipse class="sf-petal sf-p7" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(135 40 20)"/><ellipse class="sf-petal sf-p8" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(157.5 40 20)"/><ellipse class="sf-petal sf-p9" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(180 40 20)"/><ellipse class="sf-petal sf-p10" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(202.5 40 20)"/><ellipse class="sf-petal sf-p11" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(225 40 20)"/><ellipse class="sf-petal sf-p12" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(247.5 40 20)"/><ellipse class="sf-petal sf-p13" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(270 40 20)"/><ellipse class="sf-petal sf-p14" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(292.5 40 20)"/><ellipse class="sf-petal sf-p15" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(315 40 20)"/><ellipse class="sf-petal sf-p16" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(337.5 40 20)"/><circle class="sf-head" cx="40" cy="20" fill="#5c3d10"/><g class="sf-disc"><circle cx="38" cy="18" r="1.2" fill="#3d2408" opacity=".7"/><circle cx="42" cy="18" r="1.2" fill="#3d2408" opacity=".7"/><circle cx="40" cy="16" r="1.2" fill="#3d2408" opacity=".7"/><circle cx="40" cy="22" r="1.2" fill="#3d2408" opacity=".7"/><circle cx="38.5" cy="19.5" r=".8" fill="#b8975a" opacity=".4"/><circle cx="41.5" cy="19.5" r=".8" fill="#b8975a" opacity=".4"/></g></svg>'},
+    svg:'<svg aria-hidden="true" focusable="false" viewBox="0 0 80 95" width="70" height="82" overflow="visible"><ellipse cx="40" cy="85" rx="20" ry="3.5" fill="rgba(184,151,90,.25)"/><ellipse class="sf-seed" cx="40" cy="82" rx="4" ry="6" fill="#c9985e" transform="rotate(-10 40 82)"/><path class="sf-stem" d="M40 82 Q38 70 39 58 Q39 44 40 30 Q40 26 40 20" stroke="#8a7035" stroke-width="2.4" fill="none" stroke-linecap="round"/><path class="sf-leaf-l" d="M39 62 Q24 57 20 46 Q28 44 36 54 Q38 58 39 62 Z" fill="#b89840" opacity="0" transform-origin="39px 62px"/><path class="sf-leaf-r" d="M41 50 Q56 45 60 34 Q52 32 44 42 Q42 46 41 50 Z" fill="#c9a045" opacity="0" transform-origin="41px 50px"/><ellipse class="sf-petal sf-p1" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030"/><ellipse class="sf-petal sf-p2" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(22.5 40 20)"/><ellipse class="sf-petal sf-p3" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(45 40 20)"/><ellipse class="sf-petal sf-p4" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(67.5 40 20)"/><ellipse class="sf-petal sf-p5" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(90 40 20)"/><ellipse class="sf-petal sf-p6" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(112.5 40 20)"/><ellipse class="sf-petal sf-p7" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(135 40 20)"/><ellipse class="sf-petal sf-p8" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(157.5 40 20)"/><ellipse class="sf-petal sf-p9" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(180 40 20)"/><ellipse class="sf-petal sf-p10" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(202.5 40 20)"/><ellipse class="sf-petal sf-p11" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(225 40 20)"/><ellipse class="sf-petal sf-p12" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(247.5 40 20)"/><ellipse class="sf-petal sf-p13" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(270 40 20)"/><ellipse class="sf-petal sf-p14" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(292.5 40 20)"/><ellipse class="sf-petal sf-p15" cx="40" cy="9" rx="4.5" ry="9" fill="#d4a030" transform="rotate(315 40 20)"/><ellipse class="sf-petal sf-p16" cx="40" cy="9" rx="4.5" ry="9" fill="#c99020" transform="rotate(337.5 40 20)"/><circle class="sf-head" cx="40" cy="20" fill="#5c3d10"/><g class="sf-disc"><circle cx="38" cy="18" r="1.2" fill="#3d2408" opacity=".7"/><circle cx="42" cy="18" r="1.2" fill="#3d2408" opacity=".7"/><circle cx="40" cy="16" r="1.2" fill="#3d2408" opacity=".7"/><circle cx="40" cy="22" r="1.2" fill="#3d2408" opacity=".7"/><circle cx="38.5" cy="19.5" r=".8" fill="#b8975a" opacity=".4"/><circle cx="41.5" cy="19.5" r=".8" fill="#b8975a" opacity=".4"/></g></svg>'},
   cimientos:{title:'Cimientos',sub:'Construir la Iglesia',motivo:'Cimientos-MJC',
     rvr:{t:'"Subid al monte, traed madera y reedificad la casa; seré glorificado, ha dicho Jehová."',r:'Hageo 1:8 · RVR1960'},
     nvi:{t:'"Suban a los montes, traigan madera y construyan el templo, para que yo me complazca en él."',r:'Hageo 1:8 · NVI'},
-    svg:'<svg viewBox="0 0 80 90" width="70" height="80"><circle class="ca-glow" cx="40" cy="40" r="0" fill="rgba(184,151,90,.07)"/><rect class="ca-base" x="10" y="72" width="60" height="12" fill="rgba(184,151,90,.12)" stroke="#b8975a" stroke-width=".8"/><rect class="ca-wall" x="18" y="52" width="44" height="20" fill="rgba(184,151,90,.1)" stroke="#b8975a" stroke-width=".8"/><rect class="ca-tower" x="32" y="32" width="16" height="22" fill="rgba(184,151,90,.13)" stroke="#b8975a" stroke-width=".8"/><polygon class="ca-roof" points="40,14 28,34 52,34" fill="rgba(184,151,90,.22)" stroke="#b8975a" stroke-width=".8"/><line class="ca-cross-v" x1="40" y1="6" x2="40" y2="18" stroke="#b8975a" stroke-width="1.8" stroke-linecap="round" opacity="0"/><line class="ca-cross-h" x1="34" y1="11" x2="46" y2="11" stroke="#b8975a" stroke-width="1.8" stroke-linecap="round" opacity="0"/></svg>'},
+    svg:'<svg aria-hidden="true" focusable="false" viewBox="0 0 80 90" width="70" height="80"><circle class="ca-glow" cx="40" cy="40" r="0" fill="rgba(184,151,90,.07)"/><rect class="ca-base" x="10" y="72" width="60" height="12" fill="rgba(184,151,90,.12)" stroke="#b8975a" stroke-width=".8"/><rect class="ca-wall" x="18" y="52" width="44" height="20" fill="rgba(184,151,90,.1)" stroke="#b8975a" stroke-width=".8"/><rect class="ca-tower" x="32" y="32" width="16" height="22" fill="rgba(184,151,90,.13)" stroke="#b8975a" stroke-width=".8"/><polygon class="ca-roof" points="40,14 28,34 52,34" fill="rgba(184,151,90,.22)" stroke="#b8975a" stroke-width=".8"/><line class="ca-cross-v" x1="40" y1="6" x2="40" y2="18" stroke="#b8975a" stroke-width="1.8" stroke-linecap="round" opacity="0"/><line class="ca-cross-h" x1="34" y1="11" x2="46" y2="11" stroke="#b8975a" stroke-width="1.8" stroke-linecap="round" opacity="0"/></svg>'},
   diezmo:{title:'Diezmo',sub:'10% de tus ingresos',motivo:'Diezmo-MJC',
     rvr:{t:'"Traed todos los diezmos al alfolí... pruébenme ahora en esto, dice Jehová de los ejércitos."',r:'Malaquías 3:10 · RVR1960'},
     nvi:{t:'"Traigan íntegro el diezmo para los fondos del templo. Pruébenme en esto —dice el Señor."',r:'Malaquías 3:10 · NVI'},
-    svg:'<svg viewBox="0 0 80 95" width="70" height="82" overflow="visible"><ellipse cx="40" cy="86" rx="32" ry="4" fill="rgba(184,151,90,.2)"/><ellipse class="wh-seed-1" cx="22" cy="83" rx="3.5" ry="5" fill="#c9a045" transform="rotate(-12 22 83)"/><ellipse class="wh-seed-2" cx="40" cy="83" rx="3.5" ry="5.5" fill="#d4a030"/><ellipse class="wh-seed-3" cx="58" cy="83" rx="3.5" ry="5" fill="#c9a045" transform="rotate(12 58 83)"/><path class="wh-stem-l" d="M22 82 Q20 72 21 60 Q21 48 22 38 Q22 32 23 28" stroke="#8a7035" stroke-width="2" fill="none" stroke-linecap="round"/><path class="wh-stem-c" d="M40 82 Q38 70 39 56 Q39 40 40 28 Q40 22 40 16" stroke="#8a7035" stroke-width="2.4" fill="none" stroke-linecap="round"/><path class="wh-stem-r" d="M58 82 Q60 72 59 60 Q59 48 58 38 Q58 32 57 28" stroke="#8a7035" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse class="wh-gl wh-gl-1" cx="17" cy="60" rx="3.8" ry="6.5" fill="#b8975a" transform="rotate(-25 17 60)"/><ellipse class="wh-gl wh-gl-1" cx="27" cy="60" rx="3.8" ry="6.5" fill="#c9a96e" transform="rotate(25 27 60)"/><ellipse class="wh-gl wh-gc-1" cx="34" cy="60" rx="4.2" ry="7" fill="#b8975a" transform="rotate(-18 34 60)"/><ellipse class="wh-gl wh-gc-1" cx="46" cy="60" rx="4.2" ry="7" fill="#c9a96e" transform="rotate(18 46 60)"/><ellipse class="wh-gl wh-gr-1" cx="53" cy="60" rx="3.8" ry="6.5" fill="#b8975a" transform="rotate(-25 53 60)"/><ellipse class="wh-gl wh-gr-1" cx="63" cy="60" rx="3.8" ry="6.5" fill="#c9a96e" transform="rotate(25 63 60)"/><ellipse class="wh-gl wh-gc-5" cx="40" cy="20" rx="3.2" ry="5.8" fill="#d4b47a"/><ellipse class="wh-gl wh-gl-4" cx="23" cy="30" rx="3" ry="5.5" fill="#d4b47a"/><ellipse class="wh-gl wh-gr-4" cx="57" cy="30" rx="3" ry="5.5" fill="#d4b47a"/></svg>'},
+    svg:'<svg aria-hidden="true" focusable="false" viewBox="0 0 80 95" width="70" height="82" overflow="visible"><ellipse cx="40" cy="86" rx="32" ry="4" fill="rgba(184,151,90,.2)"/><ellipse class="wh-seed-1" cx="22" cy="83" rx="3.5" ry="5" fill="#c9a045" transform="rotate(-12 22 83)"/><ellipse class="wh-seed-2" cx="40" cy="83" rx="3.5" ry="5.5" fill="#d4a030"/><ellipse class="wh-seed-3" cx="58" cy="83" rx="3.5" ry="5" fill="#c9a045" transform="rotate(12 58 83)"/><path class="wh-stem-l" d="M22 82 Q20 72 21 60 Q21 48 22 38 Q22 32 23 28" stroke="#8a7035" stroke-width="2" fill="none" stroke-linecap="round"/><path class="wh-stem-c" d="M40 82 Q38 70 39 56 Q39 40 40 28 Q40 22 40 16" stroke="#8a7035" stroke-width="2.4" fill="none" stroke-linecap="round"/><path class="wh-stem-r" d="M58 82 Q60 72 59 60 Q59 48 58 38 Q58 32 57 28" stroke="#8a7035" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse class="wh-gl wh-gl-1" cx="17" cy="60" rx="3.8" ry="6.5" fill="#b8975a" transform="rotate(-25 17 60)"/><ellipse class="wh-gl wh-gl-1" cx="27" cy="60" rx="3.8" ry="6.5" fill="#c9a96e" transform="rotate(25 27 60)"/><ellipse class="wh-gl wh-gc-1" cx="34" cy="60" rx="4.2" ry="7" fill="#b8975a" transform="rotate(-18 34 60)"/><ellipse class="wh-gl wh-gc-1" cx="46" cy="60" rx="4.2" ry="7" fill="#c9a96e" transform="rotate(18 46 60)"/><ellipse class="wh-gl wh-gr-1" cx="53" cy="60" rx="3.8" ry="6.5" fill="#b8975a" transform="rotate(-25 53 60)"/><ellipse class="wh-gl wh-gr-1" cx="63" cy="60" rx="3.8" ry="6.5" fill="#c9a96e" transform="rotate(25 63 60)"/><ellipse class="wh-gl wh-gc-5" cx="40" cy="20" rx="3.2" ry="5.8" fill="#d4b47a"/><ellipse class="wh-gl wh-gl-4" cx="23" cy="30" rx="3" ry="5.5" fill="#d4b47a"/><ellipse class="wh-gl wh-gr-4" cx="57" cy="30" rx="3" ry="5.5" fill="#d4b47a"/></svg>'},
   banco:{title:'Datos Bancarios',sub:'Transferencia · DolarApp',motivo:'',
     rvr:{t:'"El que es generoso prosperará; el que reanima a otros, él mismo será reanimado."',r:'Proverbios 11:25 · RVR1960'},
     nvi:{t:'"El que es generoso prosperará; el que reanima a otros, él mismo será reanimado."',r:'Proverbios 11:25 · NVI'},
-    svg:'<svg viewBox="0 0 80 90" width="70" height="80"><rect x="8" y="25" width="64" height="42" rx="5" fill="rgba(184,151,90,.08)" stroke="#b8975a" stroke-width=".9"/><rect x="8" y="33" width="64" height="10" fill="rgba(184,151,90,.18)"/><line class="bk-line" x1="18" y1="54" x2="50" y2="54" stroke="#b8975a" stroke-width="1.5" stroke-linecap="round" opacity="0"/><line class="bk-line" x1="18" y1="60" x2="40" y2="60" stroke="#b8975a" stroke-width="1.5" stroke-linecap="round" opacity="0"/><circle class="bk-circle" cx="40" cy="82" r="0" fill="none" stroke="#b8975a" stroke-width=".8" opacity=".3"/></svg>'}
+    svg:'<svg aria-hidden="true" focusable="false" viewBox="0 0 80 90" width="70" height="80"><rect x="8" y="25" width="64" height="42" rx="5" fill="rgba(184,151,90,.08)" stroke="#b8975a" stroke-width=".9"/><rect x="8" y="33" width="64" height="10" fill="rgba(184,151,90,.18)"/><line class="bk-line" x1="18" y1="54" x2="50" y2="54" stroke="#b8975a" stroke-width="1.5" stroke-linecap="round" opacity="0"/><line class="bk-line" x1="18" y1="60" x2="40" y2="60" stroke="#b8975a" stroke-width="1.5" stroke-linecap="round" opacity="0"/><circle class="bk-circle" cx="40" cy="82" r="0" fill="none" stroke="#b8975a" stroke-width=".8" opacity=".3"/></svg>'}
 };
 
 let currentOfKey='';
@@ -2491,14 +2536,14 @@ function ofModalVerse(ver){
   const TOTAL = 10;
   const LABELS = ['Portada','Introducción','Disciplina espiritual','Personas comunes','Oración ferviente','Hombre común · Dios sobrenatural','Providencia de Dios','Iglesia del NT','Llamado','Conclusión'];
   let cur = 0;
-  var swipeStartX = 0, swipeStartY = 0;
+  let swipeStartX = 0, swipeStartY = 0;
 
   // Build dots once reader opens
   function buildDots(){
-    var container = document.getElementById('rdDots');
+    const container = document.getElementById('rdDots');
     if(!container || container.children.length) return;
-    for(var i = 0; i < TOTAL; i++){
-      var d = document.createElement('span');
+    for(let i = 0; i < TOTAL; i++){
+      const d = document.createElement('span');
       d.className = 'rd-dot' + (i===0?' active':'');
       d.dataset.pg = i;
       d.onclick = (function(idx){ return function(){ rdGoTo(idx); }; })(i);
@@ -2507,9 +2552,9 @@ function ofModalVerse(ver){
   }
 
   window.rdOpen = function(){
-    var t = document.getElementById('rdTrigger');
+    const t = document.getElementById('rdTrigger');
     if(t) t.style.display = 'none';
-    var r = document.getElementById('rdReader');
+    const r = document.getElementById('rdReader');
     if(r) r.classList.add('open');
     buildDots();
     rdUI();
@@ -2518,8 +2563,8 @@ function ofModalVerse(ver){
     if(wrap){
       wrap.addEventListener('touchstart', function(e){ swipeStartX=e.touches[0].clientX; swipeStartY=e.touches[0].clientY; }, {passive:true});
       wrap.addEventListener('touchend', function(e){
-        var dx = e.changedTouches[0].clientX - swipeStartX;
-        var dy = e.changedTouches[0].clientY - swipeStartY;
+        const dx = e.changedTouches[0].clientX - swipeStartX;
+        const dy = e.changedTouches[0].clientY - swipeStartY;
         if(Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy)*1.4){
           rdPage(dx < 0 ? 1 : -1);
         }
@@ -2544,9 +2589,9 @@ function ofModalVerse(ver){
   window.rdClose = function(){
     var r = document.getElementById('rdReader');
     if(r) r.classList.remove('open');
-    var t = document.getElementById('rdTrigger');
+    const t = document.getElementById('rdTrigger');
     if(t) t.style.display = '';
-    var wrap = document.getElementById('rdWrap');
+    const wrap = document.getElementById('rdWrap');
     if(wrap) wrap.scrollIntoView({behavior:'smooth', block:'start'});
     cur = 0;
     var pages = document.querySelectorAll('#rdPages .rd-page');
@@ -2556,16 +2601,16 @@ function ofModalVerse(ver){
   };
 
   function scrollToTop(){
-    var wrap = document.getElementById('rdWrap');
+    const wrap = document.getElementById('rdWrap');
     if(wrap) wrap.scrollIntoView({behavior:'smooth', block:'start'});
   }
 
   function rdUI(){
-    var prev  = document.getElementById('rdPrev');
-    var next  = document.getElementById('rdNext');
-    var label = document.getElementById('rdLabel');
-    var bar   = document.getElementById('rdBar');
-    var dots  = document.querySelectorAll('.rd-dot');
+    const prev  = document.getElementById('rdPrev');
+    const next  = document.getElementById('rdNext');
+    const label = document.getElementById('rdLabel');
+    const bar   = document.getElementById('rdBar');
+    const dots  = document.querySelectorAll('.rd-dot');
     if(prev)  prev.disabled  = cur === 0;
     if(next)  next.disabled  = cur === TOTAL - 1;
     if(label) label.textContent = LABELS[cur] || '';
@@ -2609,7 +2654,7 @@ const seniorBtn = document.getElementById('seniorBtn');
 
 // ── Toast helper ──
 function showSeniorToast(msg){
-  var t = document.getElementById('seniorToast');
+  let t = document.getElementById('seniorToast');
   if(!t){ t=document.createElement('div'); t.id='seniorToast'; t.className='senior-toast'; document.body.appendChild(t); }
   t.textContent = msg;
   t.classList.add('show');
@@ -2645,7 +2690,7 @@ seniorBtn.addEventListener('click', () => {
   <div class="of-modal-card" id="ofModalCard">
     <div class="of-modal-hdr">
       <button class="of-modal-close" onclick="closeOfModal()" aria-label="Cerrar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
       <div class="of-modal-anim" id="ofModalAnim"></div>
       <div class="of-modal-title" id="ofModalTitle"></div>
@@ -2677,7 +2722,7 @@ seniorBtn.addEventListener('click', () => {
           <div class="of-motivo-val" id="ofModalMotivo"></div>
         </div>
         <button class="copy-btn" onclick="copyText('iglesia.mjc.dolarapp',event)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           Copiar Alias
         </button>
         <p class="of-hint-row">Abrí <strong>Mercado Pago</strong>, tu billetera virtual o app de tu banco · Tocá <strong>"Transferir"</strong> · Pegá el alias · Completá el motivo</p>
