@@ -1087,6 +1087,17 @@ html.senior .event-msg-link span{font-size:.62rem!important}
 .gal-dot{width:6px;height:6px;border-radius:50%;background:rgba(184,151,90,.25);cursor:pointer;transition:background .25s,transform .25s;border:none;padding:0}
 .gal-dot.active{background:var(--gold);transform:scale(1.3)}
 .gal-ig-link{display:flex;justify-content:center;padding:.4rem 1.4rem .8rem}
+/* ── Galería Instagram Grid ── */
+.gal-ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:0 1.4rem}
+.gal-ig-cell{position:relative;aspect-ratio:1;overflow:hidden;display:block;background:rgba(184,151,90,.06);-webkit-tap-highlight-color:transparent}
+.gal-ig-cell img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease,filter .3s ease}
+.gal-ig-cell:hover img,.gal-ig-cell:focus img{transform:scale(1.06);filter:brightness(.75)}
+.gal-ig-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);opacity:0;transition:opacity .3s;color:#fff}
+.gal-ig-cell:hover .gal-ig-overlay,.gal-ig-cell:focus .gal-ig-overlay{opacity:1}
+.gal-ig-cell--more{background:rgba(184,151,90,.08);border:1px solid rgba(184,151,90,.2)}
+.gal-ig-more-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;height:100%;color:var(--gold);padding:.4rem}
+.gal-ig-more-inner span{font-size:.44rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;font-family:"Montserrat",sans-serif;text-align:center;line-height:1.6}
+[data-theme="light"] .gal-ig-cell--more{background:rgba(158,124,62,.08);border-color:rgba(158,124,62,.2)}
 .gal-counter{font-size:.42rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-muted);text-align:center;padding:.2rem 0 .4rem}
 .gal-loading{display:flex;align-items:center;justify-content:center;height:200px;color:var(--text-muted);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase}
 .gal-empty-state{display:flex;flex-direction:column;align-items:center;padding:2.5rem 1.4rem;text-align:center;gap:.7rem}
@@ -2152,10 +2163,7 @@ html.hc .s-btn.active{background:#444;border-color:#c8a84b;color:#c8a84b}
           <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--text-muted)"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
       </div>
-      <div class="yv-qr-row">
-        <img class="yv-qr-img" src="QR_CODE.png" alt="QR YouVersion MJC" onerror="this.style.display='none'"/>
-        
-      </div>
+
     </div>
   </div>
 
@@ -2172,22 +2180,61 @@ html.hc .s-btn.active{background:#444;border-color:#c8a84b;color:#c8a84b}
         <div class="sheet-spinner"></div>
         <span>Cargando fotos...</span>
       </div>
-      <!-- Carousel (se llena dinámicamente) -->
+      <!-- Carousel Sheet (se llena dinámicamente cuando el Sheet está configurado) -->
       <div id="galCarousel" class="gal-carousel" style="display:none" role="region" aria-label="Galería de fotos"></div>
       <p class="gal-counter" id="galCounter" style="display:none"></p>
       <div id="galDots" class="gal-dots"></div>
-      <!-- Estado vacío / sin Sheet configurado -->
-      <div id="galEmpty" class="gal-empty-state" style="display:none">
-        <svg aria-hidden="true" focusable="false" viewBox="0 0 80 60" width="80" height="60" fill="none"><rect x="4" y="4" width="72" height="52" rx="4" stroke="#b8975a" stroke-width="1.5" opacity=".4"/><circle cx="22" cy="22" r="7" stroke="#b8975a" stroke-width="1.5" opacity=".4"/><path d="M4 44l20-18 14 14 10-9 28 23" stroke="#b8975a" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg>
-        <p style="font-size:.5rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)">Galería</p>
-        <p style="font-size:.6rem;letter-spacing:.08em;color:var(--text-muted);line-height:1.9;text-align:center">Las fotos del ministerio aparecen acá<br>una vez que el Pastor configure el acceso.</p>
-        <p style="font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)">Mientras tanto →</p>
+
+      <!-- Fallback: grid Instagram cuando el Sheet no está configurado -->
+      <div id="galIgGrid" style="display:none">
+        <p style="font-size:.44rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);text-align:center;padding:.8rem 0 1rem">Seguinos en Instagram</p>
+        <div class="gal-ig-grid">
+          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
+            <img src="https://images.unsplash.com/photo-1585241645927-c7a8e5840c42?w=400&q=75" alt="Comunidad MJC" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
+            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
+          </a>
+          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
+            <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=400&q=75" alt="Culto MJC" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
+            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
+          </a>
+          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
+            <img src="https://images.unsplash.com/photo-1519491050282-cf00c82424cf?w=400&q=75" alt="Iglesia MJC" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
+            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
+          </a>
+          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
+            <img src="https://images.unsplash.com/photo-1531525645387-7f14be1bdbbd?w=400&q=75" alt="Fe MJC" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
+            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
+          </a>
+          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
+            <img src="https://images.unsplash.com/photo-1448905502797-56f7f938a568?w=400&q=75" alt="Ministerio MJC" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
+            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
+          </a>
+          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
+            <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=400&q=75" alt="Oración MJC" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
+            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
+          </a>
+          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
+            <img src="https://images.unsplash.com/photo-1438232992991-995b671e4a8b?w=400&q=75" alt="Boulogne MJC" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
+            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
+          </a>
+          <a class="gal-ig-cell" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver en Instagram">
+            <img src="https://images.unsplash.com/photo-1533000759938-aa0ba70beceb?w=400&q=75" alt="Alabanza MJC" loading="lazy" onerror="this.closest('.gal-ig-cell').style.display='none'"/>
+            <div class="gal-ig-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
+          </a>
+          <a class="gal-ig-cell gal-ig-cell--more" href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" aria-label="Ver todo en Instagram">
+            <div class="gal-ig-more-inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+              <span>Ver todo<br>en Instagram</span>
+            </div>
+          </a>
+        </div>
       </div>
+
       <!-- Siempre visible: link Instagram -->
       <div class="gal-ig-link">
         <a href="https://www.instagram.com/mjcboulogne/" target="_blank" rel="noopener" class="msg-platform-btn">
           <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
-          Ver más en Instagram
+          @mjcboulogne en Instagram
         </a>
       </div>
     </div>
@@ -2985,11 +3032,11 @@ async function loadGaleria() {
   const carousel = document.getElementById('galCarousel');
   const dotsEl   = document.getElementById('galDots');
   const counter  = document.getElementById('galCounter');
-  const empty    = document.getElementById('galEmpty');
+  const igGrid   = document.getElementById('galIgGrid');
 
   if (!sheetReady()) {
     if (loading) loading.style.display = 'none';
-    if (empty)   empty.style.display   = 'flex';
+    if (igGrid)  igGrid.style.display  = 'block';
     return;
   }
 
@@ -2998,7 +3045,7 @@ async function loadGaleria() {
   if (loading) loading.style.display = 'none';
 
   if (!data || data.length === 0) {
-    if (empty) empty.style.display = 'flex';
+    if (igGrid) igGrid.style.display = 'block';
     return;
   }
 
