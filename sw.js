@@ -5,7 +5,7 @@
 //              Fallback offline para navegación
 // ═══════════════════════════════════════════════════════════════
 
-const CACHE_NAME   = 'mjc-boulogne-v1';
+const CACHE_NAME   = 'mjc-boulogne-v2';
 const OFFLINE_URL  = '/index.html';
 
 // Assets que se cachean en la instalación (pre-cache)
