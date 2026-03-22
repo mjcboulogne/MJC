@@ -2511,11 +2511,34 @@ const PANEL_VERSES={
   'mv-of':{rvr:{t:'"Cada uno dé como propuso en su corazón: no con tristeza, ni por necesidad, porque Dios ama al dador alegre."',r:"2 Corintios 9:7 · RVR1960"},nvi:{t:'"Cada uno debe dar según lo que haya decidido en su corazón, no de mala gana ni por obligación, porque Dios ama al que da con alegría."',r:"2 Corintios 9:7 · NVI"}},
 };
 
-const EVENTS=[
-  {name:"Culto Viernes",date:"2025-03-21",time:"19:30",desc:"Reunión semanal de adoración y Palabra. Junín 1734, Boulogne.",recurring:true},
-  {name:"Culto Dominical",date:"2025-03-23",time:"09:30",desc:"Culto de la mañana. Todos son bienvenidos. Junín 1734, Boulogne.",recurring:true},
-  {name:"Culto Dominical — El Poder de la Oración",date:"2026-06-15",time:"09:30",desc:"Mensaje del Hno. Lucas Sisneros. Basado en Santiago 5:17. Junín 1734, Boulogne.",msgPage:true},
-];
+// Eventos: se cargan dinámicamente desde Google Sheet
+// El array EVENTS se llena con loadEventos() al abrir la sección Horarios
+let EVENTS = [];
+let eventosLoaded = false;
+
+async function loadEventos() {
+  if (eventosLoaded) return;
+  eventosLoaded = true;
+
+  if (!sheetReady()) return;
+
+  const data = await fetchSheet(SHEET.eventos_gid);
+  if (!data || data.length === 0) return;
+
+  EVENTS = data.map(row => ({
+    name:      row.nombre      || '',
+    date:      row.fecha       || '',
+    time:      row.hora        || '',
+    desc:      row.descripcion || '',
+    recurring: (row.repeticion || '').toLowerCase() === 'semanal' ||
+               (row.repeticion || '').toLowerCase() === 'quincenal' ||
+               (row.repeticion || '').toLowerCase() === 'mensual',
+    repeticion: (row.repeticion || '').toLowerCase()
+  })).filter(e => e.name && e.date);
+
+  // Reconstruir el calendario con los nuevos eventos
+  buildCal();
+}
 
 // ─────────────────────────────────────────
 // SCREEN NAVIGATION
@@ -2529,6 +2552,7 @@ function showScreen(name,panel){
   if(tab)tab.classList.add('active');
   if(panel){setTimeout(()=>{const it=sc&&sc.querySelector('.inner-tab[data-panel="'+panel+'"]');if(it)switchPanel(it);},60);}
   if(name==='mensajes') loadPredicas();
+  if(name==='horarios') loadEventos();
 }
 
 function switchPanel(el){
@@ -2540,6 +2564,7 @@ function switchPanel(el){
   const pan=ps.querySelector('#panel-'+pid);
   if(pan)pan.classList.add('active');
   if(pid==='galeria') loadGaleria();
+  if(pid==='eventos-tab') loadEventos();
 }
 
 // ─────────────────────────────────────────
@@ -2663,13 +2688,23 @@ function buildCal(){
 }
 
 function matchEventDate(ev,ds){
-  if(!ev.recurring)return ev.date===ds;
-  const d=new Date(ds+'T12:00:00');
-  const base=new Date(ev.date+'T12:00:00');
-  if(ds===ev.date)return true;
-  if(ev.recurring){
-    const dow=base.getDay();
-    return d.getDay()===dow&&d>=base;
+  if(ds === ev.date) return true;
+  if(!ev.recurring) return false;
+  const d    = new Date(ds + 'T12:00:00');
+  const base = new Date(ev.date + 'T12:00:00');
+  if(d < base) return false;
+  const rep = ev.repeticion || 'semanal';
+  if(rep === 'semanal') {
+    return d.getDay() === base.getDay();
+  }
+  if(rep === 'quincenal') {
+    const diffMs   = d - base;
+    const diffDays = Math.round(diffMs / (1000*60*60*24));
+    return d.getDay() === base.getDay() && diffDays % 14 === 0;
+  }
+  if(rep === 'mensual') {
+    // Mismo día del mes
+    return d.getDate() === base.getDate();
   }
   return false;
 }
@@ -3047,6 +3082,7 @@ const SHEET = {
   // GID de cada hoja (no cambiar si usás la plantilla oficial)
   galeria_gid:  '0',   // hoja "Galeria"  → primera pestaña
   predicas_gid: '1566836543',   // hoja "Predicas"
+  eventos_gid:  '1257216082',   // hoja "Eventos"
 };
 
 // ── Chequeá si el Sheet está configurado ──────────────────
