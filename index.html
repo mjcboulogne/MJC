@@ -2872,30 +2872,58 @@ const sheetReady = () => SHEET.id && SHEET.id !== 'REEMPLAZAR_CON_ID_DEL_SHEET';
 
 // ── Parser CSV robusto (maneja comas dentro de comillas) ──
 function parseCSV(text) {
+  // Parser CSV robusto que maneja campos con saltos de línea dentro de comillas
   const result = [];
-  const lines = text.replace(/\r/g, '').split('\n');
-  if (!lines.length) return result;
+  const norm   = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
-  function parseLine(line) {
-    const cols = [];
-    let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const c = line[i];
-      if (c === '"') { inQ = !inQ; continue; }
-      if (c === ',' && !inQ) { cols.push(cur); cur = ''; continue; }
-      cur += c;
+  // Tokenizar: recorrer char por char respetando campos entre comillas
+  function tokenize(str) {
+    const rows = [];
+    let row  = [];
+    let cur  = '';
+    let inQ  = false;
+    let i    = 0;
+
+    while (i < str.length) {
+      const c = str[i];
+
+      if (inQ) {
+        if (c === '"') {
+          // comilla doble escapada ""
+          if (str[i+1] === '"') { cur += '"'; i += 2; continue; }
+          inQ = false; i++; continue;
+        }
+        // dentro de comillas: saltos de línea son parte del campo
+        cur += c; i++; continue;
+      }
+
+      // fuera de comillas
+      if (c === '"') { inQ = true; i++; continue; }
+      if (c === ',') { row.push(cur); cur = ''; i++; continue; }
+      if (c === '\n') {
+        row.push(cur); cur = '';
+        if (row.some(v => v !== '')) rows.push(row);
+        row = []; i++; continue;
+      }
+      cur += c; i++;
     }
-    cols.push(cur);
-    return cols.map(c => c.trim());
+    // última celda y fila
+    row.push(cur);
+    if (row.some(v => v !== '')) rows.push(row);
+    return rows;
   }
 
-  const headers = parseLine(lines[0]);
-  for (let i = 1; i < lines.length; i++) {
-    if (!lines[i].trim()) continue;
-    const vals = parseLine(lines[i]);
+  const rows = tokenize(norm);
+  if (!rows.length) return result;
+
+  const headers = rows[0].map(h => h.trim());
+
+  for (let i = 1; i < rows.length; i++) {
+    const vals = rows[i];
+    if (!vals[0] || !vals[0].trim()) continue;
     const row = {};
-    headers.forEach((h, j) => row[h] = vals[j] || '');
-    if (row[headers[0]]) result.push(row);
+    headers.forEach((h, j) => row[h] = (vals[j] || '').trim());
+    result.push(row);
   }
   return result;
 }
