@@ -126,6 +126,36 @@
 [data-theme="light"] .yv-action{background:rgba(158,124,62,.06);border-color:rgba(158,124,62,.15)}
 [data-theme="light"] .yv-card{background:rgba(158,124,62,.06);border-color:rgba(158,124,62,.2)}
 [data-theme="light"] .ofrendar-top-verse{background:rgba(158,124,62,.05);border-color:rgba(158,124,62,.22)}
+
+/* ══ PREDICAS CARDS ══ */
+.predicas-list{padding:.8rem 1.4rem 1.2rem;display:flex;flex-direction:column;gap:.8rem}
+.predica-card{background:rgba(184,151,90,.05);border:1px solid rgba(184,151,90,.18);cursor:pointer;transition:background .22s,border-color .22s;-webkit-tap-highlight-color:transparent;overflow:hidden}
+.predica-card:hover,.predica-card:active{background:rgba(184,151,90,.1);border-color:var(--gold)}
+.predica-card-hdr{display:flex;align-items:center;gap:.9rem;padding:1rem 1.1rem}
+.predica-card-thumb{flex-shrink:0;width:48px;height:62px;background:rgba(184,151,90,.08);border:1px solid rgba(184,151,90,.2);display:flex;align-items:center;justify-content:center}
+.predica-card-meta{flex:1;min-width:0}
+.predica-card-fecha{font-size:.4rem;letter-spacing:.28em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.2rem}
+.predica-card-titulo{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--cream);font-weight:300;line-height:1.25;margin-bottom:.2rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.predica-card.open .predica-card-titulo{white-space:normal;overflow:visible;text-overflow:unset}
+.predica-card-ref{font-size:.42rem;letter-spacing:.14em;color:rgba(184,151,90,.65);font-style:italic}
+.predica-card-chev{color:var(--text-muted);transition:transform .3s;flex-shrink:0;font-size:.7rem}
+.predica-card.open .predica-card-chev{transform:rotate(180deg)}
+.predica-card.open{border-color:var(--gold);background:rgba(184,151,90,.08)}
+.predica-card-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+.predica-card.open .predica-card-body{max-height:600px}
+.predica-card-body-inner{padding:.4rem 1.1rem 1.1rem;border-top:1px solid rgba(184,151,90,.12)}
+.predica-card-versiculo{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:var(--gold-light);line-height:1.75;margin-bottom:.4rem}
+.predica-card-ver-ref{font-size:.4rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.8rem}
+.predica-card-contenido{font-size:.58rem;letter-spacing:.06em;line-height:1.95;color:rgba(245,240,232,.7);white-space:pre-line}
+[data-theme="light"] .predica-card-contenido{color:rgba(46,40,32,.65)}
+[data-theme="light"] .predica-card-titulo{color:var(--cream)}
+.predica-card-contenido .pc-punto{font-size:.44rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin:1rem 0 .3rem}
+.predica-card-contenido .pc-fuego{color:#d45030}
+.predicas-loading{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:2rem 1.4rem;color:var(--text-muted);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase}
+.predicas-empty{display:flex;flex-direction:column;align-items:center;padding:2.5rem 1.4rem;text-align:center;gap:.6rem}
+.predicas-empty-label{font-size:.5rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.predicas-empty-text{font-size:.58rem;letter-spacing:.08em;color:var(--text-muted);line-height:1.9}
+
 html{scroll-behavior:smooth;height:100%}
 body{font-family:'Montserrat',sans-serif;background:var(--dark);color:var(--cream);overflow-x:hidden;min-height:100%;transition:background-color .4s,color .4s,font-size .35s ease}
 
@@ -1556,12 +1586,20 @@ html.hc .s-btn.active{background:#444;border-color:#c8a84b;color:#c8a84b}
   <!-- Separador -->
   <div class="msg-section-sep">
     <div class="msg-sep-line"></div>
-    <span class="msg-sep-label">Última Enseñanza</span>
+    <span class="msg-sep-label">Enseñanzas</span>
     <div class="msg-sep-line"></div>
   </div>
 
-  <!-- ═══ PREDICA READER — 15 de Junio 2025 ═══ -->
-  <div class="rd-wrap" id="rdWrap">
+  <!-- ═══ PREDICAS DINÁMICAS DESDE SHEET ═══ -->
+  <div id="predicasList">
+    <div class="predicas-loading" id="predicasLoading">
+      <div class="sheet-spinner"></div>
+      <span>Cargando mensajes...</span>
+    </div>
+  </div>
+
+  <!-- PREDICA READER (se abre al tocar una card) -->
+  <div class="rd-wrap" id="rdWrap" style="display:none">
 
     <!-- Cover trigger -->
     <div class="rd-cover-trigger" onclick="rdOpen()" id="rdTrigger">
@@ -2310,6 +2348,7 @@ function showScreen(name,panel){
   const tab=document.querySelector('.tab-item[data-screen="'+name+'"]');
   if(tab)tab.classList.add('active');
   if(panel){setTimeout(()=>{const it=sc&&sc.querySelector('.inner-tab[data-panel="'+panel+'"]');if(it)switchPanel(it);},60);}
+  if(name==='mensajes') loadPredicas();
 }
 
 function switchPanel(el){
@@ -2825,7 +2864,7 @@ const SHEET = {
 
   // GID de cada hoja (no cambiar si usás la plantilla oficial)
   galeria_gid:  '0',   // hoja "Galeria"  → primera pestaña
-  predicas_gid: '1',   // hoja "Predicas" → segunda pestaña
+  predicas_gid: '1566836543',   // hoja "Predicas"
 };
 
 // ── Chequeá si el Sheet está configurado ──────────────────
@@ -2876,6 +2915,115 @@ async function fetchSheet(gid) {
     return null;
   }
 }
+
+
+// ═══════════════════════════════════════════════════════════
+//  PRÉDICAS — carga cards desde Google Sheets
+// ═══════════════════════════════════════════════════════════
+let predicasLoaded = false;
+
+async function loadPredicas() {
+  if (predicasLoaded) return;
+  predicasLoaded = true;
+
+  const loading = document.getElementById('predicasLoading');
+  const lista   = document.getElementById('predicasList');
+
+  if (!sheetReady()) {
+    if (loading) loading.style.display = 'none';
+    if (lista) lista.innerHTML = '<div class="predicas-empty"><p class="predicas-empty-label">Mensajes</p><p class="predicas-empty-text">Las enseñanzas estarán disponibles pronto.</p></div>';
+    return;
+  }
+
+  const data = await fetchSheet(SHEET.predicas_gid);
+
+  if (loading) loading.style.display = 'none';
+
+  if (!data || data.length === 0) {
+    if (lista) lista.innerHTML = '<div class="predicas-empty"><p class="predicas-empty-label">Mensajes</p><p class="predicas-empty-text">Las enseñanzas estarán disponibles pronto.</p></div>';
+    return;
+  }
+
+  // Ordenar por fecha descendente (más reciente primero)
+  data.sort((a, b) => (b.fecha || '').localeCompare(a.fecha || ''));
+
+  const html = data.map((row, idx) => {
+    const fecha    = row.fecha    || '';
+    const titulo   = row.titulo   || 'Sin título';
+    const pastor   = row.pastor   || 'Lucas Sisneros';
+    const verBase  = row.versiculo_base || '';
+    const refBase  = row.ref_base || '';
+    const contenido = row.contenido || '';
+
+    // Formatear fecha para mostrar
+    const fechaDisplay = fecha ? formatFechaDisplay(fecha) : '';
+
+    // Renderizar contenido estructurado
+    const contenidoHtml = renderContenidoPredica(contenido);
+
+    return `
+    <div class="predica-card" onclick="togglePredica(this)" data-idx="${idx}">
+      <div class="predica-card-hdr">
+        <div class="predica-card-thumb">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 44 56" width="32" height="42" fill="none">
+            <path d="M4 6 Q4 4 6 3 Q18 1 22 3 L22 53 Q17 51 5 54 Q4 54.5 4 53 Z" fill="rgba(184,151,90,.09)" stroke="#b8975a" stroke-width=".8"/>
+            <path d="M40 6 Q40 4 38 3 Q26 1 22 3 L22 53 Q27 51 39 54 Q40 54.5 40 53 Z" fill="rgba(184,151,90,.09)" stroke="#b8975a" stroke-width=".8"/>
+            <line x1="22" y1="3" x2="22" y2="53" stroke="#b8975a" stroke-width=".6" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="predica-card-meta">
+          <p class="predica-card-fecha">${fechaDisplay} · ${pastor}</p>
+          <p class="predica-card-titulo">${titulo}</p>
+          ${refBase ? `<p class="predica-card-ref">${refBase}</p>` : ''}
+        </div>
+        <span class="predica-card-chev">▾</span>
+      </div>
+      <div class="predica-card-body">
+        <div class="predica-card-body-inner">
+          ${verBase ? `<p class="predica-card-versiculo">"${verBase}"</p><p class="predica-card-ver-ref">${refBase}</p>` : ''}
+          <div class="predica-card-contenido">${contenidoHtml}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  if (lista) lista.innerHTML = html;
+}
+
+function formatFechaDisplay(fechaStr) {
+  // YYYY-MM-DD → "15 Mar 2026"
+  const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const parts = fechaStr.split('-');
+  if (parts.length < 3) return fechaStr;
+  return parseInt(parts[2]) + ' ' + (meses[parseInt(parts[1])-1] || '') + ' ' + parts[0];
+}
+
+function renderContenidoPredica(texto) {
+  if (!texto) return '';
+  // Escapar HTML básico
+  let html = texto
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+
+  // Resaltar secciones == PUNTO ==
+  html = html.replace(/== (.+?) ==/g, '<span class="pc-punto">$1</span>');
+  // Resaltar 🔥 y ✨
+  html = html.replace(/(🔥[^
+]+)/g, '<strong class="pc-fuego">$1</strong>');
+  // Resaltar versículos 📖
+  html = html.replace(/(📖[^
+]+)/g, '<em style="color:var(--gold-light)">$1</em>');
+
+  return html;
+}
+
+function togglePredica(card) {
+  const open = card.classList.contains('open');
+  document.querySelectorAll('.predica-card.open').forEach(c => c.classList.remove('open'));
+  if (!open) card.classList.add('open');
+}
+
 
 // ═══════════════════════════════════════════════════════════
 //  GALERÍA — carga fotos desde Google Sheets
