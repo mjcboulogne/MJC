@@ -2520,23 +2520,42 @@ async function loadEventos() {
   if (eventosLoaded) return;
   eventosLoaded = true;
 
-  if (!sheetReady()) return;
+  if (!sheetReady()) {
+    buildCal(); // construir igual (sin eventos del Sheet)
+    return;
+  }
+
+  // Mostrar spinner en el panel mientras carga
+  const panel = document.getElementById('panel-eventos-tab');
+  if (panel) {
+    const existing = panel.querySelector('.eventos-spinner');
+    if (!existing) {
+      const sp = document.createElement('div');
+      sp.className = 'sheet-loading eventos-spinner';
+      sp.innerHTML = '<div class="sheet-spinner"></div><span>Cargando eventos...</span>';
+      const calWrap = panel.querySelector('.calendar-wrap');
+      if (calWrap) panel.insertBefore(sp, calWrap);
+    }
+  }
 
   const data = await fetchSheet(SHEET.eventos_gid);
-  if (!data || data.length === 0) return;
 
-  EVENTS = data.map(row => ({
-    name:      row.nombre      || '',
-    date:      row.fecha       || '',
-    time:      row.hora        || '',
-    desc:      row.descripcion || '',
-    recurring: (row.repeticion || '').toLowerCase() === 'semanal' ||
-               (row.repeticion || '').toLowerCase() === 'quincenal' ||
-               (row.repeticion || '').toLowerCase() === 'mensual',
-    repeticion: (row.repeticion || '').toLowerCase()
-  })).filter(e => e.name && e.date);
+  // Quitar spinner
+  const sp = panel && panel.querySelector('.eventos-spinner');
+  if (sp) sp.remove();
 
-  // Reconstruir el calendario con los nuevos eventos
+  if (data && data.length > 0) {
+    EVENTS = data.map(row => ({
+      name:       row.nombre      || '',
+      date:       (row.fecha      || '').trim(),
+      time:       row.hora        || '',
+      desc:       row.descripcion || '',
+      recurring:  ['semanal','quincenal','mensual'].includes((row.repeticion||'').toLowerCase()),
+      repeticion: (row.repeticion || '').toLowerCase()
+    })).filter(e => e.name && e.date);
+  }
+
+  // Ahora sí construir el calendario con los eventos cargados
   buildCal();
 }
 
