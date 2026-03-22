@@ -3006,12 +3006,12 @@ function renderContenidoPredica(texto) {
     .replace(/</g,'&lt;')
     .replace(/>/g,'&gt;');
 
-  // Resaltar secciones == PUNTO ==
-  html = html.replace(/== (.+?) ==/g, '<span class="pc-punto">$1</span>');
-  // Resaltar 🔥 lineas de impacto
-  html = html.replace(/(\ud83d\udd25[^\n]+)/g, '<strong class="pc-fuego">$1</strong>');
-  // Resaltar versículos 📖
-  html = html.replace(/(\ud83d\udcd6[^\n]+)/g, '<em style="color:var(--gold-light)">$1</em>');
+  // Resaltar secciones [PUNTO]
+  html = html.replace(/\[([^\]]+)\]/g, '<span class="pc-punto">$1</span>');
+  // Resaltar versículos >>
+  html = html.replace(/(>> .+)/g, '<em style="color:var(--gold-light)">$1</em>');
+  // Resaltar frases de impacto con emoji fuego/estrella
+  html = html.replace(/([\u{1F525}\u{2728}][^\n]+)/gu, '<strong class="pc-fuego">$1</strong>');
 
   return html;
 }
