@@ -3578,7 +3578,7 @@ function globalFontApply(n) {
   else if (n === 4) root.classList.add('sz2');
   else if (n >= 5) root.classList.add('senior');
 
-  try { localStorage.setItem('mjc-font-size', n); } catch(e) {}
+  // No guardamos preferencia de fuente
 }
 
 // ── Theme (dark | light | hc) ──
@@ -3604,7 +3604,7 @@ function setTheme(t) {
     const themes = ['dark','light','hc'];
     if(b) b.classList.toggle('active', themes[i] === t);
   });
-  try { localStorage.setItem('mjc-theme', t); } catch(e){}
+  // No guardamos preferencia de tema — siempre carga en oscuro
   showToast(THEME_LABELS[t]);
 }
 
@@ -3626,14 +3626,10 @@ document.addEventListener('keydown', e => {
   if(e.key === 'Escape') closeSettings();
 });
 
-// ── Restore saved preferences ──
-try {
-  const savedRaw  = localStorage.getItem('mjc-font-size');
-  const savedSize = savedRaw !== null ? parseInt(savedRaw) : FS_DEFAULT;
-  globalFontApply(savedSize >= 0 && savedSize < FS_PX.length ? savedSize : FS_DEFAULT);
-  const savedTheme = localStorage.getItem('mjc-theme') || 'dark';
-  if(savedTheme !== 'dark') setTheme(savedTheme);
-} catch(e){}
+// ── Siempre cargar con valores por defecto (sin preferencias guardadas) ──
+globalFontApply(FS_DEFAULT);
+// Tema siempre oscuro al cargar
+setTheme('dark');
 
 // ── Petición de Oración — versículo RVR/NVI ──
 const ORACION_VERSES = {
